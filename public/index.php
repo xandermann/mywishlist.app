@@ -8,7 +8,7 @@ use \wishlist\CC;
 $app = new \Slim\Slim();
 
 $app->get('/', function () {
-    CC::cc();
+    echo "ok";
 });
 
 $app->run();
