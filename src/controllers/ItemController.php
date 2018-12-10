@@ -14,7 +14,8 @@ class ItemController {
 	}
 
 	public function create() {
-		//return $this->view($response, 'item/create.php', 'Creer un item');
+        $view = new ItemView(null, 'create');
+        $view->render();
 	}
 
 	public function store() {
@@ -44,12 +45,13 @@ class ItemController {
 	}
 
 	public function update($id) {
-		$liste_id = $request->put('liste_id');
-		$nom = $request->put('nom');
-		$descr = $request->put('descr');
-		$img = $request->put('img');
-		$url = $request->put('url');
-		$tarif = $request->put('tarif');
+        $app =\Slim\Slim::getInstance() ;
+		$liste_id = $app->request->put('liste_id');
+		$nom = $app->request->put('nom');
+		$descr = $app->request->put('descr');
+		$img = $app->request->put('img');
+		$url = $app->request->put('url');
+		$tarif = $app->request->put('tarif');
 
 
 		// Donnees inserees
