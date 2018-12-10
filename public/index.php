@@ -34,29 +34,24 @@ $app->post('/item', function () {
     $controller->store();
 })->name('item.store');
 
-$app->get('/item/create', function () {
+$app->get('/item/:id', function ($id) {
     $controller = new ItemController();
-    $controller->create();
-})->name('item.create');
-
-$app->get('/item/:id', function () {
-    $controller = new ItemController();
-    $controller->show();
+    $controller->show($id);
 })->name('item.show');
 
-$app->get('/item/:id/edit', function () {
+$app->get('/item/:id/edit', function ($id) {
     $controller = new ItemController();
-    $controller->edit();
+    $controller->edit($id);
 })->name('item.edit');
 
-$app->put('/item/:id', function () {
+$app->put('/item/:id', function ($id) {
     $controller = new ItemController();
-    $controller->update();
+    $controller->update($id);
 })->name('item.update');
 
-$app->delete('/item/:id', function () {
+$app->delete('/item/:id', function ($id) {
     $controller = new ItemController();
-    $controller->destroy();
+    $controller->destroy($id);
 })->name('item.destroy');
 
 

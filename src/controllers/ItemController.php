@@ -9,10 +9,13 @@ class ItemController {
 	public function index() {
 		$items = Item::all();
 		//return $this->view($response, 'item/index.php', 'Item index', compact('items'));
+
+		$v = new ItemView($items);
+		$v->render();
 	}
 
 	public function create() {
-		return $this->view($response, 'item/create.php', 'Creer un item');
+		//return $this->view($response, 'item/create.php', 'Creer un item');
 	}
 
 	public function store() {
