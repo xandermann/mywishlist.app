@@ -16,17 +16,24 @@ abstract class View {
 	 */
 	protected $view;
 
+	/**
+	 * Contenu
+	 * @var string
+	 */
+	protected $content;
+
 	public function __construct($variables, $view) {
 		$this->variables = $variables;
 		$this->view = $view;
+		$this->content = "";
 	}
 
 	public abstract function render();
 
-	public function html($content) {
+	public function html() {
 		echo <<<END
 <h1>TODO: Faire le layout html ici (Corentin)</h1>
-<div>$content</div>
+<div>$this->content</div>
 END;
 	}
 
