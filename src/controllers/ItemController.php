@@ -2,16 +2,15 @@
 
 namespace wishlist\controllers;
 
-
 use wishlist\models\Item;
+use wishlist\views\ItemView;
 
 class ItemController {
 	public function index() {
 		$items = Item::all();
-		//return $this->view($response, 'item/index.php', 'Item index', compact('items'));
 
-		$v = new ItemView($items);
-		$v->render();
+		$view = new ItemView($items, 'index');
+		$view->render();
 	}
 
 	public function create() {

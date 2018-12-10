@@ -8,6 +8,13 @@ use \wishlist\CC;
 $app = new \Slim\Slim();
 
 
+use Illuminate\Database\Capsule\Manager as DB;
+$db = new DB();
+$db->addConnection(parse_ini_file('../src/config/db.ini'));
+$db->setAsGlobal();
+$db->bootEloquent();
+
+
 
 $app->get('/', function () {
 	echo "Page d'accueil (TODO)";
@@ -18,6 +25,8 @@ $app->get('/', function () {
 
 
 // Gestion des items
+use wishlist\controllers\ItemController;
+
 $app->get('/item', function () {
     $controller = new ItemController();
     $controller->index();
