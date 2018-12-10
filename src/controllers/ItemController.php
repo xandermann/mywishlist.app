@@ -18,13 +18,14 @@ class ItemController {
 	}
 
 	public function store() {
+		$app =\Slim\Slim::getInstance() ;
 
 		$liste_id = $app->request->post('liste_id');
-		$nom = $request->post('nom');
-		$descr = $request->post('descr');
-		$img = $request->post('img');
-		$url = $request->post('url');
-		$tarif = $request->post('tarif');
+		$nom = $app->request->post('nom');
+		$descr = $app->request->post('descr');
+		$img = $app->request->post('img');
+		$url = $app->request->post('url');
+		$tarif = $app->request->post('tarif');
 
 
 		// Donnees inserees
