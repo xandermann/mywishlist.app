@@ -2,26 +2,18 @@
 
 namespace wishlist\views;
 
-class ItemView {
+use wishlist\views\View;
 
-	private $item;
-	private $view;
-
-	public function __construct($item, $view) {
-		$this->item = $item;
-		$this->view = $view;
-	}
+class ItemView extends View {
 
 	public function render() {
 		switch($this->view) {
 			case 'index':
-			$content = "Bonjour :)";
+			$content = "Contenu de la page ici";
 			break;
 		}
 
-		echo <<<END
-Affichier les items ici.
-END;
+		$this->html($content);
 	}
 
 }
