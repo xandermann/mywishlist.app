@@ -7,8 +7,78 @@ use \wishlist\CC;
 
 $app = new \Slim\Slim();
 
+
+
 $app->get('/', function () {
-    echo "ok";
+	echo "Page d'accueil (TODO)";
 });
+
+
+
+
+
+// Gestion des items
+$app->get('/item', function () {
+    $controller = new ItemController();
+    $controller->index();
+})->name('item.index');
+
+// Liste des routes
+$app->get('/item/create', function () {
+    $controller = new ItemController();
+    $controller->create();
+})->name('item.create');
+
+$app->post('/item', function () {
+    $controller = new ItemController();
+    $controller->store();
+})->name('item.store');
+
+$app->get('/item/create', function () {
+    $controller = new ItemController();
+    $controller->create();
+})->name('item.create');
+
+$app->get('/item/:id', function () {
+    $controller = new ItemController();
+    $controller->show();
+})->name('item.show');
+
+$app->get('/item/:id/edit', function () {
+    $controller = new ItemController();
+    $controller->edit();
+})->name('item.edit');
+
+$app->put('/item/:id', function () {
+    $controller = new ItemController();
+    $controller->update();
+})->name('item.update');
+
+$app->delete('/item/:id', function () {
+    $controller = new ItemController();
+    $controller->destroy();
+})->name('item.destroy');
+
+
+/*
+// Gestion des listes
+use \wishlist\controllers\ListeController;
+$app->get('/liste', ListeController::class . ':index')->setName('liste.index');
+$app->get('/liste/create', ListeController::class . ':create')->setName('liste.create');
+$app->post('/liste', ListeController::class . ':store')->setName('liste.store');
+$app->get('/liste/{id:[0-9]+}', ListeController::class . ':show')->setName('liste.show');
+$app->get('/liste/{id:[0-9]+}/edit', ListeController::class . ':edit')->setName('liste.edit');
+$app->put('/liste/{id:[0-9]+}', ListeController::class . ':update')->setName('liste.update');
+$app->delete('/liste/{id:[0-9]+}', ListeController::class . ':destroy')->setName('liste.destroy');
+*/
+
+
+
+
+
+
+
+
+
 
 $app->run();

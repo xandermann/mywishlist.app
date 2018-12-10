@@ -8,7 +8,7 @@ use wishlist\models\Item;
 class ItemController {
 	public function index() {
 		$items = Item::all();
-		return $this->view($response, 'item/index.php', 'Item index', compact('items'));
+		//return $this->view($response, 'item/index.php', 'Item index', compact('items'));
 	}
 
 	public function create() {
@@ -17,45 +17,45 @@ class ItemController {
 
 	public function store() {
 
-		$liste_id = $request->getParam('liste_id');
-		$nom = $request->getParam('nom');
-		$descr = $request->getParam('descr');
-		$img = $request->getParam('img');
-		$url = $request->getParam('url');
-		$tarif = $request->getParam('tarif');
+		$liste_id = $app->request->post('liste_id');
+		$nom = $request->post('nom');
+		$descr = $request->post('descr');
+		$img = $request->post('img');
+		$url = $request->post('url');
+		$tarif = $request->post('tarif');
 
 
 		// Donnees inserees
 		Item::create(compact('liste_id', 'nom', 'descr', 'img', 'url', 'tarif'));
-		return $response->withRedirect($this->router->pathFor('item.index'));
+		//return $response->withRedirect($this->router->pathFor('item.index'));
 	}
 
-	public function show() {
-		$item = Item::findOrFail($args['id']);
-		return $this->view($response, 'item/show.php', "Afficher l'item $item->id", compact('item'));
+	public function show($id) {
+		$item = Item::findOrFail($id);
+		//return $this->view($response, 'item/show.php', "Afficher l'item $item->id", compact('item'));
 	}
 
-	public function edit() {
-		$item = Item::findOrFail($args['id']);
-		return $this->view($response, 'item/edit.php', "Editer un item", compact('item'));
+	public function edit($id) {
+		$item = Item::findOrFail($id);
+		//return $this->view($response, 'item/edit.php', "Editer un item", compact('item'));
 	}
 
-	public function update() {
-		$liste_id = $request->getParam('liste_id');
-		$nom = $request->getParam('nom');
-		$descr = $request->getParam('descr');
-		$img = $request->getParam('img');
-		$url = $request->getParam('url');
-		$tarif = $request->getParam('tarif');
+	public function update($id) {
+		$liste_id = $request->put('liste_id');
+		$nom = $request->put('nom');
+		$descr = $request->put('descr');
+		$img = $request->put('img');
+		$url = $request->put('url');
+		$tarif = $request->put('tarif');
 
 
 		// Donnees inserees
-		Item::findOrFail($args['id'])->update(compact('liste_id', 'nom', 'descr', 'img', 'url', 'tarif'));
-		return $response->withRedirect($this->router->pathFor('item.index'));
+		Item::findOrFail($id)->update(compact('liste_id', 'nom', 'descr', 'img', 'url', 'tarif'));
+		//return $response->withRedirect($this->router->pathFor('item.index'));
 	}
 
-	public function destroy() {
-		Item::destroy($args['id']);
-		return $response->withRedirect($this->router->pathFor('item.index'));
+	public function destroy($id) {
+		Item::destroy($id);
+		//return $response->withRedirect($this->router->pathFor('item.index'));
 	}
 }
