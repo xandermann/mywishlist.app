@@ -73,19 +73,19 @@ class ItemView extends View {
 
 		switch($this->view) {
 			case 'index':
-			$this->content = $this->index();
+			$this->index();
 			break;
 
 			case 'create':
-			$this->content = $this->create();
+			$this->create();
 			break;
 
 			case 'show':
-			$this->content = $this->show();
+			$this->show();
 			break;
 
 			case 'edit':
-			$this->content = $this->edit();
+			$this->edit();
 			break;
 		}
 
