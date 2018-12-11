@@ -5,7 +5,7 @@ namespace wishlist\controllers;
 use wishlist\models\Item;
 use wishlist\views\ItemView;
 
-class ItemController {
+class ItemController extends Controller {
 	public function index() {
 		$items = Item::all();
 
@@ -31,7 +31,7 @@ class ItemController {
 
 		// Donnees inserees
 		Item::create(compact('liste_id', 'nom', 'descr', 'img', 'url', 'tarif'));
-		//return $response->withRedirect($this->router->pathFor('item.index'));
+		$this->app->redirect($this->app->urlFor('item.index'));
 	}
 
 	public function show($id) {
