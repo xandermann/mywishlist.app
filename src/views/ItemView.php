@@ -12,7 +12,7 @@ class ItemView extends View {
 			case 'index':
 				$this->content .= '<ul>';
 				foreach ($this->var as $v)
-					$this->content .= "<li>{$v->nom}</li>";
+					$this->content .= "<li><a href='{$this->app->urlFor('item.show', ['id' => $v->id])}'>{$v->nom}</a></li>";
 				$this->content .= '</ul>';
 				break;
 
