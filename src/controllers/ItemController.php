@@ -19,12 +19,12 @@ class ItemController extends Controller {
 	}
 
 	public function store() {
-		$liste_id = $app->request->post('liste_id');
-		$nom = $app->request->post('nom');
-		$descr = $app->request->post('descr');
-		$img = $app->request->post('img');
-		$url = $app->request->post('url');
-		$tarif = $app->request->post('tarif');
+		$liste_id = $this->app->request->post('liste_id');
+		$nom = $this->app->request->post('nom');
+		$descr = $this->app->request->post('descr');
+		$img = $this->app->request->post('img');
+		$url = $this->app->request->post('url');
+		$tarif = $this->app->request->post('tarif');
 
 
 		// Donnees inserees
@@ -47,12 +47,12 @@ class ItemController extends Controller {
 	}
 
 	public function update($id) {
-		$liste_id = $app->request->put('liste_id');
-		$nom = $app->request->put('nom');
-		$descr = $app->request->put('descr');
-		$img = $app->request->put('img');
-		$url = $app->request->put('url');
-		$tarif = $app->request->put('tarif');
+		$liste_id = $this->app->request->put('liste_id');
+		$nom = $this->app->request->put('nom');
+		$descr = $this->app->request->put('descr');
+		$img = $this->app->request->put('img');
+		$url = $this->app->request->put('url');
+		$tarif = $this->app->request->put('tarif');
 
 
 		// Donnees inserees
