@@ -14,6 +14,8 @@ class ItemController {
 	}
 
 	public function create() {
+		$view = new ItemView(null, 'create');
+		$view->render();
 		//return $this->view($response, 'item/create.php', 'Creer un item');
 	}
 

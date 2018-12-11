@@ -22,10 +22,17 @@ abstract class View {
 	 */
 	protected $content;
 
+	/**
+	 * Slim
+	 * @var \Slim\Slim
+	 */
+	protected $app;
+
 	public function __construct($variables, $view) {
 		$this->variables = $variables;
 		$this->view = $view;
 		$this->content = "";
+		$this->app = \Slim\Slim::getInstance();
 	}
 
 	public abstract function render();
