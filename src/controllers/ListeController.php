@@ -35,14 +35,16 @@ class ListeController {
         //return $response->withRedirect($this->router->pathFor('liste.index'));
     }
 
-    public function show() {
-        $liste = Liste::findOrFail($args['id']);
-        return $this->view($response, 'liste/show.php', "Afficher la liste $liste->no", compact('liste'));
+    public function show($id) {
+        $liste = Liste::findOrFail($id);
+        $view = new ListeView($liste, 'show');
+        $view->render();
     }
 
-    public function edit() {
-        $liste = Liste::findOrFail($args['id']);
-        return $this->view($response, 'liste/edit.php', "Editer une liste", compact('liste'));
+    public function edit($id) {
+        $liste = Liste::findOrFail($id);
+        $view = new ListeView($liste, 'edit');
+        $view->render();
     }
 
     public function update($id) {
