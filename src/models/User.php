@@ -13,18 +13,12 @@
 		public $timestamps=false;
 
 
-		/**
-		 * @return messages globaux postés par l'utilisateur
-		 * pour une liste données
-		 */
-		public function messages($list = null){
 
-		}
 		/**
 		 * @return messages postés par l'utilisateur pour
 		 * un item donné sur une liste données
 		 */
-		public function messages($list,$item){
+		public function messages($list=null,$item){
 
 		}
 		/**
