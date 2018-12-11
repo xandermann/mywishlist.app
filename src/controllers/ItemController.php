@@ -19,8 +19,6 @@ class ItemController extends Controller {
 	}
 
 	public function store() {
-		$app =\Slim\Slim::getInstance() ;
-
 		$liste_id = $app->request->post('liste_id');
 		$nom = $app->request->post('nom');
 		$descr = $app->request->post('descr');
@@ -49,7 +47,6 @@ class ItemController extends Controller {
 	}
 
 	public function update($id) {
-        $app =\Slim\Slim::getInstance() ;
 		$liste_id = $app->request->put('liste_id');
 		$nom = $app->request->put('nom');
 		$descr = $app->request->put('descr');

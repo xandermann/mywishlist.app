@@ -40,6 +40,7 @@ abstract class View {
 	public function html() {
 		echo <<<END
 <h1>TODO: Faire le layout html ici (Corentin)</h1>
+<h2><a href="{$this->app->urlFor('index')}">INDEX</a> - <a href="{$this->app->urlFor('item.index')}">ITEM</a> - <a href="{$this->app->urlFor('liste.index')}">LISTE</a></h2>
 <div>$this->content</div>
 END;
 	}

@@ -16,15 +16,26 @@ $db->bootEloquent();
 
 
 
+/*========================================*/
+/* PAGES */
+/*========================================*/
+use wishlist\controllers\PagesController;
+
 $app->get('/', function () {
-	echo "Page d'accueil (TODO)";
+    $controller = new PagesController;
+    $controller->index();
+})->name('index');
+$app->notFound(function () {
+    $controller = new PagesController;
+    $controller->_404();
 });
 
 
 
 
-
-// Gestion des items
+/*========================================*/
+/* ITEMS */
+/*========================================*/
 use wishlist\controllers\ItemController;
 
 $app->get('/item', function () {
@@ -64,18 +75,48 @@ $app->delete('/item/:id', function ($id) {
 })->name('item.destroy');
 
 
-/*
-// Gestion des listes
-use \wishlist\controllers\ListeController;
-$app->get('/liste', ListeController::class . ':index')->setName('liste.index');
-$app->get('/liste/create', ListeController::class . ':create')->setName('liste.create');
-$app->post('/liste', ListeController::class . ':store')->setName('liste.store');
-$app->get('/liste/{id:[0-9]+}', ListeController::class . ':show')->setName('liste.show');
-$app->get('/liste/{id:[0-9]+}/edit', ListeController::class . ':edit')->setName('liste.edit');
-$app->put('/liste/{id:[0-9]+}', ListeController::class . ':update')->setName('liste.update');
-$app->delete('/liste/{id:[0-9]+}', ListeController::class . ':destroy')->setName('liste.destroy');
-*/
 
+
+/*========================================*/
+/* LISTES */
+/*========================================*/
+use wishlist\controllers\ListeController;
+
+$app->get('/liste', function () {
+    $controller = new ListeController();
+    $controller->index();
+})->name('liste.index');
+
+// Liste des routes
+$app->get('/liste/create', function () {
+    $controller = new ListeController();
+    $controller->create();
+})->name('liste.create');
+
+$app->post('/liste', function () {
+    $controller = new ListeController();
+    $controller->store();
+})->name('liste.store');
+
+$app->get('/liste/:id', function ($id) {
+    $controller = new ListeController();
+    $controller->show($id);
+})->name('liste.show');
+
+$app->get('/liste/:id/edit', function ($id) {
+    $controller = new ListeController();
+    $controller->edit($id);
+})->name('liste.edit');
+
+$app->put('/liste/:id', function ($id) {
+    $controller = new ItemController();
+    $controller->update($id);
+})->name('liste.update');
+
+$app->delete('/liste/:id', function ($id) {
+    $controller = new ItemController();
+    $controller->destroy($id);
+})->name('liste.destroy');
 
 
 

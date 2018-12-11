@@ -20,9 +20,6 @@ class ListeController extends Controller {
     }
 
     public function store() {
-
-        $app =\Slim\Slim::getInstance() ;
-
         $titre = $app->request->getParam('titre');
         $description = $app->request->getParam('descr');
         $token = $app->request->getParam('token');
@@ -49,7 +46,6 @@ class ListeController extends Controller {
     }
 
     public function update($id) {
-        $app =\Slim\Slim::getInstance() ;
         $titre = $app->request->getParam('titre');
         $description = $app->request->getParam('descr');
         $token = $app->request->getParam('token');

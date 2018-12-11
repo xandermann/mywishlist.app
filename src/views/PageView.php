@@ -4,7 +4,7 @@ namespace wishlist\views;
 
 use wishlist\views\View;
 
-class ItemView extends View {
+class PageView extends View {
 
     public function render() {
 
@@ -20,6 +20,10 @@ class ItemView extends View {
 	<button>Connection</button>
 </form></div>";
                 break;
+
+
+            case '404':
+                $this->content = "<h1>Erreur 404</h1>";
         }
 
         $this->html();
