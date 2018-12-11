@@ -5,10 +5,10 @@ namespace wishlist\views;
 abstract class View {
 
 	/**
-	 * Les variables de la page
+	 * La(Les) variable(s) de la page
 	 * @var array
 	 */
-	protected $variables;
+	protected $var;
 
 	/**
 	 * Nom de la vue (index, create ...)
@@ -28,8 +28,8 @@ abstract class View {
 	 */
 	protected $app;
 
-	public function __construct($variables, $view) {
-		$this->variables = $variables;
+	public function __construct($var, $view) {
+		$this->var = $var;
 		$this->view = $view;
 		$this->content = "";
 		$this->app = \Slim\Slim::getInstance();

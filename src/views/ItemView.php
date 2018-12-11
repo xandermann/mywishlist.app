@@ -11,8 +11,8 @@ class ItemView extends View {
 		switch($this->view) {
 			case 'index':
 				$this->content .= '<ul>';
-				foreach ($this->variables as $variable)
-					$this->content .= "<li>{$variable->nom}</li>";
+				foreach ($this->var as $v)
+					$this->content .= "<li>{$v->nom}</li>";
 				$this->content .= '</ul>';
 				break;
 
@@ -29,6 +29,44 @@ class ItemView extends View {
 	Tarif (en €): <input type='number' name='tarif'>
 
 	<input type='hidden' name='_METHOD' value='POST' />
+
+	<button>Valide</button>
+</form>
+";
+				break;
+
+
+			case 'show':
+				$this->content = "<h1>{$this->var->nom}</h1>";
+				break;
+
+
+			case 'edit':
+				$this->content = "
+<h1>Editer l'item <?= htmlspecialchars($this->var->id); ?>:</h1>
+
+<form action='{$this->app->urlFor('item.update', ['id' => $this->var->id])}' method='POST'>
+	Liste ID: <input type='text' name='liste_id' value='{$this->var->liste_id}'>
+	Nom: <input type='text' name='nom' value='{$this->var->nom}'>
+	Descr: <input type='text' name='descr' value='{$this->var->descr}'>
+	Img: <input type='text' name='img' value='{$this->var->img}'>
+	URL: <input type='text' name='url' value='{$this->var->url}'>
+	Tarif: <input type='text' name='tarif' value='{$this->var->tarif}'>
+
+	<input type='hidden' name='_METHOD' value='PUT' />
+
+	<button>Valide</button>
+</form>
+
+<hr>
+
+<h2>Ou alors le supprimer:</h2>
+
+<form action='{$this->app->urlFor('item.destroy', ['id' => $this->var->id])}' method='POST'>
+
+	<input type='hidden' name='id' value='{$this->var->id}'>
+
+	<input type='hidden' name='_METHOD' value='DELETE' />
 
 	<button>Valide</button>
 </form>

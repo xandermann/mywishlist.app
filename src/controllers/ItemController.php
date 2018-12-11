@@ -36,12 +36,16 @@ class ItemController extends Controller {
 
 	public function show($id) {
 		$item = Item::findOrFail($id);
-		//return $this->view($response, 'item/show.php', "Afficher l'item $item->id", compact('item'));
+
+		$view = new ItemView($item, 'show');
+		$view->render();
 	}
 
 	public function edit($id) {
 		$item = Item::findOrFail($id);
-		//return $this->view($response, 'item/edit.php', "Editer un item", compact('item'));
+
+		$view = new ItemView($item, 'edit');
+		$view->render();
 	}
 
 	public function update($id) {
@@ -56,11 +60,11 @@ class ItemController extends Controller {
 
 		// Donnees inserees
 		Item::findOrFail($id)->update(compact('liste_id', 'nom', 'descr', 'img', 'url', 'tarif'));
-		//return $response->withRedirect($this->router->pathFor('item.index'));
+		$this->app->redirect($this->app->urlFor('item.index'));
 	}
 
 	public function destroy($id) {
 		Item::destroy($id);
-		//return $response->withRedirect($this->router->pathFor('item.index'));
+		$this->app->redirect($this->app->urlFor('item.index'));
 	}
 }
