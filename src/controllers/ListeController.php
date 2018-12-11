@@ -3,8 +3,9 @@
 namespace wishlist\controllers;
 
 use wishlist\models\Liste;
+use wishlist\controllers\Controller;
 
-class ListeController {
+class ListeController extends Controller {
     public function index() {
         $liste = Liste::all();
 
@@ -32,7 +33,7 @@ class ListeController {
 
         // Donnees inserees
         Liste::create(compact('user_id','titre', 'description',  'expiration','token' ));
-        //return $response->withRedirect($this->router->pathFor('liste.index'));
+        $this->app->redirect($this->app->urlFor('liste.index'));
     }
 
     public function show($id) {
@@ -58,11 +59,11 @@ class ListeController {
 
         // Donnees inserees
         Liste::findOrFail($id)->update(compact('user_id','titre', 'description',  'expiration','token'));
-        //return $response->withRedirect($this->router->pathFor('liste.index'));
+        $this->app->redirect($this->app->urlFor('liste.index'));
     }
 
     public function destroy($id) {
         Liste::destroy($id);
-        //return $response->withRedirect($this->router->pathFor('liste.index'));
+        $this->app->redirect($this->app->urlFor('liste.index'));
     }
 }

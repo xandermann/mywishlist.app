@@ -43,7 +43,7 @@ class ItemView extends View {
 
 			case 'edit':
 				$this->content = "
-<h1>Editer l'item <?= htmlspecialchars($this->var->id); ?>:</h1>
+<h1>Editer l'item {$this->var->id}:</h1>
 
 <form action='{$this->app->urlFor('item.update', ['id' => $this->var->id])}' method='POST'>
 	Liste ID: <input type='text' name='liste_id' value='{$this->var->liste_id}'>
