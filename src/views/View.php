@@ -11,12 +11,6 @@ abstract class View {
 	protected $var;
 
 	/**
-	 * Nom de la vue (index, create ...)
-	 * @var string
-	 */
-	protected $view;
-
-	/**
 	 * Contenu
 	 * @var string
 	 */
@@ -28,14 +22,13 @@ abstract class View {
 	 */
 	protected $app;
 
-	public function __construct($var, $view) {
+	public function __construct($var = null) {
 		$this->var = $var;
-		$this->view = $view;
 		$this->content = "";
 		$this->app = \Slim\Slim::getInstance();
 	}
 
-	public abstract function render();
+	public abstract function render($view);
 
 	public function html() {
 		echo <<<END

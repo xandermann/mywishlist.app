@@ -9,14 +9,14 @@ class ListeController extends Controller {
     public function index() {
         $liste = Liste::all();
 
-        $view = new ListeView($liste, 'index');
-        $view->render();
+        $view = new ListeView($liste);
+        $view->render('index');
 
     }
 
     public function create() {
-        $view = new ListeView(null, 'create');
-        $view->render();
+        $view = new ListeView;
+        $view->render('create');
     }
 
     public function store() {
@@ -35,14 +35,14 @@ class ListeController extends Controller {
 
     public function show($id) {
         $liste = Liste::findOrFail($id);
-        $view = new ListeView($liste, 'show');
-        $view->render();
+        $view = new ListeView($liste);
+        $view->render('show');
     }
 
     public function edit($id) {
         $liste = Liste::findOrFail($id);
-        $view = new ListeView($liste, 'edit');
-        $view->render();
+        $view = new ListeView($liste);
+        $view->render('edit');
     }
 
     public function update($id) {

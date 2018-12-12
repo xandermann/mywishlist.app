@@ -69,9 +69,9 @@ class ItemView extends View {
 	}
 
 
-	public function render() {
+	public function render($view) {
 
-		switch($this->view) {
+		switch($view) {
 			case 'index':
 			$this->index();
 			break;

@@ -9,13 +9,13 @@ class ItemController extends Controller {
 	public function index() {
 		$items = Item::all();
 
-		$view = new ItemView($items, 'index');
-		$view->render();
+		$view = new ItemView($items);
+		$view->render('index');
 	}
 
 	public function create() {
-        $view = new ItemView(null, 'create');
-        $view->render();
+        $view = new ItemView;
+        $view->render('create');
 	}
 
 	public function store() {
@@ -35,15 +35,15 @@ class ItemController extends Controller {
 	public function show($id) {
 		$item = Item::findOrFail($id);
 
-		$view = new ItemView($item, 'show');
-		$view->render();
+		$view = new ItemView($item);
+		$view->render('show');
 	}
 
 	public function edit($id) {
 		$item = Item::findOrFail($id);
 
-		$view = new ItemView($item, 'edit');
-		$view->render();
+		$view = new ItemView($item);
+		$view->render('edit');
 	}
 
 	public function update($id) {
