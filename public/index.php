@@ -27,7 +27,7 @@ $app->get('/', function () {
 })->name('index');
 $app->notFound(function () {
     $controller = new PagesController;
-    $controller->_404();
+    $controller->notFound();
 });
 
 

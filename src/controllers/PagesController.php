@@ -8,13 +8,13 @@ use wishlist\views\PageView;
 class PagesController extends Controller {
 
 	public function index() {
-		$view = new PageView(null, 'index');
-		$view->render();
+		$view = new PageView;
+		$view->render('index');
 	}
 
-	public function _404() {
-		$view = new PageView(null, '404');
-		$view->render();
+	public function notFound() {
+		$view = new PageView;
+		$view->render('notFound');
 	}
 
 }
