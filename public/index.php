@@ -57,22 +57,22 @@ $app->post('/item', function () {
 $app->get('/item/:id', function ($id) {
     $controller = new ItemController();
     $controller->show($id);
-})->name('item.show');
+})->name('item.show')->conditions(['id' => '[0-9]+']);
 
 $app->get('/item/:id/edit', function ($id) {
     $controller = new ItemController();
     $controller->edit($id);
-})->name('item.edit');
+})->name('item.edit')->conditions(['id' => '[0-9]+']);
 
 $app->put('/item/:id', function ($id) {
     $controller = new ItemController();
     $controller->update($id);
-})->name('item.update');
+})->name('item.update')->conditions(['id' => '[0-9]+']);
 
 $app->delete('/item/:id', function ($id) {
     $controller = new ItemController();
     $controller->destroy($id);
-})->name('item.destroy');
+})->name('item.destroy')->conditions(['id' => '[0-9]+']);
 
 
 
@@ -101,22 +101,22 @@ $app->post('/liste', function () {
 $app->get('/liste/:id', function ($id) {
     $controller = new ListeController();
     $controller->show($id);
-})->name('liste.show');
+})->name('liste.show')->conditions(['id' => '[0-9]+']);
 
 $app->get('/liste/:id/edit', function ($id) {
     $controller = new ListeController();
     $controller->edit($id);
-})->name('liste.edit');
+})->name('liste.edit')->conditions(['id' => '[0-9]+']);
 
 $app->put('/liste/:id', function ($id) {
     $controller = new ItemController();
     $controller->update($id);
-})->name('liste.update');
+})->name('liste.update')->conditions(['id' => '[0-9]+']);
 
 $app->delete('/liste/:id', function ($id) {
     $controller = new ItemController();
     $controller->destroy($id);
-})->name('liste.destroy');
+})->name('liste.destroy')->conditions(['id' => '[0-9]+']);
 
 
 

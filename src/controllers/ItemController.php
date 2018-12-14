@@ -19,16 +19,18 @@ class ItemController extends Controller {
 	}
 
 	public function store() {
-		$liste_id = $this->app->request->post('liste_id');
-		$nom = $this->app->request->post('nom');
-		$descr = $this->app->request->post('descr');
-		$img = $this->app->request->post('img');
-		$url = $this->app->request->post('url');
-		$tarif = $this->app->request->post('tarif');
 
+		$safeDatas = ($this->validator)([
+			'liste_id' => $this->validator::STRING,
+			'nom' => $this->validator::STRING,
+			'descr' => $this->validator::STRING,
+			//'img' => $this->validator::STRING, 	//<== Voir groupe
+			'url' => $this->validator::URL,
+			'tarif' => $this->validator::FLOAT,
+		], 'item.create');
 
 		// Donnees inserees
-		Item::create(compact('liste_id', 'nom', 'descr', 'img', 'url', 'tarif'));
+		Item::create($safeDatas);
 		$this->app->redirect($this->app->urlFor('item.index'));
 	}
 
