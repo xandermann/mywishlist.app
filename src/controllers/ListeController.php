@@ -4,6 +4,7 @@ namespace wishlist\controllers;
 
 use wishlist\models\Liste;
 use wishlist\controllers\Controller;
+use wishlist\views\ListeView;
 
 class ListeController extends Controller {
     public function index() {
@@ -20,11 +21,11 @@ class ListeController extends Controller {
     }
 
     public function store() {
-        $titre = $app->request->getParam('titre');
-        $description = $app->request->getParam('descr');
-        $token = $app->request->getParam('token');
-        $expiration = $app->request->getParam('expiration');
-        $user_id = $app->request->getParam('user_id');
+        $titre = $this->app->request->getParam('titre');
+        $description = $this->app->request->getParam('descr');
+        $token = $this->app->request->getParam('token');
+        $expiration = $this->app->request->getParam('expiration');
+        $user_id = $this->app->request->getParam('user_id');
 
 
 
@@ -36,6 +37,7 @@ class ListeController extends Controller {
     public function show($id) {
         $liste = Liste::findOrFail($id);
         $view = new ListeView($liste);
+        //$liste->items;
         $view->render('show');
     }
 
@@ -46,11 +48,11 @@ class ListeController extends Controller {
     }
 
     public function update($id) {
-        $titre = $app->request->getParam('titre');
-        $description = $app->request->getParam('descr');
-        $token = $app->request->getParam('token');
-        $expiration = $app->request->getParam('expiration');
-        $user_id = $app->request->getParam('user_id');
+        $titre = $this->app->request->getParam('titre');
+        $description = $this->app->request->getParam('descr');
+        $token = $this->app->request->getParam('token');
+        $expiration = $this->app->request->getParam('expiration');
+        $user_id = $this->app->request->getParam('user_id');
 
 
         // Donnees inserees
