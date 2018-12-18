@@ -10,10 +10,10 @@ class PageView extends View {
 
         switch($view) {
             case 'index':
-                $this->content .= "<div><h1>Information</h1><p>dhgcbfxbdxfchbcgnhfcncffn</p></div>";
+                $this->content .= "<div><h2>Connexion</h2></div>";
                 $this->content .= "<div><form action='{}' method='POST'>
-	User: <input type='text' name='user'>
-	Password: <input type='password' name='password'>
+	<input type='text' placeholder='Pseudo' name='user'>
+	<input type='password' placeholder='Password' name='password'>
 
 	<input type='hidden' name='_METHOD' value='POST' />
 
