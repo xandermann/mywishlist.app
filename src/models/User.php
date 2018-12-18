@@ -58,11 +58,35 @@
 			return $req;
 		}
 		/**
+		 * @return listes créées par l'utilisateur
+		 */ 
+		public function created_lists(){
+			return $this->lists('creator');
+		}
+		/**
+		 * @return listes auxquelles participe l'utilisateur
+		 */
+		public function participated_lists(){
+			return $this->lists('participant');
+		}
+		/**
+		 * @return listes que l'utilisateur doit recevoir
+		 */
+		public function received_lists(){
+			return $this->lists('cible');
+		}
+		/**
 		 * @return listes auxquelles participe
 		 * l'utilisateur
 		 */
-		public function lists(){
+		private function lists($type){
+			$req=DB::table('liste')->join('contribue','liste.titreListe','=','contribue.titreListe');
+			$req=$req->join('typeContributeur','contribue.idType','=','typeContributeur.idType');
+			$req=$req->where('typeContributeur.idType','=',$type);
+			$req=$req->where('idUser','=',$this->idUser);
+			$req=$req->select('liste.*');
 
+			return $req;
 		}
 	}
 ?>
