@@ -123,30 +123,40 @@ $app->delete('/liste/:id', function ($id) {
 
 
 
-use wishlist\classes\Authentification;
+use wishlist\classes\Authentification as Auth;
 use wishlist\controllers\AuthController;
+
+if(!Auth::check()) {
 // Routes quand l'utilisateur N'EST PAS connecte
-$app->group('/auth', function() use ($app) {
-    $app->get('/inscription', function() {
-        $controller = new AuthController;
-        $controller->signUp();
+    $app->group('/auth', function() use ($app) {
+
+        $app->get('/inscription', function() {
+            $controller = new AuthController;
+            $controller->getSignUp();
+        })->name('auth.signup');
+
+        $app->post('/inscription', function() {
+            $controller = new AuthController;
+            $controller->postSignUp();
+        });
+
+        $app->get('/connexion', function() {
+            $controller = new AuthController;
+            $controller->getSignIn();
+        });
     });
 
-    $app->get('/connexion', function() {
-        $controller = new AuthController;
-        $controller->signIn();
+} else {
+
+    // Routes quand l'utilisateur EST connecte
+    $app->group('/auth', function() use ($app) {
+        $app->get('/deconnexion', function() {
+            $controller = new AuthController;
+            $controller->signUp();
+        });
     });
-});
 
-
-// Routes quand l'utilisateur EST connecte
-$app->group('/auth', function() use ($app) {
-    $app->get('/deconnexion', function() {
-        $controller = new AuthController;
-        $controller->signUp();
-    });
-});
-
+}
 
 
 

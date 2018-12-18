@@ -2,19 +2,38 @@
 
 namespace wishlist\controllers;
 
+use wishlist\views\AuthView;
+use wishlist\classes\Authentification as Auth;
+
 class AuthController extends Controller {
 
 	/**
 	 * Inscripion
 	 */
-	public function signUp() {
+	public function getSignUp() {
+		$view = new AuthView;
+		$view->render('signUp');
+	}
 
+	/**
+	 * Inscripion
+	 */
+	public function postSignUp() {
+
+		$datas = ($this->validator)([
+			'user' => $this->validator::STRING,
+			'password' => $this->validator::STRING,
+			'password_confirm' => $this->validator::STRING,
+		], 'auth.signup');
+
+		var_dump($datas);
+		die;
 	}
 
 	/**
 	 * Connexion
 	 */
-	public function signIn() {
+	public function getSignIn() {
 
 	}
 
@@ -22,7 +41,8 @@ class AuthController extends Controller {
 	 * Deconnexion
 	 */
 	public function signOut() {
-
+		Auth::logOut();
+		$this->app->redirect($this->app->urlFor('index'));
 	}
 
 }

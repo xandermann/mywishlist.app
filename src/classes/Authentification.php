@@ -4,10 +4,19 @@ namespace wishlist\classes;
 
 class Authentification {
 
-	private $authSessionVar;
+	private $authSessionVar = "auth";
 
-	public function __construct() {
-		$this->authSessionVar = $_SESSION['auth'];
+	/**
+	 * Check si l'utilisateur est connecte ou pas
+	 */
+	public static function check(): bool {
+		return false;
+		var_dump($this->authSessionVar);
+		die;
+	}
+
+	public static function logOut() {
+		unset($_SESSION[$authSessionVar]);
 	}
 
 	public static function authenticate($login, $password): bool {
