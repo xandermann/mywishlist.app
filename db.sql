@@ -1,22 +1,22 @@
 CREATE TABLE categorie(
-  codeCateg INTEGER PRIMARY KEY NOT NULL,
+  codeCateg INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
   nomCateg VARCHAR(80) NOT NULL,
   description VARCHAR(200)
 );
 
 CREATE TABLE image(
-  idImage INTEGER PRIMARY KEY NOT NULL,
+  idImage INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
   path VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE user(
-  idUser INTEGER PRIMARY KEY NOT NULL,
+  idUser INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
   userName VARCHAR(80),
   crypted_pass VARCHAR(80)
 );
 
 CREATE TABLE message(
-  idMessage INTEGER PRIMARY KEY NOT NULL,
+  idMessage INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
   contenu VARCHAR(200) NOT NULL
 );
 
@@ -58,7 +58,7 @@ ALTER TABLE estDans
     ADD FOREIGN KEY (nomItem) REFERENCES items(nomItem);
 
 CREATE TABLE typeContributeur(
-  idType INTEGER PRIMARY KEY NOT NULL,
+  idType INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
   libelle VARCHAR(60) NOT NULL
 );
 
@@ -75,8 +75,8 @@ ALTER TABLE contribue
     ADD FOREIGN KEY (idType) REFERENCES typeContributeur(idType);
 
 CREATE TABLE poste(
-  idPoste INTEGER PRIMARY KEY NOT NULL,
-  idMessage INTEGER,
+  idPoste INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  idMessage INTEGER NOT NULL,
   titreListe VARCHAR(80) NOT NULL,
   idUser INTEGER NOT NULL
 );
@@ -95,8 +95,3 @@ ALTER TABLE concerne
     ADD PRIMARY KEY (idPoste,nomItem),
     ADD FOREIGN KEY (idPoste) REFERENCES poste(idPoste),
     ADD FOREIGN KEY (nomItem) REFERENCES items(nomItem);
-
-
-INSERT INTO typeContributeur(idType,libelle) VALUES (1,'creator');
-INSERT INTO typeContributeur(idType,libelle) VALUES (2,'participant');
-INSERT INTO typeContributeur(idType,libelle) VALUES (3,'cible');
