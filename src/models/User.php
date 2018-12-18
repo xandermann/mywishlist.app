@@ -11,6 +11,9 @@
 		protected $table="user";
 		protected $primaryKey="idUser";
 		public $timestamps=false;
+		protected $fillable = ['userName', 'crypted_pass'];
+
+
 		/**
 		 * @return tous les messages postés par l'utiisateur
 		 */
@@ -41,6 +44,7 @@
 		 * @return messages postés par l'utilisateur pour
 		 * un item donné sur une liste données
 		 */
+		/*
 		public function messages($list,$item){
 			$postes=DB::table('concerne')->where('concerne.nomItem','=',$item)->select('concerne.idPoste')->get();
 			$id_poste_array=array();
@@ -57,9 +61,10 @@
 
 			return $req;
 		}
+		*/
 		/**
 		 * @return listes créées par l'utilisateur
-		 */ 
+		 */
 		public function created_lists(){
 			return $this->lists('creator');
 		}

@@ -4,6 +4,7 @@ namespace wishlist\controllers;
 
 use wishlist\views\AuthView;
 use wishlist\classes\Authentification as Auth;
+use wishlist\classes\AuthException;
 
 class AuthController extends Controller {
 
@@ -26,8 +27,19 @@ class AuthController extends Controller {
 			'password_confirm' => $this->validator::STRING,
 		], 'auth.signup');
 
-		var_dump($datas);
-		die;
+		// Si 'mot de passe' et 'confirmation du mot de passe' different, alors erreur
+		if($datas['password'] != $datas['password_confirm']) {
+			$this->app->redirect($this->app->urlFor('auth.signup'));
+		}
+
+		try {
+			Auth::createUser($datas['user'], $datas['password']);
+		} catch(AuthException $e) {
+			// Erreur insertion, existe deja
+			$this->app->redirect($this->app->urlFor('auth.signup'));
+		}
+
+		$this->app->redirect($this->app->urlFor('index'));
 	}
 
 	/**
