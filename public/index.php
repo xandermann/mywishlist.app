@@ -1,11 +1,13 @@
 <?php
 
+session_start();
 require_once "../vendor/autoload.php";
 
 use \Slim\Slim;
 use \wishlist\CC;
 
 $app = new \Slim\Slim();
+
 
 
 use Illuminate\Database\Capsule\Manager as DB;
@@ -118,6 +120,32 @@ $app->delete('/liste/:id', function ($id) {
     $controller->destroy($id);
 })->name('liste.destroy')->conditions(['id' => '[0-9]+']);
 
+
+
+
+use wishlist\classes\Authentification;
+use wishlist\controllers\AuthController;
+// Routes quand l'utilisateur N'EST PAS connecte
+$app->group('/auth', function() use ($app) {
+    $app->get('/inscription', function() {
+        $controller = new AuthController;
+        $controller->signUp();
+    });
+
+    $app->get('/connexion', function() {
+        $controller = new AuthController;
+        $controller->signIn();
+    });
+});
+
+
+// Routes quand l'utilisateur EST connecte
+$app->group('/auth', function() use ($app) {
+    $app->get('/deconnexion', function() {
+        $controller = new AuthController;
+        $controller->signUp();
+    });
+});
 
 
 
