@@ -38,9 +38,9 @@ class ListeController extends Controller {
     }
 
     public function show($id) {
-        $liste = Liste::findOrFail($id);
+        //$liste = Liste::findOrFail($id);
+        $liste = Liste::where('token', $id)->firstOrFail();
         $view = new ListeView($liste);
-
         $view->render('show');
     }
 

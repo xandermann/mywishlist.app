@@ -9,7 +9,7 @@ class ListeView extends View {
     private function index() {
         $this->content .= '<ul>';
         foreach ($this->var as $v)
-            $this->content .= "<li><a href='{$this->app->urlFor('liste.show', ['id' => $v->no])}'>{$v->titre}</a></li>";
+            $this->content .= "<li><a href='{$this->app->urlFor('liste.show', ['id' => $v->token])}'>{$v->titre}</a></li>";
         $this->content .= '</ul>';
     }
 

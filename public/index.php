@@ -132,7 +132,7 @@ $app->post('/liste', function () {
 $app->get('/liste/:id', function ($id) {
     $controller = new ListeController();
     $controller->show($id);
-})->name('liste.show')->conditions(['id' => '[0-9]+']);
+})->name('liste.show');
 
 $app->get('/liste/:id/edit', function ($id) {
     $controller = new ListeController();
