@@ -22,20 +22,22 @@ class ListeController extends Controller {
     }
 
     public function store() {
+
         $validator = new Validator;
 
         $datas = $validator([
             'titre' => $validator::STRING,
             'description' => $validator::STRING,
-            'expiration' => $validator::STRING,//<== Voir groupe
+            'expiration' => $validator::DATE,
         ], 'liste.create');
 
         $datas['user_id'] = 1; // TODO
 
 
         // Donnees inserees
-        Liste::create($datas);
-        $this->app->redirect($this->app->urlFor('liste.index'));
+        $liste = Liste::create($datas);
+
+        $this->app->redirect($this->app->urlFor('liste.show', ['id' => $liste->no]));
     }
 
     public function show($id) {
@@ -65,7 +67,7 @@ class ListeController extends Controller {
         $datas = $validator([
             'titre' => $validator::STRING,
             'description' => $validator::STRING,
-            'expiration' => $validator::STRING,//<== Voir groupe
+            'expiration' => $validator::DATE,
         ], 'liste.edit');
 
 
@@ -84,17 +86,21 @@ class ListeController extends Controller {
 
         $liste = Liste::findOrFail($datas['no']);
 
-        // Generation du token
-        // On genere un token, tant qu'il y a un token qui existe deja, alors on regenere
-        $token;
-        do {
-            $token = bin2hex(random_bytes(11));
-        } while(Liste::where('token', $token)->first());
+        // Si le token existe deja, ne le genere pas
+        if(!$liste->token) {
+            // Generation du token
+            // On genere un token, tant qu'il y a un token qui existe deja, alors on regenere
+            $token;
+            do {
+                $token = bin2hex(random_bytes(11));
+            } while(Liste::where('token', $token)->first());
 
-        //$token est maintenant unique
-        $liste->update(['token' => $token]);
+            //$token est maintenant unique
+            $liste->update(['token' => $token]);
 
-        $this->app->redirect($this->app->urlFor('liste.showPublic', ['token' => $token]));
+        }
+
+        $this->app->redirect($this->app->urlFor('liste.showPublic', ['token' => $liste->token]));
     }
 
     public function destroy($id) {

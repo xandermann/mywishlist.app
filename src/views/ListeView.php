@@ -32,6 +32,8 @@ class ListeView extends View {
 
     private function show() {
         $this->content .= "<h2>{$this->var->titre}</h2>";
+        $this->content .= "<a href='{$this->app->urlFor('liste.edit', ['id' => $this->var->no])}'>Editer la liste</a>";
+
 
         $this->content .= "<ul>";
         foreach($this->var->items as $item) {
@@ -56,7 +58,7 @@ class ListeView extends View {
         $this->content = "
         <h2>Editer la liste \"{$this->var->titre}\":</h2>
 
-        <a href='{$this->app->urlFor('item.create', ['listToken' => $this->var->no])}'>Ajouter un item</a>
+        <a href='{$this->app->urlFor('item.create', ['id' => $this->var->no])}'>Ajouter un item</a>
 
         <hr>
 
@@ -65,7 +67,7 @@ class ListeView extends View {
 
         <input type='hidden' name='_METHOD' value='PUT'>
 
-        <input type='submit' value='Generer un lien publique'>
+        <input type='submit' value='Recuperer le lien publique'>
         </form>
 
         <hr>

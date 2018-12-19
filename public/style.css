@@ -11,6 +11,10 @@ html, body {
 	font-family: roboto;
 }
 
+a, a:visited {
+	color: green;
+}
+
 .content {
 	margin: 0 auto;
 	width: 80%;

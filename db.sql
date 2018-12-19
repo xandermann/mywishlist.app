@@ -12,6 +12,8 @@ CREATE TABLE `item` (
   `img` text,
   `url` text,
   `tarif` decimal(5,2) DEFAULT NULL,
+  `participant` varchar(255),
+  `message` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

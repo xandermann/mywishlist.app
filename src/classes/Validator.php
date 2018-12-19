@@ -12,24 +12,13 @@ class Validator {
 	const STRING = 0;
 
 	/**
-	 * Filtre du validateur
+	 * Filtres du validateur
 	 */
 	const FLOAT = 1;
-
-	/**
-	 * Filtre du validateur
-	 */
 	const URL = 2;
-
-	/**
-	 * Filtre du validateur
-	 */
 	const EMAIL = 3;
-
-	/**
-	 * Filtre du validateur
-	 */
 	const INT = 4;
+	const DATE = 5;
 
 
 
@@ -121,6 +110,20 @@ class Validator {
 					$ret[$variableToFilter] = $paramToTest;
 				else
 					throw new ValidatorException($variableToFilter);
+				break;
+
+
+				// Si doit etre une date
+				case self::DATE:
+				$date = $paramToTest;
+
+				list($y, $m, $d) = explode('-', $date);
+
+				if(checkdate($m, $d, $y)){
+					$ret[$variableToFilter] = $paramToTest;
+				} else {
+					throw new ValidatorException($variableToFilter);
+				}
 				break;
 
 				default:

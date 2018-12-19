@@ -43,7 +43,7 @@ class ItemController extends Controller {
 
 		// Donnees inserees
 		Item::create($datas);
-		$this->app->redirect($this->app->urlFor('liste.edit', ['id' => $token]));
+		$this->app->redirect($this->app->urlFor('liste.show', ['id' => $liste->no]));
 	}
 
 	public function show($id) {
