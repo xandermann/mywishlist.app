@@ -9,7 +9,7 @@ use wishlist\classes\Validator;
 
 class ListeController extends Controller {
     public function index() {
-        $liste = Liste::all();
+        $liste = Liste::whereNotNull('token')->get();
 
         $view = new ListeView($liste);
         $view->render('index');
@@ -33,15 +33,6 @@ class ListeController extends Controller {
         $datas['user_id'] = 1; // TODO
 
 
-        // Generation du token
-        // On genere un token, tant qu'il y a un token qui existe deja, alors on regenere
-        $token;
-        do {
-            $token = $token = bin2hex(random_bytes(11));
-        } while(Liste::where('token', $token)->first());
-
-        $datas['token'] = $token;
-
         // Donnees inserees
         Liste::create($datas);
         $this->app->redirect($this->app->urlFor('liste.index'));
@@ -49,14 +40,22 @@ class ListeController extends Controller {
 
     public function show($id) {
         //$liste = Liste::findOrFail($id);
-        $liste = Liste::where('token', $id)->firstOrFail();
+        $liste = Liste::findOrFail($id);
         $view = new ListeView($liste);
         $view->render('show');
     }
 
-    public function edit($id) {
-        $liste = Liste::where('token', $id)->firstOrFail();
+    public function showPublic($token) {
+        //$liste = Liste::findOrFail($id);
+        $liste = Liste::where('token', $token)->firstOrFail();
         $view = new ListeView($liste);
+        $view->render('showPublic');
+    }
+
+    public function edit($id) {
+        $liste = Liste::findOrFail($id);
+        $view = new ListeView($liste);
+
         $view->render('edit');
     }
 
@@ -73,6 +72,29 @@ class ListeController extends Controller {
         // Donnees inserees
         Liste::where('token', $id)->update($datas);
         $this->app->redirect($this->app->urlFor('liste.index'));
+    }
+
+    public function setPublic() {
+
+        $validator = new Validator;
+
+        $datas = $validator([
+            'no' => $validator::INT
+        ], 'liste.edit');
+
+        $liste = Liste::findOrFail($datas['no']);
+
+        // Generation du token
+        // On genere un token, tant qu'il y a un token qui existe deja, alors on regenere
+        $token;
+        do {
+            $token = bin2hex(random_bytes(11));
+        } while(Liste::where('token', $token)->first());
+
+        //$token est maintenant unique
+        $liste->update(['token' => $token]);
+
+        $this->app->redirect($this->app->urlFor('liste.showPublic', ['token' => $token]));
     }
 
     public function destroy($id) {

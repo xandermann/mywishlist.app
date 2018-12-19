@@ -24,29 +24,6 @@ $app->get('/css', function () use ($app) {
     require 'style.css';
 })->name('css');
 
-$app->get('/img/:name', function ($img) use ($app) {
-
-    try {
-        $filename = basename($img);
-        $file_extension = strtolower(substr(strrchr($filename,"."),1));
-
-        switch( $file_extension ) {
-            case "gif": $ctype="image/gif"; break;
-            case "png": $ctype="image/png"; break;
-            case "jpeg":
-            case "jpg": $ctype="image/jpeg"; break;
-            default:
-        }
-
-        $app->response->headers->set('Content-Type', $ctype);
-        require "img_item/$img";
-
-    } catch(Exception $e){
-        $controller = new PagesController;
-        $controller->notFound();
-    }
-})->name('img');
-
 
 /*========================================*/
 /* PAGES */
@@ -78,9 +55,9 @@ $app->get('/item', function () {
 */
 
 // Liste des routes
-$app->get('/item/create/:listToken', function ($listToken) {
+$app->get('/item/create/:id', function ($id) {
     $controller = new ItemController();
-    $controller->create($listToken);
+    $controller->create($id);
 })->name('item.create');
 
 $app->post('/item', function () {
@@ -135,22 +112,32 @@ $app->post('/liste', function () {
 $app->get('/liste/:id', function ($id) {
     $controller = new ListeController();
     $controller->show($id);
-})->name('liste.show');
+})->name('liste.show')->conditions(['id' => '[0-9]+']);
+
+$app->get('/liste/publique/:token', function ($token) {
+    $controller = new ListeController();
+    $controller->showPublic($token);
+})->name('liste.showPublic');
 
 $app->get('/liste/:id/edit', function ($id) {
     $controller = new ListeController();
     $controller->edit($id);
-})->name('liste.edit');
+})->name('liste.edit')->conditions(['id' => '[0-9]+']);
 
 $app->put('/liste/:id', function ($id) {
     $controller = new ListeController();
     $controller->update($id);
-})->name('liste.update');
+})->name('liste.update')->conditions(['id' => '[0-9]+']);
+
+$app->put('/liste/publique', function () {
+    $controller = new ListeController();
+    $controller->setPublic();
+})->name('liste.setPublic');
 
 $app->delete('/liste/:id', function ($id) {
     $controller = new ListeController();
     $controller->destroy($id);
-})->name('liste.destroy');
+})->name('liste.destroy')->conditions(['id' => '[0-9]+']);
 
 
 

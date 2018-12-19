@@ -17,10 +17,10 @@ class ItemController extends Controller {
 	}
 	*/
 
-	public function create($listToken) {
+	public function create($id) {
 
 		// Si la liste existe, ok, sinon 404
-		$liste = Liste::where('token', $listToken)->firstOrFail();
+		$liste = Liste::findOrFail($id);
 
 		$view = new ItemView($liste);
 		$view->render('create');
