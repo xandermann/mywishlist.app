@@ -51,8 +51,9 @@ section {
 }
 
 section article {
+	padding: 10% 0;
 	display: inline-block;
-	width: 60%;
+	width: 100%;
 	border: 1px solid black;
 	vertical-align: top;
 	box-sizing: border-box;
@@ -88,7 +89,7 @@ section input {
 	display: block;
 	margin: 0 auto;
 
-	width: 80%;
+	width: 100%;
 	padding: 12px 20px;
 	margin: 8px 0;
 	display: inline-block;
@@ -100,7 +101,6 @@ section input {
 section aside input[type=submit]:hover {
   background-color: #ffb366;
 }
-
 
 footer {
 	margin-top: 15px;

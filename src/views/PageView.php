@@ -10,6 +10,7 @@ class PageView extends View {
 
         switch($view) {
             case 'index':
+            /*
                 $this->content .= "<div><h2>Connexion</h2></div>";
                 $this->content .= "<div><form action='{}' method='POST'>
 	<input type='text' placeholder='Pseudo' name='user'>
@@ -19,6 +20,14 @@ class PageView extends View {
 
 	<button>Connection</button>
 </form></div>";
+*/
+                $this->content .= "<h2>MyWishlist.app</h2>";
+
+                $this->content .= "<ul>";
+                $this->content .= "<li><a href='{$this->app->urlFor('liste.index')}'>Voir les listes</a></li>";
+                $this->content .= "<li><a href='{$this->app->urlFor('liste.create')}'>Créer une liste</a></li>";
+                $this->content .= "</ul>";
+
                 break;
 
 

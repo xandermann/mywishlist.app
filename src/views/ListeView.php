@@ -20,9 +20,7 @@ class ListeView extends View {
 		<form action='{$this->app->urlFor('liste.store')}' method='POST'>
 		Titre: <input type='text' name='titre'>
         Description: <input type='text' name='description'>
-        Token: <input type='text' name='token'>
-        Expiration: <input type='text' name='expiration'>
-        User_id: <input type='text' name='user_id'>
+        Expiration: <input type='date' name='expiration'>
 
 		<input type='hidden' name='_METHOD' value='POST' />
 
@@ -44,16 +42,13 @@ class ListeView extends View {
 
     private function edit() {
         $this->content = "
-		<h2>Editer la liste {$this->var->no}:</h2>
+		<h2>Editer la liste {$this->var->token}:</h2>
 
-		<form action='{$this->app->urlFor('liste.update', ['id' => $this->var->no])}' method='POST'>
-		Liste ID: <input type='text' name='liste_id' value='{$this->var->liste_id}'>
+		<form action='{$this->app->urlFor('liste.update', ['id' => $this->var->token])}' method='POST'>
 
 		Titre: <input type='text' name='titre' value='{$this->var->titre}'>
-		Descr: <input type='text' name='description' value='{$this->var->descr}'>
-		token: <input type='text' name='token' value='{$this->var->token}'>
-		expi: <input type='text' name='expiration' value='{$this->var->expiration}'>
-		user_id: <input type='text' name='user_id' value='{$this->var->user_id}'>
+		Descr: <input type='text' name='description' value='{$this->var->description}'>
+		expi: <input type='date' name='expiration' value='{$this->var->expiration}'>
 
 		<input type='hidden' name='_METHOD' value='PUT' />
 
@@ -62,7 +57,7 @@ class ListeView extends View {
 
 		<hr>
 
-		<h2>Ou alors le supprimer:</h2>
+		<h2>Ou alors la supprimer:</h2>
 
 		<form action='{$this->app->urlFor('liste.destroy', ['id' => $this->var->no])}' method='POST'>
 

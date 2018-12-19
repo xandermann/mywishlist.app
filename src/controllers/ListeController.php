@@ -25,12 +25,24 @@ class ListeController extends Controller {
         $validator = new Validator;
 
         $datas = $validator([
-            'user_id' => $validator::INT,
             'titre' => $validator::STRING,
             'description' => $validator::STRING,
             'expiration' => $validator::STRING,//<== Voir groupe
-            'token' => $validator::STRING,
         ], 'liste.create');
+
+        $datas['user_id'] = 1; // TODO
+
+
+        // Generation du token
+        // On genere un token, tant qu'il y a un token qui existe deja, alors on regenere
+        $token;
+        $i = 0;
+        do {
+            $token = md5($datas['user_id'] . $datas['titre'] . $datas['description'] . $datas['expiration'] . $i);
+            $i++;
+        } while(Liste::where('token', $token)->first());
+
+        $datas['token'] = $token;
 
         // Donnees inserees
         Liste::create($datas);
@@ -45,7 +57,7 @@ class ListeController extends Controller {
     }
 
     public function edit($id) {
-        $liste = Liste::findOrFail($id);
+        $liste = Liste::where('token', $id)->firstOrFail();
         $view = new ListeView($liste);
         $view->render('edit');
     }
@@ -54,16 +66,14 @@ class ListeController extends Controller {
 
         $validator = new Validator;
         $datas = $validator([
-            'user_id' => $validator::INT,
             'titre' => $validator::STRING,
             'description' => $validator::STRING,
             'expiration' => $validator::STRING,//<== Voir groupe
-            'token' => $validator::STRING
         ], 'liste.edit');
 
 
         // Donnees inserees
-        Liste::findOrFail($id)->update($datas);
+        Liste::where('token', $id)->update($datas);
         $this->app->redirect($this->app->urlFor('liste.index'));
     }
 

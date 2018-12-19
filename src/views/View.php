@@ -60,18 +60,7 @@ abstract class View {
 		<section>
 			<article>
 				$this->content
-			</article><aside>
-                <!--
-				<form action="#connexion" method="POST">
-					<input type="text" placeholder="Pseudo">
-					<input type="password" placeholder="Mot de passe">
-					<input type="submit" value="Connexion">
-				</form>
-
-				-->
-                <a href="#inscription"><input type="submit" value="TODO"></a>
-
-			</aside>
+			</article>
 		</section>
 
 		<footer>

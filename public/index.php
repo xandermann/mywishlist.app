@@ -137,17 +137,17 @@ $app->get('/liste/:id', function ($id) {
 $app->get('/liste/:id/edit', function ($id) {
     $controller = new ListeController();
     $controller->edit($id);
-})->name('liste.edit')->conditions(['id' => '[0-9]+']);
+})->name('liste.edit');
 
 $app->put('/liste/:id', function ($id) {
-    $controller = new ItemController();
+    $controller = new ListeController();
     $controller->update($id);
-})->name('liste.update')->conditions(['id' => '[0-9]+']);
+})->name('liste.update');
 
 $app->delete('/liste/:id', function ($id) {
-    $controller = new ItemController();
+    $controller = new ListeController();
     $controller->destroy($id);
-})->name('liste.destroy')->conditions(['id' => '[0-9]+']);
+})->name('liste.destroy');
 
 
 
