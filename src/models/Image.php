@@ -11,5 +11,6 @@
 		protected $table="image";
 		protected $primaryKey="idImage";
 		public $timestamps=false;
+		protected $guarded = [];
 	}
 ?>

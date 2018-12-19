@@ -9,7 +9,7 @@ class Liste extends Model {
 
 	protected $table = "liste";
 	protected $primaryKey = "no";
-    protected $fillable = ['no','user_id','titre', 'description',  'expiration','token'];
+    protected $guarded = [];
     public $timestamps = false;
 
 	public function items() {

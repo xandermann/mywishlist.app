@@ -9,7 +9,7 @@ use wishlist\classes\Validator;
 
 class ListeController extends Controller {
     public function index() {
-        $liste = Liste::whereNotNull('token')->get();
+        $liste = Liste::whereNotNull('token')->where('estPublique', 1)->get();
 
         $view = new ListeView($liste);
         $view->render('index');
@@ -78,14 +78,26 @@ class ListeController extends Controller {
 
     public function setPublic() {
 
+
         $validator = new Validator;
 
         $datas = $validator([
-            'no' => $validator::INT
-        ], 'liste.edit');
+            'no' => $validator::INT,
+        ], 'liste.index');
 
+        // Passe a 1 la liste
         $liste = Liste::findOrFail($datas['no']);
 
+
+        // On genere un token si ce n'est pas encore fait
+        $this->createToken($liste);
+
+        $liste->update(['estPublique' => 1]);
+
+        $this->app->redirect($this->app->urlFor('liste.edit', ['id' => $liste->no]));
+    }
+
+    private function createToken($liste) {
         // Si le token existe deja, ne le genere pas
         if(!$liste->token) {
             // Generation du token
@@ -99,6 +111,19 @@ class ListeController extends Controller {
             $liste->update(['token' => $token]);
 
         }
+    }
+
+    public function generateToken() {
+
+        $validator = new Validator;
+
+        $datas = $validator([
+            'no' => $validator::INT
+        ], 'liste.index');
+
+        $liste = Liste::findOrFail($datas['no']);
+
+        $this->createToken($liste);
 
         $this->app->redirect($this->app->urlFor('liste.showPublic', ['token' => $liste->token]));
     }

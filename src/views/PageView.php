@@ -24,7 +24,7 @@ class PageView extends View {
                 $this->content .= "<h2>MyWishlist.app</h2>";
 
                 $this->content .= "<ul>";
-                $this->content .= "<li><a href='{$this->app->urlFor('liste.index')}'>Voir les listes</a></li>";
+                $this->content .= "<li><a href='{$this->app->urlFor('liste.index')}'>Voir les listes publiques</a></li>";
                 $this->content .= "<li><a href='{$this->app->urlFor('liste.create')}'>Créer une liste</a></li>";
                 $this->content .= "</ul>";
 

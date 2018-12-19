@@ -11,6 +11,7 @@
 		protected $table="message";
 		protected $primaryKey="idMessage";
 		public $timestamps=false;
+		protected $guarded = [];
 		/**
 		 * @return utilisateur qui a posté le message
 		 */

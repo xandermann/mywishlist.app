@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model {
     protected $table = "item";
     protected $primaryKey = "id";
-    protected $fillable = ['id', 'liste_id', 'nom', 'descr', 'img', 'url', 'tarif'];
+    protected $guarded = [];
     public $timestamps = false;
 
     /**

@@ -62,12 +62,26 @@ class ListeView extends View {
 
         <hr>
 
+        <h2>Rendre la liste publique</h2>
+
         <form action='{$this->app->urlFor('liste.setPublic')}' method='post'>
-        <input type='hidden' name='no' value='{$this->var->no}'>
+              <input type='hidden' name='no' value='{$this->var->no}'>
 
-        <input type='hidden' name='_METHOD' value='PUT'>
+              <input type='hidden' name='_METHOD' value='PUT'>
 
-        <input type='submit' value='Recuperer le lien publique'>
+               <input type='submit' value='Rendre la liste publique'>
+        </form>
+
+        <hr>
+
+        <h2>Recuperer le token</h2>
+
+        <form action='{$this->app->urlFor('liste.generateToken')}' method='post'>
+              <input type='hidden' name='no' value='{$this->var->no}'>
+
+              <input type='hidden' name='_METHOD' value='PUT'>
+
+               <input type='submit' value='Recuperer le lien (via token)'>
         </form>
 
         <hr>

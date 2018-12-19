@@ -11,7 +11,7 @@
 		protected $table="user";
 		protected $primaryKey="idUser";
 		public $timestamps=false;
-		protected $fillable = ['userName', 'crypted_pass'];
+		protected $guarded = [];
 
 
 		/**

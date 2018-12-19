@@ -12,6 +12,7 @@ class Categorie extends Model{
 	protected $table="categorie";
 	protected $primaryKey="codeCateg";
 	public $timestamps=false;
+	protected $guarded = [];
 
 	/**
 	 * @return tous les items d'une catégorie

@@ -129,10 +129,15 @@ $app->put('/liste/:id', function ($id) {
     $controller->update($id);
 })->name('liste.update')->conditions(['id' => '[0-9]+']);
 
-$app->put('/liste/publique', function () {
+$app->put('/liste/mettre/publique', function () {
     $controller = new ListeController();
     $controller->setPublic();
 })->name('liste.setPublic');
+
+$app->put('/liste/generer/token', function () {
+    $controller = new ListeController();
+    $controller->generateToken();
+})->name('liste.generateToken');
 
 $app->delete('/liste/:id', function ($id) {
     $controller = new ListeController();
