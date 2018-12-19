@@ -51,7 +51,7 @@ abstract class View {
 
 			<nav>
 				<ul>
-					<li><a href="{$this->app->urlFor('index')}">Acceuil</a></li><li><a href="{$this->app->urlFor('liste.index')}">LISTE</a></li><li><a href="{$this->app->urlFor('item.index')}">ITEM</a></li>
+					<li><a href="{$this->app->urlFor('index')}">Acceuil</a></li><li><a href="#">Connexion</a></li><li><a href="#">Inscription</a></li>
 				</ul>
 			</nav>
 		</header>

@@ -6,24 +6,25 @@ use wishlist\views\View;
 
 class ItemView extends View {
 
+	/*
 	private function index() {
 		$this->content .= '<ul>';
 		foreach ($this->var as $v)
 			$this->content .= "<li><a href='{$this->app->urlFor('item.show', ['id' => $v->id])}'>{$v->nom}</a></li>";
 		$this->content .= '</ul>';
 	}
+	*/
 
 	private function create() {
 		$this->content = "
 		<h2>Creer un item</h2>
 
 		<form action='{$this->app->urlFor('item.store')}' method='POST'>
-		Liste ID: <input type='text' name='liste_id'>
 		Nom: <input type='text' name='nom'>
 		Descr: <input type='text' name='descr'>
-		Img: <input type='file' name='img'>
-		URL: <input type='text' name='url'>
 		Tarif (en €): <input type='number' name='tarif'>
+
+		<input type='hidden' name='listToken' value='{$this->var->token}'>
 
 		<input type='hidden' name='_METHOD' value='POST' />
 

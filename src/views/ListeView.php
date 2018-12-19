@@ -30,7 +30,7 @@ class ListeView extends View {
     }
 
     private function show() {
-        $this->content = "<h2>{$this->var->titre}</h2>";
+        $this->content .= "<h2>{$this->var->titre}</h2>";
 
         $this->content .= "<ul>";
         foreach($this->var->items as $item) {
@@ -43,6 +43,10 @@ class ListeView extends View {
     private function edit() {
         $this->content = "
 		<h2>Editer la liste {$this->var->token}:</h2>
+
+        <a href='{$this->app->urlFor('item.create', ['listToken' => $this->var->token])}'>Ajouter un item</a>
+
+        <hr>
 
 		<form action='{$this->app->urlFor('liste.update', ['id' => $this->var->token])}' method='POST'>
 

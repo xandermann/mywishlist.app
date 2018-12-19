@@ -5,36 +5,45 @@ namespace wishlist\controllers;
 use wishlist\models\Item;
 use wishlist\views\ItemView;
 use wishlist\classes\Validator;
+use wishlist\models\Liste;
 
 class ItemController extends Controller {
+	/*
 	public function index() {
 		$items = Item::all();
 
 		$view = new ItemView($items);
 		$view->render('index');
 	}
+	*/
 
-	public function create() {
-        $view = new ItemView;
-        $view->render('create');
+	public function create($listToken) {
+
+		// Si la liste existe, ok, sinon 404
+		$liste = Liste::where('token', $listToken)->firstOrFail();
+
+		$view = new ItemView($liste);
+		$view->render('create');
 	}
 
 	public function store() {
 
-		$validator = new Validator;
 
-		$safeDatas = $validator([
-			'liste_id' => $validator::STRING,
+		$token = $this->app->request->params('listToken');
+		$liste = Liste::where('token', $token)->firstOrFail(); // Si token pas OK, erreur 404
+
+		$validator = new Validator;
+		$datas = $validator([
 			'nom' => $validator::STRING,
 			'descr' => $validator::STRING,
-			//'img' => $this->validator::STRING, 	//<== Voir groupe
-			'url' => $validator::URL,
 			'tarif' => $validator::FLOAT,
-		], 'item.create');
+		], 'item.create', ['listToken' => $token]);
+
+		$datas['liste_id'] = $liste->no;
 
 		// Donnees inserees
-		Item::create($safeDatas);
-		$this->app->redirect($this->app->urlFor('item.index'));
+		Item::create($datas);
+		$this->app->redirect($this->app->urlFor('liste.edit', ['id' => $token]));
 	}
 
 	public function show($id) {

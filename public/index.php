@@ -69,15 +69,18 @@ $app->notFound(function () {
 /*========================================*/
 use wishlist\controllers\ItemController;
 
+/*
+// Pas dans le sujet
 $app->get('/item', function () {
     $controller = new ItemController();
     $controller->index();
 })->name('item.index');
+*/
 
 // Liste des routes
-$app->get('/item/create', function () {
+$app->get('/item/create/:listToken', function ($listToken) {
     $controller = new ItemController();
-    $controller->create();
+    $controller->create($listToken);
 })->name('item.create');
 
 $app->post('/item', function () {

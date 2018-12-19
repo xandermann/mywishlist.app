@@ -44,11 +44,12 @@ class Validator {
 
 	/**
 	 * Methode de filtrage des donnees
-	 * @param  array $filters          Definition de l'ensemble des filtres pour les donnees
-	 * @param  string $redirectIfError Lien de redirection si les filtres ne sont pas OK
-	 * @return array                   Ensemble des donnees filtrees
+	 * @param  array  $filters          Definition de l'ensemble des filtres pour les donnees
+	 * @param  string $redirectIfError  Lien de redirection si les filtres ne sont pas OK
+	 * @param  array  $urlParam         Parametre du lien
+	 * @return array                    Ensemble des donnees filtrees
 	 */
-	public function __invoke(array $filters, $redirectIfError) {
+	public function __invoke(array $filters, $redirectIfError, $urlParam = []) {
 
 		// Tests des filtres, si pas ok, alors renvoie une exception
 		// Si ok, alors retourne les donnees filtrees
@@ -57,7 +58,7 @@ class Validator {
 		} catch(ValidatorException $e) {
 
 			// Redirige le client si erreur
-			$this->app->redirect($this->app->urlFor($redirectIfError) . "?error={$e->field}");
+			$this->app->redirect($this->app->urlFor($redirectIfError, $urlParam) . "?error={$e->field}");
 		}
 
 	}

@@ -36,10 +36,8 @@ class ListeController extends Controller {
         // Generation du token
         // On genere un token, tant qu'il y a un token qui existe deja, alors on regenere
         $token;
-        $i = 0;
         do {
-            $token = md5($datas['user_id'] . $datas['titre'] . $datas['description'] . $datas['expiration'] . $i);
-            $i++;
+            $token = $token = bin2hex(random_bytes(11));
         } while(Liste::where('token', $token)->first());
 
         $datas['token'] = $token;

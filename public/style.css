@@ -81,9 +81,11 @@ section aside {
 	align-items: center;
 }
 
+/*
 section form {
 	border-bottom: 1px solid black;
 }
+*/
 
 section input {
 	display: block;
