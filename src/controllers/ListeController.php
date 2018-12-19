@@ -5,6 +5,7 @@ namespace wishlist\controllers;
 use wishlist\models\Liste;
 use wishlist\controllers\Controller;
 use wishlist\views\ListeView;
+use wishlist\classes\Validator;
 
 class ListeController extends Controller {
     public function index() {
@@ -21,16 +22,18 @@ class ListeController extends Controller {
     }
 
     public function store() {
-        $titre = $this->app->request->getParam('titre');
-        $description = $this->app->request->getParam('descr');
-        $token = $this->app->request->getParam('token');
-        $expiration = $this->app->request->getParam('expiration');
-        $user_id = $this->app->request->getParam('user_id');
+        $validator = new Validator;
 
-
+        $datas = $validator([
+            'user_id' => $validator::INT,
+            'titre' => $validator::STRING,
+            'description' => $validator::STRING,
+            'expiration' => $validator::STRING,//<== Voir groupe
+            'token' => $validator::STRING,
+        ], 'liste.create');
 
         // Donnees inserees
-        Liste::create(compact('user_id','titre', 'description',  'expiration','token' ));
+        Liste::create($datas);
         $this->app->redirect($this->app->urlFor('liste.index'));
     }
 
@@ -48,15 +51,19 @@ class ListeController extends Controller {
     }
 
     public function update($id) {
-        $titre = $this->app->request->getParam('titre');
-        $description = $this->app->request->getParam('descr');
-        $token = $this->app->request->getParam('token');
-        $expiration = $this->app->request->getParam('expiration');
-        $user_id = $this->app->request->getParam('user_id');
+
+        $validator = new Validator;
+        $datas = $validator([
+            'user_id' => $validator::INT,
+            'titre' => $validator::STRING,
+            'description' => $validator::STRING,
+            'expiration' => $validator::STRING,//<== Voir groupe
+            'token' => $validator::STRING
+        ], 'liste.edit');
 
 
         // Donnees inserees
-        Liste::findOrFail($id)->update(compact('user_id','titre', 'description',  'expiration','token'));
+        Liste::findOrFail($id)->update($datas);
         $this->app->redirect($this->app->urlFor('liste.index'));
     }
 

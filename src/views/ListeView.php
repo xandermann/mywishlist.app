@@ -15,11 +15,11 @@ class ListeView extends View {
 
     private function create() {
         $this->content = "
-		<h1>Creer une liste</h1>
+		<h2>Creer une liste</h2>
 
 		<form action='{$this->app->urlFor('liste.store')}' method='POST'>
 		Titre: <input type='text' name='titre'>
-        Description: <input type='text' name='descr'>
+        Description: <input type='text' name='description'>
         Token: <input type='text' name='token'>
         Expiration: <input type='text' name='expiration'>
         User_id: <input type='text' name='user_id'>
@@ -32,18 +32,18 @@ class ListeView extends View {
     }
 
     private function show() {
-        $this->content = "<h1>{$this->var->titre}</h1>";
+        $this->content = "<h2>{$this->var->titre}</h2>";
     }
 
     private function edit() {
         $this->content = "
-		<h1>Editer la liste {$this->var->no}:</h1>
+		<h2>Editer la liste {$this->var->no}:</h2>
 
 		<form action='{$this->app->urlFor('liste.update', ['id' => $this->var->no])}' method='POST'>
 		Liste ID: <input type='text' name='liste_id' value='{$this->var->liste_id}'>
-        
+
 		Titre: <input type='text' name='titre' value='{$this->var->titre}'>
-		Descr: <input type='text' name='descr' value='{$this->var->descr}'>
+		Descr: <input type='text' name='description' value='{$this->var->descr}'>
 		token: <input type='text' name='token' value='{$this->var->token}'>
 		expi: <input type='text' name='expiration' value='{$this->var->expiration}'>
 		user_id: <input type='text' name='user_id' value='{$this->var->user_id}'>

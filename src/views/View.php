@@ -41,7 +41,7 @@ abstract class View {
 <head>
 	<meta charset="UTF-8">
 	<title>INDEX</title>
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="{$this->app->urlFor('css')}">
 </head>
 <body>
 
@@ -59,20 +59,18 @@ abstract class View {
 
 		<section>
 			<article>
-				<h2>Information</h2>
-				<p>fsbgsjhbfqfbehigbqzfiqzfhuevblfqbsfbizqbfievbijevbfzqilefbizqvbilsebeirq</p>
+				$this->content
 			</article><aside>
-                <!-- 
+                <!--
 				<form action="#connexion" method="POST">
 					<input type="text" placeholder="Pseudo">
 					<input type="password" placeholder="Mot de passe">
 					<input type="submit" value="Connexion">
 				</form>
-				
+
 				-->
-                $this->content
-                <a href="#inscription"><input type="submit" value="Inscription"></a>
-				
+                <a href="#inscription"><input type="submit" value="TODO"></a>
+
 			</aside>
 		</section>
 

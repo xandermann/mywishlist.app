@@ -27,6 +27,13 @@ class Validator {
 	const EMAIL = 3;
 
 	/**
+	 * Filtre du validateur
+	 */
+	const INT = 4;
+
+
+
+	/**
 	 * Slim
 	 * @var \Slim\Slim
 	 */
@@ -104,6 +111,15 @@ class Validator {
 					throw new ValidatorException($variableToFilter);
 				else
 					$ret[$variableToFilter] = $paramToTest;
+				break;
+
+
+				// Si doit etre un int
+				case self::INT:
+				if(is_numeric($paramToTest))
+					$ret[$variableToFilter] = $paramToTest;
+				else
+					throw new ValidatorException($variableToFilter);
 				break;
 
 				default:

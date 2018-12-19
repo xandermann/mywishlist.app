@@ -23,7 +23,7 @@ class PageView extends View {
 
 
             case 'notFound':
-                $this->content = "<h1>Erreur 404</h1>";
+                $this->content = "<h2>Erreur 404</h2>";
         }
 
         $this->html();

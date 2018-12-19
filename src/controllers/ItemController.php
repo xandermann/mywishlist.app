@@ -4,6 +4,7 @@ namespace wishlist\controllers;
 
 use wishlist\models\Item;
 use wishlist\views\ItemView;
+use wishlist\classes\Validator;
 
 class ItemController extends Controller {
 	public function index() {
@@ -20,13 +21,15 @@ class ItemController extends Controller {
 
 	public function store() {
 
-		$safeDatas = ($this->validator)([
-			'liste_id' => $this->validator::STRING,
-			'nom' => $this->validator::STRING,
-			'descr' => $this->validator::STRING,
+		$validator = new Validator;
+
+		$safeDatas = $validator([
+			'liste_id' => $validator::STRING,
+			'nom' => $validator::STRING,
+			'descr' => $validator::STRING,
 			//'img' => $this->validator::STRING, 	//<== Voir groupe
-			'url' => $this->validator::URL,
-			'tarif' => $this->validator::FLOAT,
+			'url' => $validator::URL,
+			'tarif' => $validator::FLOAT,
 		], 'item.create');
 
 		// Donnees inserees
@@ -56,9 +59,19 @@ class ItemController extends Controller {
 		$url = $this->app->request->put('url');
 		$tarif = $this->app->request->put('tarif');
 
+		$validator = new Validator;
+		$safeDatas = $validator([
+			'liste_id' => $validator::STRING,
+			'nom' => $validator::STRING,
+			'descr' => $validator::STRING,
+			//'img' => $this->validator::STRING, 	//<== Voir groupe
+			'url' => $validator::URL,
+			'tarif' => $validator::FLOAT,
+		], 'item.create');
+
 
 		// Donnees inserees
-		Item::findOrFail($id)->update(compact('liste_id', 'nom', 'descr', 'img', 'url', 'tarif'));
+		Item::findOrFail($id)->update($safeDatas);
 		$this->app->redirect($this->app->urlFor('item.index'));
 	}
 

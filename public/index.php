@@ -17,6 +17,12 @@ $db->setAsGlobal();
 $db->bootEloquent();
 
 
+$app->get('/css', function () use ($app) {
+    $app->response->headers->set('Content-Type', 'text/css');
+    require 'style.css';
+})->name('css');
+
+
 
 /*========================================*/
 /* PAGES */

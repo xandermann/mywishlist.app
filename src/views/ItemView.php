@@ -15,7 +15,7 @@ class ItemView extends View {
 
 	private function create() {
 		$this->content = "
-		<h1>Creer un item</h1>
+		<h2>Creer un item</h2>
 
 		<form action='{$this->app->urlFor('item.store')}' method='POST'>
 		Liste ID: <input type='text' name='liste_id'>
@@ -33,12 +33,12 @@ class ItemView extends View {
 	}
 
 	private function show() {
-		$this->content = "<h1>{$this->var->nom}</h1>";
+		$this->content = "<h2>{$this->var->nom}</h2>";
 	}
 
 	private function edit() {
 		$this->content = "
-		<h1>Editer l'item {$this->var->id}:</h1>
+		<h2>Editer l'item {$this->var->id}:</h2>
 
 		<form action='{$this->app->urlFor('item.update', ['id' => $this->var->id])}' method='POST'>
 		Liste ID: <input type='text' name='liste_id' value='{$this->var->liste_id}'>
