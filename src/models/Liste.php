@@ -13,7 +13,7 @@ class Liste extends Model {
     public $timestamps = false;
 
 	public function items() {
-		return $this->hasMany('\wishlist\models\Item');
+		return $this->hasMany('\wishlist\models\Item', 'liste_id');
 	}
 
 }

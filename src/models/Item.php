@@ -5,7 +5,7 @@ namespace wishlist\models;
 use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model {
-    protected $table = "items";
+    protected $table = "item";
     protected $primaryKey = "id";
     protected $fillable = ['id', 'liste_id', 'nom', 'descr', 'img', 'url', 'tarif'];
     public $timestamps = false;
@@ -22,6 +22,6 @@ class Item extends Model {
      */
     public function images(){
     	return $this->belongsToMany('\wishlist\models\Image','decris');
-    } 
+    }
 }
 ?>

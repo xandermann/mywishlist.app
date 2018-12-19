@@ -33,6 +33,13 @@ class ListeView extends View {
 
     private function show() {
         $this->content = "<h2>{$this->var->titre}</h2>";
+
+        $this->content .= "<ul>";
+        foreach($this->var->items as $item) {
+            $this->content .= "<li><a href='{$this->app->urlFor('item.show', ['id' => $item->id])}'>{$item->nom}</a></li>";
+        }
+        $this->content .= "</ul>";
+
     }
 
     private function edit() {

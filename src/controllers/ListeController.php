@@ -40,7 +40,7 @@ class ListeController extends Controller {
     public function show($id) {
         $liste = Liste::findOrFail($id);
         $view = new ListeView($liste);
-        //$liste->items;
+
         $view->render('show');
     }
 

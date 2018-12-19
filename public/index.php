@@ -16,18 +16,41 @@ $db->addConnection(parse_ini_file('../src/config/db.ini'));
 $db->setAsGlobal();
 $db->bootEloquent();
 
+use wishlist\controllers\PagesController;
+
 
 $app->get('/css', function () use ($app) {
     $app->response->headers->set('Content-Type', 'text/css');
     require 'style.css';
 })->name('css');
 
+$app->get('/img/:name', function ($img) use ($app) {
+
+    try {
+        $filename = basename($img);
+        $file_extension = strtolower(substr(strrchr($filename,"."),1));
+
+        switch( $file_extension ) {
+            case "gif": $ctype="image/gif"; break;
+            case "png": $ctype="image/png"; break;
+            case "jpeg":
+            case "jpg": $ctype="image/jpeg"; break;
+            default:
+        }
+
+        $app->response->headers->set('Content-Type', $ctype);
+        require "img_item/$img";
+
+    } catch(Exception $e){
+        $controller = new PagesController;
+        $controller->notFound();
+    }
+})->name('img');
 
 
 /*========================================*/
 /* PAGES */
 /*========================================*/
-use wishlist\controllers\PagesController;
 
 $app->get('/', function () {
     $controller = new PagesController;
