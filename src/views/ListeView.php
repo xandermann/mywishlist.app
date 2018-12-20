@@ -26,7 +26,9 @@ class ListeView extends View {
         <input type='hidden' name='_METHOD' value='POST' />
 
         <button>Valide</button>
-        </form></article>
+        </form>
+        
+        <p>A faire correctement pour le bouton + peut etre mettre a droite la liste des items et on a juste a les cochez pour les ajouter a la liste comme a l'acceuil avec connection pour le visuel</p></article>
         ";
 
 
