@@ -16,7 +16,7 @@ class ListeView extends View {
 
     private function create() {
         $this->content = "
-        <h2>Creer une liste</h2>
+        <article><h2>Creer une liste</h2>
 
         <form action='{$this->app->urlFor('liste.store')}' method='POST'>
         Titre: <input type='text' name='titre'>
@@ -26,8 +26,10 @@ class ListeView extends View {
         <input type='hidden' name='_METHOD' value='POST' />
 
         <button>Valide</button>
-        </form>
+        </form></article>
         ";
+
+
     }
 
     private function show() {

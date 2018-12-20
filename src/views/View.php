@@ -51,17 +51,16 @@ abstract class View {
 
 			<nav>
 				<ul>
-					<li><a href="{$this->app->urlFor('index')}">Accueil</a></li><li><a href="#">Connexion</a></li><li><a href="#">Inscription</a></li>
+					<li><a href="{$this->app->urlFor('index')}">Accueil</a></li><li><a href='{$this->app->urlFor('liste.index')}'>Voir les listes publiques</a></li><li><a href='{$this->app->urlFor('liste.create')}'>Créer une liste</a></li>
 				</ul>
 			</nav>
 		</header>
 
 
 		<section>
-			<article>
-				$this->content
-			</article>
+		$this->content
 		</section>
+		
 
 		<footer>
 			<p>Site réalisé par [...]</p>
