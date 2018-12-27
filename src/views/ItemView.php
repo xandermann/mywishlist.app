@@ -3,6 +3,7 @@
 namespace wishlist\views;
 
 use wishlist\views\View;
+use wishlist\classes\ImageTypeLoader;
 
 class ItemView extends View {
 
@@ -40,20 +41,26 @@ class ItemView extends View {
 	}
 
 	private function edit() {
+		$accepted_types=ImageTypeLoader::types();
 		$this->content = "
 		<h2>Editer l'item {$this->var->id}:</h2>
 
-		<form action='{$this->app->urlFor('item.update', ['id' => $this->var->id])}' enctype='multipart/form-data' method='POST'>
+		<form action='{$this->app->urlFor('item.update', ['id' => $this->var->id])}' method='POST'>
 		Liste ID: <input type='text' name='liste_id' value='{$this->var->liste_id}'>
 		Nom: <input type='text' name='nom' value='{$this->var->nom}'>
 		Descr: <input type='text' name='descr' value='{$this->var->descr}'>
-		Img: <input type='file' name='img' value='{$this->var->img}'>
 		URL: <input type='text' name='url' value='{$this->var->url}'>
 		Tarif: <input type='text' name='tarif' value='{$this->var->tarif}'>
 
 		<input type='hidden' name='_METHOD' value='PUT' />
 
 		<button>Valide</button>
+		</form>
+
+		<h2>ajouter des images à l'item {$this->var->id}:</h2>
+
+		<form action='{$this->app->urlFor('item.images',['id' => $this->var->id])}' enctype='multipart/form-data' method='POST'>
+			Img: <input type='file' name='img' value='{$this->var->img} accept='{$accepted_types}'>
 		</form>
 
 		<hr>

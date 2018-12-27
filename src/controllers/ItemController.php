@@ -64,7 +64,6 @@ class ItemController extends Controller {
 		$liste_id = $this->app->request->put('liste_id');
 		$nom = $this->app->request->put('nom');
 		$descr = $this->app->request->put('descr');
-		$img = $this->app->request->put('img');
 		$url = $this->app->request->put('url');
 		$tarif = $this->app->request->put('tarif');
 
@@ -87,5 +86,13 @@ class ItemController extends Controller {
 	public function destroy($id) {
 		Item::destroy($id);
 		$this->app->redirect($this->app->urlFor('item.index'));
+	}
+
+	public function addImage($id){
+
+	}
+
+	public function deleteImage($id,$idImage){
+		
 	}
 }

@@ -24,7 +24,7 @@
 
 			foreach($readen_types as $key => $value){
 				if($value!=0){
-					$to_return.='*.'.$key;
+					$to_return.='*.'.filter_var($key,FILTER_SANITIZE_SPECIAL_CHARS);
 
 					if($i<count($readen_types)-1)
 						$to_return.=',';
