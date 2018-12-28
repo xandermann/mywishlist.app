@@ -18,7 +18,7 @@ class Authentification {
 	}
 
 	public static function logOut() {
-		unset($_SESSION[$authSessionVar]);
+		unset($_SESSION[self::SESSION_VAR]);
 	}
 
 	public static function authenticate($login, $password): bool {

@@ -190,8 +190,8 @@ if(!Auth::check()) {
     $app->group('/auth', function() use ($app) {
         $app->get('/deconnexion', function() {
             $controller = new AuthController;
-            $controller->signUp();
-        })->name('signout');
+            $controller->getSignOut();
+        })->name('auth.signout');
     });
 
 }

@@ -75,7 +75,7 @@ class AuthController extends Controller {
 	/**
 	 * Deconnexion
 	 */
-	public function signOut() {
+	public function getSignOut() {
 		Auth::logOut();
 		$this->app->redirect($this->app->urlFor('index'));
 	}
