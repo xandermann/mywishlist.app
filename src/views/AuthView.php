@@ -13,7 +13,7 @@ class AuthView extends View {
 		<input type='text' name='user' placeholder='User'>
 		<input type='password' name='password' placeholder='password'>
 		<input type='password' name='password_confirm' placeholder='password_confirm'>
-		<button>Valide ici</button>
+		<input type='submit' value='Valide'>
 		</form>";
 	}
 

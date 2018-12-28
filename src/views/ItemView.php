@@ -29,7 +29,7 @@ class ItemView extends View {
 
 		<input type='hidden' name='_METHOD' value='POST' />
 
-		<button>Valide</button>
+		<input type='submit' value='Valide'>
 		</form>
 		";
 	}
@@ -54,13 +54,13 @@ class ItemView extends View {
 
 		<input type='hidden' name='_METHOD' value='PUT' />
 
-		<button>Valide</button>
+		<input type='submit' value='Valide'>
 		</form>
 
 		<h2>ajouter des images à l'item {$this->var->id}:</h2>
 
 		<form action='{$this->app->urlFor('item.images',['id' => $this->var->id])}' enctype='multipart/form-data' method='POST'>
-			Img: <input type='file' name='img' value='{$this->var->img} accept='{$accepted_types}'>
+		Img: <input type='file' name='img' value='{$this->var->img} accept='{$accepted_types}'>
 		</form>
 
 		<hr>
@@ -73,7 +73,7 @@ class ItemView extends View {
 
 		<input type='hidden' name='_METHOD' value='DELETE' />
 
-		<button>Valide</button>
+		<input type='submit' value='Valide'>
 		</form>
 		";
 	}

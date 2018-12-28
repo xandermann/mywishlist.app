@@ -25,9 +25,10 @@ class ListeView extends View {
 
         <input type='hidden' name='_METHOD' value='POST' />
 
-        <button>Valide</button>
+        <input type='submit' value='Valide'>
+
         </form>
-        
+
         <p>A faire correctement pour le bouton + peut etre mettre a droite la liste des items et on a juste a les cochez pour les ajouter a la liste comme a l'acceuil avec connection pour le visuel</p></article>
         ";
 
@@ -69,11 +70,11 @@ class ListeView extends View {
         <h2>Rendre la liste publique</h2>
 
         <form action='{$this->app->urlFor('liste.setPublic')}' method='post'>
-              <input type='hidden' name='no' value='{$this->var->no}'>
+        <input type='hidden' name='no' value='{$this->var->no}'>
 
-              <input type='hidden' name='_METHOD' value='PUT'>
+        <input type='hidden' name='_METHOD' value='PUT'>
 
-               <input type='submit' value='Rendre la liste publique'>
+        <input type='submit' value='Rendre la liste publique'>
         </form>
 
         <hr>
@@ -81,11 +82,11 @@ class ListeView extends View {
         <h2>Recuperer le token</h2>
 
         <form action='{$this->app->urlFor('liste.generateToken')}' method='post'>
-              <input type='hidden' name='no' value='{$this->var->no}'>
+        <input type='hidden' name='no' value='{$this->var->no}'>
 
-              <input type='hidden' name='_METHOD' value='PUT'>
+        <input type='hidden' name='_METHOD' value='PUT'>
 
-               <input type='submit' value='Recuperer le lien (via token)'>
+        <input type='submit' value='Recuperer le lien (via token)'>
         </form>
 
         <hr>
@@ -98,7 +99,7 @@ class ListeView extends View {
 
         <input type='hidden' name='_METHOD' value='PUT' />
 
-        <button>Valide</button>
+        <input type='submit' value='Valide'>
         </form>
 
         <hr>
@@ -111,7 +112,7 @@ class ListeView extends View {
 
         <input type='hidden' name='_METHOD' value='DELETE' />
 
-        <button>Valide</button>
+        <input type='submit' value='Valide'>
         </form>
         ";
     }

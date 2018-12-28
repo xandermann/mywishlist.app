@@ -93,7 +93,7 @@ $app->post('/item/:id',function ($id){
 $app->delete('/item/:id/:idImage',function($id,$idImage){
     $controller=new ItemController();
     $controller->deleteImage($id,$idImage);
-})->name('item.images.destroy')->conditions(['id' => '[0-9]+'])->conditions(['idImage' => '[0-9]+']):
+})->name('item.images.destroy')->conditions(['id' => '[0-9]+'])->conditions(['idImage' => '[0-9]+']);
 
 
 

@@ -30,7 +30,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore natus accusamu
 
 	            <input type='hidden' name='_METHOD' value='POST' />
 
-	            <button>Connection</button>
+	            <input type='submit' value='Connection'>
                 </form></div>
                 <button>Inscription</button><p>A Faire proprement</p></article>";
                 break;
