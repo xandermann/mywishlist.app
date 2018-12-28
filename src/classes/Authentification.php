@@ -39,13 +39,13 @@ class Authentification {
 	public static function createUser($login, $password) {
 		// Creer l'utilisateur dans la base de donnee
 		// Hash le mot de passe quand inscription avec la base de donnee
-		$userAlreadyExists = User::where('userName', $login)->first();
+		$userAlreadyExists = User::where('email', $login)->first();
 
 		if($userAlreadyExists == null) {
 			$pass_hash = password_hash($password, PASSWORD_DEFAULT, ['cost' => 12]);
 			User::create([
-				'userName' => $login,
-				'crypted_pass' => $pass_hash,
+				'email' => $login,
+				'password' => $pass_hash,
 			]);
 
 		} else {

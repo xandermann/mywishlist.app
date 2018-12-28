@@ -8,7 +8,7 @@
 	 * utilisateurs
 	 */
 	class User extends Model{
-		protected $table="user";
+		protected $table="users";
 		protected $primaryKey="idUser";
 		public $timestamps=false;
 		protected $guarded = [];

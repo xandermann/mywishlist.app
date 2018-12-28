@@ -176,6 +176,11 @@ if(!Auth::check()) {
         $app->get('/connexion', function() {
             $controller = new AuthController;
             $controller->getSignIn();
+        })->name('auth.signin');
+
+        $app->post('/connexion', function() {
+            $controller = new AuthController;
+            $controller->postSignIn();
         });
     });
 
@@ -186,7 +191,7 @@ if(!Auth::check()) {
         $app->get('/deconnexion', function() {
             $controller = new AuthController;
             $controller->signUp();
-        });
+        })->name('signout');
     });
 
 }

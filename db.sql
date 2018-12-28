@@ -54,3 +54,118 @@ INSERT INTO `liste` (`no`, `user_id`, `titre`, `description`, `expiration`, `tok
 (1, 1,  'Pour fêter le bac !',  'Pour un week-end à Nancy qui nous fera oublier les épreuves. ',  '2018-06-27', 'nosecure1'),
 (2, 2,  'Liste de mariage d\'Alice et Bob', 'Nous souhaitons passer un week-end royal à Nancy pour notre lune de miel :)',  '2018-06-30', 'nosecure2'),
 (3, 3,  'C\'est l\'anniversaire de Charlie',  'Pour lui préparer une fête dont il se souviendra :)',  '2017-12-12', 'nosecure3');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*=============================*/
+/*============ALEX=============*/
+/*========TABLE=USER===========*/
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+/*============Datas============*/
+
+INSERT INTO `users` (`id`, `email`, `password`) VALUES
+(1, 'a@a.a',  '$2y$12$VmttT35SDVNpgaORTgJsk.wGLx8bTh4gy.WOwHQH8hkZPBSlAe0oG'),
+(2, 'tstanton@hotmail.com', 'L0\'Wtse?3'),
+(3, 'tstanton@hotmail.com', 'L0\'Wtse?3'),
+(4, 'king.marquise@funk.com', 'xXq*F!YOxCWh3'),
+(5, 'tstanton@hotmail.com', 'L0\'Wtse?3'),
+(6, 'king.marquise@funk.com', 'xXq*F!YOxCWh3'),
+(7, 'grimes.geovanni@leuschke.com', '[6K*8grwO)'),
+(8, 'tstanton@hotmail.com', 'L0\'Wtse?3'),
+(9, 'king.marquise@funk.com', 'xXq*F!YOxCWh3'),
+(10,  'grimes.geovanni@leuschke.com', '[6K*8grwO)'),
+(11,  'dcollins@yahoo.com', '7`1D*0\"'),
+(12,  'tstanton@hotmail.com', 'L0\'Wtse?3'),
+(13,  'king.marquise@funk.com', 'xXq*F!YOxCWh3'),
+(14,  'grimes.geovanni@leuschke.com', '[6K*8grwO)'),
+(15,  'dcollins@yahoo.com', '7`1D*0\"'),
+(16,  'unienow@powlowski.biz',  'WPI?GeR4tR\'Z8=uw'),
+(17,  'tstanton@hotmail.com', 'L0\'Wtse?3'),
+(18,  'king.marquise@funk.com', 'xXq*F!YOxCWh3'),
+(19,  'grimes.geovanni@leuschke.com', '[6K*8grwO)'),
+(20,  'dcollins@yahoo.com', '7`1D*0\"'),
+(21,  'unienow@powlowski.biz',  'WPI?GeR4tR\'Z8=uw'),
+(22,  'hodkiewicz.hoyt@gmail.com',  'u[lOM<Gyfa&gX)&op'),
+(23,  'tstanton@hotmail.com', 'L0\'Wtse?3'),
+(24,  'king.marquise@funk.com', 'xXq*F!YOxCWh3'),
+(25,  'grimes.geovanni@leuschke.com', '[6K*8grwO)'),
+(26,  'dcollins@yahoo.com', '7`1D*0\"'),
+(27,  'unienow@powlowski.biz',  'WPI?GeR4tR\'Z8=uw'),
+(28,  'hodkiewicz.hoyt@gmail.com',  'u[lOM<Gyfa&gX)&op'),
+(29,  'ylang@hotmail.com',  '6iQvQ0v|!pUL,9RP@=R6'),
+(30,  'tstanton@hotmail.com', 'L0\'Wtse?3'),
+(31,  'king.marquise@funk.com', 'xXq*F!YOxCWh3'),
+(32,  'grimes.geovanni@leuschke.com', '[6K*8grwO)'),
+(33,  'dcollins@yahoo.com', '7`1D*0\"'),
+(34,  'unienow@powlowski.biz',  'WPI?GeR4tR\'Z8=uw'),
+(35,  'hodkiewicz.hoyt@gmail.com',  'u[lOM<Gyfa&gX)&op'),
+(36,  'ylang@hotmail.com',  '6iQvQ0v|!pUL,9RP@=R6'),
+(37,  'carissa.turner@crist.biz', '@\'<^.(+S)$'),
+(38,  'tstanton@hotmail.com', 'L0\'Wtse?3'),
+(39,  'king.marquise@funk.com', 'xXq*F!YOxCWh3'),
+(40,  'grimes.geovanni@leuschke.com', '[6K*8grwO)'),
+(41,  'dcollins@yahoo.com', '7`1D*0\"'),
+(42,  'unienow@powlowski.biz',  'WPI?GeR4tR\'Z8=uw'),
+(43,  'hodkiewicz.hoyt@gmail.com',  'u[lOM<Gyfa&gX)&op'),
+(44,  'ylang@hotmail.com',  '6iQvQ0v|!pUL,9RP@=R6'),
+(45,  'carissa.turner@crist.biz', '@\'<^.(+S)$'),
+(46,  'justina65@blanda.com', 'AG2mJy>k9>IOOE-'),
+(47,  'tstanton@hotmail.com', 'L0\'Wtse?3'),
+(48,  'king.marquise@funk.com', 'xXq*F!YOxCWh3'),
+(49,  'grimes.geovanni@leuschke.com', '[6K*8grwO)'),
+(50,  'dcollins@yahoo.com', '7`1D*0\"'),
+(51,  'unienow@powlowski.biz',  'WPI?GeR4tR\'Z8=uw'),
+(52,  'hodkiewicz.hoyt@gmail.com',  'u[lOM<Gyfa&gX)&op'),
+(53,  'ylang@hotmail.com',  '6iQvQ0v|!pUL,9RP@=R6'),
+(54,  'carissa.turner@crist.biz', '@\'<^.(+S)$'),
+(55,  'justina65@blanda.com', 'AG2mJy>k9>IOOE-'),
+(56,  'kelvin.kerluke@yahoo.com', '`F{3Aq');

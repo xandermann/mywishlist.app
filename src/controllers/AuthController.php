@@ -5,6 +5,8 @@ namespace wishlist\controllers;
 use wishlist\views\AuthView;
 use wishlist\classes\Authentification as Auth;
 use wishlist\classes\AuthException;
+use wishlist\classes\Validator;
+
 
 class AuthController extends Controller {
 
@@ -21,10 +23,12 @@ class AuthController extends Controller {
 	 */
 	public function postSignUp() {
 
-		$datas = ($this->validator)([
-			'user' => $this->validator::STRING,
-			'password' => $this->validator::STRING,
-			'password_confirm' => $this->validator::STRING,
+		$validator = new Validator;
+
+		$datas = $validator([
+			'email' => $validator::EMAIL,
+			'password' => $validator::STRING,
+			'password_confirm' => $validator::STRING,
 		], 'auth.signup');
 
 		// Si 'mot de passe' et 'confirmation du mot de passe' different, alors erreur
@@ -33,10 +37,10 @@ class AuthController extends Controller {
 		}
 
 		try {
-			Auth::createUser($datas['user'], $datas['password']);
+			Auth::createUser($datas['email'], $datas['password']);
 		} catch(AuthException $e) {
 			// Erreur insertion, existe deja
-			$this->app->redirect($this->app->urlFor('auth.signup'));
+			$this->app->redirect($this->app->urlFor('auth.signup') . '?error=utilisateurExisteDeja');
 		}
 
 		$this->app->redirect($this->app->urlFor('index'));
