@@ -48,9 +48,28 @@ class AuthController extends Controller {
 
 	/**
 	 * Connexion
+	 * => Il n'y a pas de page connexion, nous passons par la page 'index'
 	 */
 	public function getSignIn() {
+	}
 
+	public function postSignIn() {
+		$validator = new Validator;
+
+		$datas = $validator([
+			'email' => $validator::EMAIL,
+			'password' => $validator::STRING,
+		], 'index');
+
+		try {
+			Auth::authenticate($datas['email'], $datas['password']);
+		} catch (AuthException $e) {
+			$this->app->redirect($this->app->urlFor('index') . '?error=incorrectPassword');
+		}
+
+		Auth::loadProfile($datas['email']);
+
+		$this->app->redirect($this->app->urlFor('index'));
 	}
 
 	/**

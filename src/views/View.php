@@ -60,7 +60,7 @@ abstract class View {
 		<section>
 		$this->content
 		</section>
-		
+
 
 		<footer>
 			<p>Site réalisé par [...]</p>

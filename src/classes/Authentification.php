@@ -8,15 +8,13 @@ use wishlist\classes\AuthException;
 
 class Authentification {
 
-	private $authSessionVar = "auth";
+	const SESSION_VAR = "auth";
 
 	/**
 	 * Check si l'utilisateur est connecte ou pas
 	 */
 	public static function check(): bool {
-		return false;
-		var_dump($this->authSessionVar);
-		die;
+		return isset($_SESSION[self::SESSION_VAR]);
 	}
 
 	public static function logOut() {
@@ -25,10 +23,20 @@ class Authentification {
 
 	public static function authenticate($login, $password): bool {
 		// Verifie si l'utilisateur est OK
+		$user = User::where('email', $login)->first();
+
+		$passIsOk = password_verify($password, $user->password);
+
+		if($passIsOk) {
+			return true;
+		} else {
+			throw new AuthException;
+		}
 	}
 
 	public static function loadProfile($login) {
 		// Met dans la session l'utilisateur
+		$_SESSION[self::SESSION_VAR]['email'] = $login;
 	}
 
 	public static function checkAccessRights($requiredLevel) {
@@ -52,6 +60,15 @@ class Authentification {
 			throw new AuthException();
 		}
 
+	}
+
+
+	public function get($param = null) {
+		if($param !== null) {
+			return $_SESSION[self::SESSION_VAR][$param];
+		} else {
+			return $_SESSION[self::SESSION_VAR];
+		}
 	}
 
 }

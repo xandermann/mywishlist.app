@@ -3,6 +3,7 @@
 namespace wishlist\views;
 
 use wishlist\views\View;
+use wishlist\classes\Authentification as Auth;
 
 class PageView extends View {
 
@@ -23,21 +24,27 @@ class PageView extends View {
                 $this->content .= "<p>Sur ce site vous pouvez faire vos listes de noel ....<br>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore natus accusamus consectetur dolores eum repudiandae laborum iste voluptas earum, expedita officia voluptatum velit amet ducimus deserunt sequi quaerat ullam necessitatibus reprehenderit doloremque, dignissimos hic et aut optio ipsam. Inventore saepe rerum fugit quos. Explicabo aperiam ullam eum cupiditate cum alias.</p></article>";
 
-                $this->content .= "<article><div><h2>Connexion</h2></div>";
-                $this->content .= "<div><form action='{$this->app->urlFor('auth.signin')}' method='POST'>
-                <input type='text' placeholder='Pseudo' name='user'>
-                <input type='password' placeholder='Password' name='password'>
 
-                <input type='hidden' name='_METHOD' value='POST' />
 
-                <input type='submit' value='Connection'>
-                </form></div>
+                if(!Auth::check()) {
+                    $this->content .= "<article><div><h2>Connexion</h2></div>";
+                    $this->content .= "<div><form action='{$this->app->urlFor('auth.signin')}' method='POST'>
+                    <input type='text' placeholder='Email' name='email'>
+                    <input type='password' placeholder='Password' name='password'>
 
-                <hr>
+                    <input type='hidden' name='_METHOD' value='POST' />
 
-                <h2>Inscription</h2>
-                <a href='{$this->app->urlFor('auth.signup')}'>Inscription</a>
-                </article>";
+                    <input type='submit' value='Connection'>
+                    </form></div>
+
+                    <hr>
+
+                    <h2>Inscription</h2>
+                    <a href='{$this->app->urlFor('auth.signup')}'>Inscription</a></article>";
+                } else {
+                    $this->content .= "<h2>Felicitation vous etes connecté " . Auth::get('email') . " !</h2>";
+                }
+
                 break;
 
 

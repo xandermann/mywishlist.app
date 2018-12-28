@@ -9,7 +9,7 @@
 	 */
 	class User extends Model{
 		protected $table="users";
-		protected $primaryKey="idUser";
+		protected $primaryKey="id";
 		public $timestamps=false;
 		protected $guarded = [];
 
