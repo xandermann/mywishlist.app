@@ -80,4 +80,10 @@ class AuthController extends Controller {
 		$this->app->redirect($this->app->urlFor('index'));
 	}
 
+
+	public function getAccount() {
+		$view = new AuthView;
+		$view->render('account');
+	}
+
 }

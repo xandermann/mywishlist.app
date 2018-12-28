@@ -42,8 +42,10 @@ class PageView extends View {
                     <h2>Inscription</h2>
                     <a href='{$this->app->urlFor('auth.signup')}'>Inscription</a></article>";
                 } else {
-                    $this->content .= "<h2>Felicitation vous etes connecté " . Auth::get('email') . " !</h2>";
-                    $this->content .= "<div><a href='{$this->app->urlFor('auth.signout')}'>Se déconnecter</a></div>";
+                    $this->content .= "<aside><p>Felicitation vous êtes connecté <strong>" . Auth::get('email') . "</strong> ! Accedez à votre espace compte en cliquant <a href='{$this->app->urlFor('auth.account')}'>ici</a></p>
+
+                    <div><a href='{$this->app->urlFor('auth.signout')}'>Se déconnecter</a></div>
+                    </aside>";
                 }
 
                 break;

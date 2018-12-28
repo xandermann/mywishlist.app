@@ -37,6 +37,7 @@ class Authentification {
 	public static function loadProfile($login) {
 		// Met dans la session l'utilisateur
 		$_SESSION[self::SESSION_VAR]['email'] = $login;
+		$_SESSION[self::SESSION_VAR]['id'] = User::where('email', $login)->first()->id;
 	}
 
 	public static function checkAccessRights($requiredLevel) {

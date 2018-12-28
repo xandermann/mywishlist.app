@@ -1,24 +1,37 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: alex_
- * Date: 11/12/2018
- * Time: 11:42
- */
-
 
 namespace wishlist\controllers;
 
 use wishlist\models\User;
+use wishlist\classes\Validator;
+use wishlist\classes\Authentification as Auth;
 
-class UserController
+class UserController extends Controller
 {
-    public function index()
-    {
-        $User = User::all();
 
-        $view = new ListeView($User, 'index');
-        $view->render();
+	public function update() {
+		$validator = new Validator;
 
-    }
+		$datas = $validator([
+			'email' => $validator::EMAIL,
+			'password' => $validator::STRING,
+			'password_confirm' => $validator::STRING,
+		], 'auth.account');
+
+		if($datas['password'] !== $datas['password_confirm']) {
+			$this->app->redirect($this->app->urlFor('auth.account') . '?error=passwordDiff');
+		}
+
+		$accountID = Auth::get('id');
+
+		User::find($accountID)->update([
+			'email' => $datas['email'],
+			'password' => $datas['password']
+		]);
+
+		Auth::loadProfile($datas['email']);
+
+		$this->app->redirect($this->app->urlFor('auth.account') . '?success');
+	}
+
 }

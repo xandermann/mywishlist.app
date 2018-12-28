@@ -158,6 +158,7 @@ $app->delete('/liste/:id', function ($id) {
 
 use wishlist\classes\Authentification as Auth;
 use wishlist\controllers\AuthController;
+use wishlist\controllers\UserController;
 
 if(!Auth::check()) {
 // Routes quand l'utilisateur N'EST PAS connecte
@@ -192,7 +193,19 @@ if(!Auth::check()) {
             $controller = new AuthController;
             $controller->getSignOut();
         })->name('auth.signout');
+
+
+        $app->get('/compte', function() {
+            $controller = new AuthController;
+            $controller->getAccount();
+        })->name('auth.account');
     });
+
+
+    $app->put('/user', function () {
+        $controller = new UserController();
+        $controller->update();
+    })->name('user.update');
 
 }
 
