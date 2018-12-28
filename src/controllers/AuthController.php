@@ -6,6 +6,7 @@ use wishlist\views\AuthView;
 use wishlist\classes\Authentification as Auth;
 use wishlist\classes\AuthException;
 use wishlist\classes\Validator;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 
 class AuthController extends Controller {
@@ -43,6 +44,8 @@ class AuthController extends Controller {
 			$this->app->redirect($this->app->urlFor('auth.signup') . '?error=utilisateurExisteDeja');
 		}
 
+		Auth::loadProfile($datas['email']);
+
 		$this->app->redirect($this->app->urlFor('index'));
 	}
 
@@ -65,6 +68,8 @@ class AuthController extends Controller {
 			Auth::authenticate($datas['email'], $datas['password']);
 		} catch (AuthException $e) {
 			$this->app->redirect($this->app->urlFor('index') . '?error=incorrectPassword');
+		} catch(ModelNotFoundException $e) {
+			$this->app->redirect($this->app->urlFor('index') . '?error=emailFaux');
 		}
 
 		Auth::loadProfile($datas['email']);

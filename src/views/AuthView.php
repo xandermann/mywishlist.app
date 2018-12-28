@@ -38,8 +38,10 @@ class AuthView extends View {
 		$this->content .= "<hr>";
 
 		$this->content .= "<h3>Voulez-vous supprimer votre compte ?</h3>";
-		$this->content .= "<form>";
+		$this->content .= "<form action='{$this->app->urlFor('user.delete')}' method='POST'>";
 		$this->content .= "<input type='submit' value='Supprimer'>";
+
+		$this->content .= "<input type='hidden' name='_METHOD' value='DELETE'>";
 		$this->content .= "</form>";
 
 		$this->content .= "</article>";

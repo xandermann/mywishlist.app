@@ -37,7 +37,7 @@ class ItemView extends View {
 	private function show() {
 		$this->content .= "<h2>{$this->var->nom}</h2>";
 		$this->content .= "<p>{$this->var->descr}</p>";
-		$this->content .= "<img src='{$this->app->urlFor('img', ['name' => $this->var->img])}'>";
+		$this->content .= "<img src='../img_item/{$this->var->img}'>";
 	}
 
 	private function edit() {

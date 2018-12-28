@@ -202,10 +202,15 @@ if(!Auth::check()) {
     });
 
 
-    $app->put('/user', function () {
+    $app->put('/user/mettre-a-jour-le-compte', function () {
         $controller = new UserController();
         $controller->update();
     })->name('user.update');
+
+    $app->delete('/user/supprimer-le-compte', function () {
+        $controller = new UserController();
+        $controller->delete();
+    })->name('user.delete');
 
 }
 

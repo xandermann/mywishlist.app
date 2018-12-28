@@ -23,7 +23,7 @@ class Authentification {
 
 	public static function authenticate($login, $password): bool {
 		// Verifie si l'utilisateur est OK
-		$user = User::where('email', $login)->first();
+		$user = User::where('email', $login)->firstOrFail();
 
 		$passIsOk = password_verify($password, $user->password);
 

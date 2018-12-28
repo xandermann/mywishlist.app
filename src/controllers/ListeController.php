@@ -6,6 +6,9 @@ use wishlist\models\Liste;
 use wishlist\controllers\Controller;
 use wishlist\views\ListeView;
 use wishlist\classes\Validator;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use wishlist\views\PageView;
+
 
 class ListeController extends Controller {
     public function index() {
@@ -41,24 +44,41 @@ class ListeController extends Controller {
     }
 
     public function show($id) {
-        //$liste = Liste::findOrFail($id);
-        $liste = Liste::findOrFail($id);
-        $view = new ListeView($liste);
-        $view->render('show');
+        try {
+            $liste = Liste::findOrFail($id);
+
+            $view = new ListeView($liste);
+            $view->render('show');
+        } catch(ModelNotFoundException $e) {
+            $view = new PageView;
+            $view->render('notFound');
+        }
+
+
     }
 
     public function showPublic($token) {
-        //$liste = Liste::findOrFail($id);
-        $liste = Liste::where('token', $token)->firstOrFail();
-        $view = new ListeView($liste);
-        $view->render('showPublic');
+        try {
+            $liste = Liste::where('token', $token)->firstOrFail();
+
+            $view = new ListeView($liste);
+            $view->render('showPublic');
+        } catch(ModelNotFoundException $e) {
+            $view = new PageView;
+            $view->render('notFound');
+        }
     }
 
     public function edit($id) {
-        $liste = Liste::findOrFail($id);
-        $view = new ListeView($liste);
+        try {
+            $liste = Liste::findOrFail($id);
+            $view = new ListeView($liste);
+            $view->render('edit');
+        } catch(ModelNotFoundException $e) {
+            $view = new PageView;
+            $view->render('notFound');
+        }
 
-        $view->render('edit');
     }
 
     public function update($id) {
@@ -86,15 +106,21 @@ class ListeController extends Controller {
         ], 'liste.index');
 
         // Passe a 1 la liste
-        $liste = Liste::findOrFail($datas['no']);
+        //
+        try {
+            $liste = Liste::findOrFail($datas['no']);
 
+            // On genere un token si ce n'est pas encore fait
+            $this->createToken($liste);
 
-        // On genere un token si ce n'est pas encore fait
-        $this->createToken($liste);
+            $liste->update(['estPublique' => 1]);
 
-        $liste->update(['estPublique' => 1]);
+            $this->app->redirect($this->app->urlFor('liste.edit', ['id' => $liste->no]));
 
-        $this->app->redirect($this->app->urlFor('liste.edit', ['id' => $liste->no]));
+        } catch(ModelNotFoundException $e) {
+            $view = new PageView;
+            $view->render('notFound');
+        }
     }
 
     private function createToken($liste) {
@@ -121,11 +147,16 @@ class ListeController extends Controller {
             'no' => $validator::INT
         ], 'liste.index');
 
-        $liste = Liste::findOrFail($datas['no']);
+        try {
+            $liste = Liste::findOrFail($datas['no']);
 
-        $this->createToken($liste);
+            $this->createToken($liste);
 
-        $this->app->redirect($this->app->urlFor('liste.showPublic', ['token' => $liste->token]));
+            $this->app->redirect($this->app->urlFor('liste.showPublic', ['token' => $liste->token]));
+        } catch(ModelNotFoundException $e) {
+            $view = new PageView;
+            $view->render('notFound');
+        }
     }
 
     public function destroy($id) {

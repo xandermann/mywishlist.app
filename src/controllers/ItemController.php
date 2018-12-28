@@ -4,8 +4,11 @@ namespace wishlist\controllers;
 
 use wishlist\models\Item;
 use wishlist\views\ItemView;
+use wishlist\views\PageView;
 use wishlist\classes\Validator;
 use wishlist\models\Liste;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 
 class ItemController extends Controller {
 	/*
@@ -20,44 +23,73 @@ class ItemController extends Controller {
 	public function create($id) {
 
 		// Si la liste existe, ok, sinon 404
-		$liste = Liste::findOrFail($id);
+		try {
+			$liste = Liste::findOrFail($id);
+			$view = new ItemView($liste);
+			$view->render('create');
+		} catch(ModelNotFoundException $e) {
+			$view = new PageView;
+			$view->render('notFound');
+		}
 
-		$view = new ItemView($liste);
-		$view->render('create');
+
 	}
 
 	public function store() {
 
 
 		$token = $this->app->request->params('listToken');
-		$liste = Liste::where('token', $token)->firstOrFail(); // Si token pas OK, erreur 404
 
-		$validator = new Validator;
-		$datas = $validator([
-			'nom' => $validator::STRING,
-			'descr' => $validator::STRING,
-			'tarif' => $validator::FLOAT,
-		], 'item.create', ['listToken' => $token]);
+		try {
+			$liste = Liste::where('token', $token)->firstOrFail(); // Si token pas OK, erreur 404
 
-		$datas['liste_id'] = $liste->no;
+			$validator = new Validator;
+			$datas = $validator([
+				'nom' => $validator::STRING,
+				'descr' => $validator::STRING,
+				'tarif' => $validator::FLOAT,
+			], 'item.create', ['listToken' => $token]);
 
-		// Donnees inserees
-		Item::create($datas);
-		$this->app->redirect($this->app->urlFor('liste.show', ['id' => $liste->no]));
+			$datas['liste_id'] = $liste->no;
+
+			// Donnees inserees
+			Item::create($datas);
+			$this->app->redirect($this->app->urlFor('liste.show', ['id' => $liste->no]));
+
+
+		} catch(ModelNotFoundException $e) {
+			$view = new PageView;
+			$view->render('notFound');
+		}
+
+
 	}
 
 	public function show($id) {
-		$item = Item::findOrFail($id);
+		try {
+			$item = Item::findOrFail($id);
 
-		$view = new ItemView($item);
-		$view->render('show');
+			$view = new ItemView($item);
+			$view->render('show');
+		} catch(ModelNotFoundException $e){
+			$view = new PageView;
+			$view->render('notFound');
+		}
+
+
 	}
 
 	public function edit($id) {
-		$item = Item::findOrFail($id);
+		try {
+			$item = Item::findOrFail($id);
 
-		$view = new ItemView($item);
-		$view->render('edit');
+			$view = new ItemView($item);
+			$view->render('edit');
+		} catch(ModelNotFoundException $e) {
+			$view = new PageView;
+			$view->render('notFound');
+		}
+
 	}
 
 	public function update($id) {
@@ -79,8 +111,15 @@ class ItemController extends Controller {
 
 
 		// Donnees inserees
-		Item::findOrFail($id)->update($safeDatas);
-		$this->app->redirect($this->app->urlFor('item.index'));
+		try {
+			Item::findOrFail($id)->update($safeDatas);
+			$this->app->redirect($this->app->urlFor('item.index'));
+		} catch(ModelNotFoundException $e) {
+			$view = new PageView;
+			$view->render('notFound');
+		}
+
+
 	}
 
 	public function destroy($id) {
@@ -93,6 +132,6 @@ class ItemController extends Controller {
 	}
 
 	public function deleteImage($id,$idImage){
-		
+
 	}
 }
