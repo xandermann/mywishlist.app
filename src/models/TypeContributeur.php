@@ -6,4 +6,3 @@
 		protected $table='typeContributeur';
 		protected $primaryKey='idType';
 	}
-?>

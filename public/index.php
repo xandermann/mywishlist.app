@@ -226,7 +226,10 @@ if(!Auth::check()) {
 
 
 
-
+$app->get('/createurs', function() {
+        $controller = new UserController();
+        $controller->creator();
+})->name('user.creator');
 
 
 

@@ -19,4 +19,3 @@
 			return $this->belongsToMany('\wishlist\models\User','poste');
 		}
 	}
-?>

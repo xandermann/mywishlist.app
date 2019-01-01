@@ -13,4 +13,3 @@
 		public $timestamps=false;
 		protected $guarded = [];
 	}
-?>

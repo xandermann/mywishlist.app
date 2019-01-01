@@ -16,4 +16,8 @@ class Liste extends Model {
 		return $this->hasMany('\wishlist\models\Item', 'liste_id');
 	}
 
+	public function user() {
+		return $this->belongsTo('\wishlist\models\User', 'user_id');
+	}
+
 }

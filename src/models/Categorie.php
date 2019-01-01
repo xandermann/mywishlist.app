@@ -21,4 +21,3 @@ class Categorie extends Model{
 		return $this->hasMany('\wishlist\models\Item');
 	}
 }
-?>

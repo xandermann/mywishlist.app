@@ -3,11 +3,21 @@
 namespace wishlist\controllers;
 
 use wishlist\models\User;
+use wishlist\models\Liste;
 use wishlist\classes\Validator;
 use wishlist\classes\Authentification as Auth;
+use wishlist\views\UserView;
 
 class UserController extends Controller
 {
+
+	public function creator() {
+
+		$createurs = User::whereIn('id', Liste::select('user_id')->where('estPublique', 1))->get();
+
+		$view = new UserView($createurs);
+		$view->render('creator');
+	}
 
 	/**
 	 * Met a jour l'utilisateur courant
