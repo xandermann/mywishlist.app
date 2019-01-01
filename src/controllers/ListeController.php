@@ -8,14 +8,27 @@ use wishlist\views\ListeView;
 use wishlist\classes\Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use wishlist\views\PageView;
+use wishlist\classes\Authentification as Auth;
+
 
 
 class ListeController extends Controller {
+
     public function index() {
-        $liste = Liste::whereNotNull('token')->where('estPublique', 1)->get();
+        $userId = Auth::get('id');
+
+        $liste = Liste::where('user_id', $userId)->get();
 
         $view = new ListeView($liste);
         $view->render('index');
+
+    }
+
+    public function publique() {
+        $liste = Liste::whereNotNull('token')->where('estPublique', 1)->get();
+
+        $view = new ListeView($liste);
+        $view->render('publique');
 
     }
 

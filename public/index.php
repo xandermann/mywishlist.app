@@ -17,6 +17,8 @@ $db->setAsGlobal();
 $db->bootEloquent();
 
 use wishlist\controllers\PagesController;
+use wishlist\classes\Authentification as Auth;
+
 
 
 $app->get('/css', function () use ($app) {
@@ -102,10 +104,19 @@ $app->delete('/item/:id/:idImage',function($id,$idImage){
 /*========================================*/
 use wishlist\controllers\ListeController;
 
-$app->get('/liste', function () {
+// Affiche les listes DE L'UTILISATEUR
+if(Auth::check()) {
+    $app->get('/liste', function () {
+        $controller = new ListeController();
+        $controller->index();
+    })->name('liste.index');
+}
+
+// Affiche les listes publiques
+$app->get('/liste/publique', function () {
     $controller = new ListeController();
-    $controller->index();
-})->name('liste.index');
+    $controller->publique();
+})->name('liste.publique');
 
 // Liste des routes
 $app->get('/liste/create', function () {
@@ -156,7 +167,6 @@ $app->delete('/liste/:id', function ($id) {
 
 
 
-use wishlist\classes\Authentification as Auth;
 use wishlist\controllers\AuthController;
 use wishlist\controllers\UserController;
 

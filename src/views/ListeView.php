@@ -8,6 +8,20 @@ class ListeView extends View {
 
     private function index() {
 
+        $this->content .= '<article>';
+        $this->content .= '<h2>Vos listes sont ici</h2>';
+
+        $this->content .= '<ul>';
+        foreach ($this->var as $v)
+            $this->content .= "<li><a href='{$this->app->urlFor('liste.showPublic', ['token' => $v->token])}'>{$v->titre}</a></li>";
+        $this->content .= '</ul>';
+        $this->content .= '</article>';
+    }
+
+    private function publique() {
+
+        $this->content .= '<h2>Vos listes sont ici</h2>';
+
         $this->content .= '<ul>';
         foreach ($this->var as $v)
             $this->content .= "<li><a href='{$this->app->urlFor('liste.showPublic', ['token' => $v->token])}'>{$v->titre}</a></li>";
@@ -52,9 +66,12 @@ class ListeView extends View {
     }
 
     private function showPublic() {
+        $this->content .= '<article>';
+
         $this->content .= "<p>Vous voyez une liste partagée: {$this->app->urlFor('liste.showPublic', ['token' => $this->var->token])}</p>";
 
         $this->show();
+        $this->content .= '</article>';
 
     }
 
@@ -139,6 +156,10 @@ class ListeView extends View {
 
             case 'showPublic':
             $this->showPublic();
+            break;
+
+            case 'publique':
+            $this->publique();
             break;
         }
 
