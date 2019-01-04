@@ -56,44 +56,13 @@ INSERT INTO `liste` (`no`, `user_id`, `titre`, `description`, `expiration`, `tok
 (3, 3,  'C\'est l\'anniversaire de Charlie',  'Pour lui préparer une fête dont il se souviendra :)',  '2017-12-12', 'nosecure3');
 
 
+DROP TABLE IF EXISTS `messageliste`;
+CREATE TABLE `messageliste` (
+  `liste_id` int(11) NOT NULL,
+  `message` text,
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  PRIMARY KEY (`liste_id`,`message`),
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 

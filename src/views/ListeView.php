@@ -73,6 +73,15 @@ class ListeView extends View {
         $this->show();
         $this->content .= '</article>';
 
+        /*message associer*/
+        $this->content .= '<article>';
+
+        $this->content .= "<h3>Message :</h3>";
+        $this->content .= "<p>pas fonctionnel</p>";
+
+
+        $this->content .= '</article>';
+
     }
 
     private function edit() {
