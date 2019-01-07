@@ -65,8 +65,12 @@ class ListeController extends Controller {
         try {
             $liste = Liste::findOrFail($id);
 
-            $view = new ListeView($liste);
-            $view->render('show');
+            if(Auth::check()){
+              $view = new ListeView($liste);
+              $view->render('show');
+            } else {
+              throw new NotFound;
+            }
         } catch(ModelNotFoundException $e) {
             throw new NotFound;
         }

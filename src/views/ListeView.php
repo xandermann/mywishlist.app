@@ -52,8 +52,10 @@ class ListeView extends View {
 
     private function show() {
         $this->content .= "<article><h2>{$this->var->titre}</h2>";
-        $this->content .= "<a href='{$this->app->urlFor('liste.edit', ['id' => $this->var->no])}'>Editer la liste</a>";
 
+        if(Auth::check()) {
+        $this->content .= "<a href='{$this->app->urlFor('liste.edit', ['id' => $this->var->no])}'>Editer la liste</a>";
+        }
 
         $this->content .= "<ul>";
         foreach($this->var->items as $item) {
@@ -75,7 +77,7 @@ class ListeView extends View {
 
         if(Auth::check()){
           $this->content .= "<a href='{$this->app->urlFor('liste.edit', ['id' => $this->var->no])}'>Editer la liste</a>";
-        }      
+        }
 
         $this->content .= "<ul>";
         foreach($this->var->items as $item) {
