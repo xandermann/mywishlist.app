@@ -82,7 +82,7 @@ CREATE TABLE `users` (
 /*============Datas============*/
 
 INSERT INTO `users` (`id`, `email`, `password`) VALUES
-(1, 'a@a.a',  '$2y$12$VmttT35SDVNpgaORTgJsk.wGLx8bTh4gy.WOwHQH8hkZPBSlAe0oG'),
+(1, 'a@a.a',  '$2a$10$wbEcZj9/19Mo0PpNBPujBeKMcYNqhEDd/f7Mc0ATsuAGvnpUlYrTS'), /* a */
 (2, 'tstanton@hotmail.com', 'L0\'Wtse?3'),
 (3, 'tstanton@hotmail.com', 'L0\'Wtse?3'),
 (4, 'king.marquise@funk.com', 'xXq*F!YOxCWh3'),

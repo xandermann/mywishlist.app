@@ -10,10 +10,6 @@ class Validator {
 	 * Filtre du validateur
 	 */
 	const STRING = 0;
-
-	/**
-	 * Filtres du validateur
-	 */
 	const FLOAT = 1;
 	const URL = 2;
 	const EMAIL = 3;
@@ -73,7 +69,7 @@ class Validator {
 
 				// Si doit etre un string
 				case self::STRING:
-				if(!empty($paramToTest))
+				if(!empty($paramToTest) && strlen($paramToTest) > 100000)
 					$ret[$variableToFilter] = filter_var($paramToTest, FILTER_SANITIZE_STRING);
 				else
 					throw new ValidatorException($variableToFilter);
