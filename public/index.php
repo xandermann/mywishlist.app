@@ -121,11 +121,12 @@ $app->get('/liste/publique', function () {
 
 // Liste des routes
 
-
-$app->get('/liste/create', function () {
-    $controller = new ListeController();
-    $controller->create();
-})->name('liste.create');
+//if(Auth::check()){
+  $app->get('/liste/create', function () {
+      $controller = new ListeController();
+      $controller->create();
+  })->name('liste.create');
+//}
 
 $app->post('/liste', function () {
     $controller = new ListeController();

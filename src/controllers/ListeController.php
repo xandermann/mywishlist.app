@@ -33,8 +33,12 @@ class ListeController extends Controller {
     }
 
     public function create() {
-        $view = new ListeView;
-        $view->render('create');
+        if(Auth::check()) {
+          $view = new ListeView;
+          $view->render('create');
+        } else {
+          $this->app->redirect($this->app->urlFor("index"));
+        }
     }
 
     public function store() {
@@ -75,7 +79,9 @@ class ListeController extends Controller {
             $liste = Liste::where('token', $token)->firstOrFail();
 
             $view = new ListeView($liste);
+            if(Auth::check()) {
             $view->render('showPublic');
+            }
         } catch(ModelNotFoundException $e) {
             $view = new PageView;
             $view->render('notFound');

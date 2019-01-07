@@ -30,6 +30,7 @@ class ListeView extends View {
     }
 
     private function create() {
+
         $this->content = "
         <article><h2>Creer une liste</h2>
 
@@ -46,7 +47,6 @@ class ListeView extends View {
 
         <p>A faire correctement pour le bouton + peut etre mettre a droite la liste des items et on a juste a les cochez pour les ajouter a la liste comme a l'acceuil avec connection pour le visuel</p></article>
         ";
-
 
     }
 
@@ -74,11 +74,7 @@ class ListeView extends View {
         $this->content .= "<h2>{$this->var->titre}</h2>";
 
 
-
-        if(Auth::check()) {
-          $this->content .= "<a href='{$this->app->urlFor('liste.edit', ['id' => $this->var->no])}'>Editer la liste</a>";
-        }
-
+        $this->content .= "<a href='{$this->app->urlFor('liste.edit', ['id' => $this->var->no])}'>Editer la liste</a>";
 
 
         $this->content .= "<ul>";
