@@ -28,8 +28,7 @@ class ItemController extends Controller {
 			$view = new ItemView($liste);
 			$view->render('create');
 		} catch(ModelNotFoundException $e) {
-			$view = new PageView;
-			$view->render('notFound');
+			$this->notFound();
 		}
 
 
@@ -58,8 +57,7 @@ class ItemController extends Controller {
 
 
 		} catch(ModelNotFoundException $e) {
-			$view = new PageView;
-			$view->render('notFound');
+			$this->notFound();
 		}
 
 
@@ -72,8 +70,7 @@ class ItemController extends Controller {
 			$view = new ItemView($item);
 			$view->render('show');
 		} catch(ModelNotFoundException $e){
-			$view = new PageView;
-			$view->render('notFound');
+			$this->notFound();
 		}
 
 
@@ -86,8 +83,7 @@ class ItemController extends Controller {
 			$view = new ItemView($item);
 			$view->render('edit');
 		} catch(ModelNotFoundException $e) {
-			$view = new PageView;
-			$view->render('notFound');
+			$this->notFound();
 		}
 
 	}
@@ -115,8 +111,7 @@ class ItemController extends Controller {
 			Item::findOrFail($id)->update($safeDatas);
 			$this->app->redirect($this->app->urlFor('item.index'));
 		} catch(ModelNotFoundException $e) {
-			$view = new PageView;
-			$view->render('notFound');
+			$this->notFound();
 		}
 
 

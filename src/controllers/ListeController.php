@@ -64,7 +64,7 @@ class ListeController extends Controller {
             $view = new ListeView($liste);
             $view->render('show');
         } catch(ModelNotFoundException $e) {
-            throw new NotFound;
+            $this->notFound();
         }
 
 
@@ -77,7 +77,7 @@ class ListeController extends Controller {
             $view = new ListeView($liste);
             $view->render('showPublic');
         } catch(ModelNotFoundException $e) {
-            throw new NotFound;
+            $this->notFound();
         }
     }
 
@@ -87,7 +87,7 @@ class ListeController extends Controller {
             $view = new ListeView($liste);
             $view->render('edit');
         } catch(ModelNotFoundException $e) {
-            throw new NotFound;
+            $this->notFound();
         }
 
     }
@@ -129,7 +129,7 @@ class ListeController extends Controller {
             $this->app->redirect($this->app->urlFor('liste.edit', ['id' => $liste->no]));
 
         } catch(ModelNotFoundException $e) {
-            throw new NotFound;
+            $this->notFound();
         }
     }
 
@@ -164,7 +164,7 @@ class ListeController extends Controller {
 
             $this->app->redirect($this->app->urlFor('liste.showPublic', ['token' => $liste->token]));
         } catch(ModelNotFoundException $e) {
-            throw new NotFound;
+            $this->notFound();
         }
     }
 
