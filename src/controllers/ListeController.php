@@ -79,9 +79,7 @@ class ListeController extends Controller {
             $liste = Liste::where('token', $token)->firstOrFail();
 
             $view = new ListeView($liste);
-            if(Auth::check()) {
             $view->render('showPublic');
-            }
         } catch(ModelNotFoundException $e) {
             throw new NotFound;
         }
