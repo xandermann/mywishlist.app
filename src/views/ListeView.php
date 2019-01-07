@@ -20,12 +20,12 @@ class ListeView extends View {
 
     private function publique() {
 
-        $this->content .= '<h2>Vos listes sont ici</h2>';
+        $this->content .= '<article><h2>Vos listes sont ici</h2>';
 
         $this->content .= '<ul>';
         foreach ($this->var as $v)
             $this->content .= "<li><a href='{$this->app->urlFor('liste.showPublic', ['token' => $v->token])}'>{$v->titre}</a></li>";
-        $this->content .= '</ul>';
+        $this->content .= '</ul></article>';
     }
 
     private function create() {
@@ -50,6 +50,26 @@ class ListeView extends View {
     }
 
     private function show() {
+        $this->content .= "<article><h2>{$this->var->titre}</h2>";
+        $this->content .= "<a href='{$this->app->urlFor('liste.edit', ['id' => $this->var->no])}'>Editer la liste</a>";
+
+
+        $this->content .= "<ul>";
+        foreach($this->var->items as $item) {
+            $this->content .= "<p>{$item->nom}</p>";
+            $this->content .= "<p>{$item->descr}</p>";
+            $this->content .= "<img src='../../img_item/{$item->img}'>";
+            $this->content .= "<hr>";
+        }
+        $this->content .= "</ul></article>";
+
+    }
+
+    private function showPublic() {
+        $this->content .= '<article>';
+
+        $this->content .= "<p>Vous voyez une liste partagée: {$this->app->urlFor('liste.showPublic', ['token' => $this->var->token])}</p>";
+
         $this->content .= "<h2>{$this->var->titre}</h2>";
         $this->content .= "<a href='{$this->app->urlFor('liste.edit', ['id' => $this->var->no])}'>Editer la liste</a>";
 
@@ -63,18 +83,7 @@ class ListeView extends View {
         }
         $this->content .= "</ul>";
 
-    }
 
-    private function showPublic() {
-        $this->content .= '<article>';
-
-        $this->content .= "<p>Vous voyez une liste partagée: {$this->app->urlFor('liste.showPublic', ['token' => $this->var->token])}</p>";
-
-        $this->show();
-        $this->content .= '</article>';
-
-        /*message associer*/
-        $this->content .= '<article>';
 
         $this->content .= "<h3>Message :</h3>";
         $this->content .= "<p>pas fonctionnel</p>";
@@ -87,7 +96,7 @@ class ListeView extends View {
     private function edit() {
 
         $this->content = "
-        <h2>Editer la liste \"{$this->var->titre}\":</h2>
+        <article><h2>Editer la liste \"{$this->var->titre}\":</h2>
 
         <a href='{$this->app->urlFor('item.create', ['id' => $this->var->no])}'>Ajouter un item</a>
 
@@ -139,7 +148,7 @@ class ListeView extends View {
         <input type='hidden' name='_METHOD' value='DELETE' />
 
         <input type='submit' value='Valide'>
-        </form>
+        </form></article>
         ";
     }
 
