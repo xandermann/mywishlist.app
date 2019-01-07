@@ -69,7 +69,7 @@ class ListeController extends Controller {
               $view = new ListeView($liste);
               $view->render('show');
             } else {
-              throw new NotFound;
+              $this->notFound();
             }
         } catch(ModelNotFoundException $e) {
             $this->notFound();
