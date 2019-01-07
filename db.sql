@@ -59,9 +59,9 @@ INSERT INTO `liste` (`no`, `user_id`, `titre`, `description`, `expiration`, `tok
 DROP TABLE IF EXISTS `messageliste`;
 CREATE TABLE `messageliste` (
   `liste_id` int(11) NOT NULL,
-  `message` text,
+  `message` varchar(200),
 
-  PRIMARY KEY (`liste_id`,`message`),
+  PRIMARY KEY (`liste_id`,`message`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
