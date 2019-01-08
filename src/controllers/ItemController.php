@@ -3,11 +3,14 @@
 namespace wishlist\controllers;
 
 use wishlist\models\Item;
+use wishlist\models\Image;
 use wishlist\views\ItemView;
 use wishlist\views\PageView;
 use wishlist\classes\Validator;
 use wishlist\models\Liste;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\DB;
+use Slim\Slim as App;
 
 
 class ItemController extends Controller {
@@ -128,7 +131,22 @@ class ItemController extends Controller {
 	}
 
 	public function addImage($id){
+		$request=App::getInstance()->request();
+		$files=$request->getUploadedFiles();
 
+		$uploaded=$files['img'];
+
+		if($uploaded->getError()===UPLOAD_ERR_OK){
+			$basename=$_FILES['img']['name'];
+			$imgPath='../../public/img_item/';
+			$image=new Image();
+			$image->path=$basename;
+			$image->save();
+
+			DB::table('decris')->insert(['idImage' => $image->idImage , 'nomItem' => $id]);
+
+			move_uploaded_file($_FILES['img']['tmp_name'],$imgPath.$basename);
+		}
 	}
 
 	public function deleteImage($id,$idImage){
