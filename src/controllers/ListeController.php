@@ -181,9 +181,7 @@ class ListeController extends Controller {
         Liste::destroy($id);
         $this->app->redirect($this->app->urlFor('liste.index'));
     }
-<<<<<<< HEAD
-}
-=======
+
 
 
     public function showmessage($id){
@@ -198,4 +196,3 @@ class ListeController extends Controller {
         }
     }
 }
->>>>>>> 083c4143176fbd1e2c4483c57531185cd4109ef9
