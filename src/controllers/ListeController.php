@@ -10,6 +10,7 @@ use wishlist\classes\Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use wishlist\views\PageView;
 use wishlist\classes\Authentification as Auth;
+use wishlist\classes\NotFound;
 
 
 
@@ -64,8 +65,7 @@ class ListeController extends Controller {
             $view = new ListeView($liste);
             $view->render('show');
         } catch(ModelNotFoundException $e) {
-            $view = new PageView;
-            $view->render('notFound');
+            $this->notFound();
         }
 
 
@@ -78,8 +78,7 @@ class ListeController extends Controller {
             $view = new ListeView($liste);
             $view->render('showPublic');
         } catch(ModelNotFoundException $e) {
-            $view = new PageView;
-            $view->render('notFound');
+            $this->notFound();
         }
     }
 
@@ -89,8 +88,7 @@ class ListeController extends Controller {
             $view = new ListeView($liste);
             $view->render('edit');
         } catch(ModelNotFoundException $e) {
-            $view = new PageView;
-            $view->render('notFound');
+            $this->notFound();
         }
 
     }
@@ -132,8 +130,7 @@ class ListeController extends Controller {
             $this->app->redirect($this->app->urlFor('liste.edit', ['id' => $liste->no]));
 
         } catch(ModelNotFoundException $e) {
-            $view = new PageView;
-            $view->render('notFound');
+            $this->notFound();
         }
     }
 
@@ -168,8 +165,7 @@ class ListeController extends Controller {
 
             $this->app->redirect($this->app->urlFor('liste.showPublic', ['token' => $liste->token]));
         } catch(ModelNotFoundException $e) {
-            $view = new PageView;
-            $view->render('notFound');
+            $this->notFound();
         }
     }
 
