@@ -145,6 +145,18 @@ class ItemController extends Controller {
 	}
 
 	public function deleteImage($id,$idImage){
+		DB::table('decris')->where(
+			['idImage','=',$idImage],
+			['nomItem','=',$id]
+		)->delete();
 
+		$count=DB::table('decris')->where('idImage','=',$idImage)->count();
+
+		if($count==0){
+			$img=Image::find('idImage');
+			$path='../../public/img_item/'.$img->path;
+			$img->delete();
+			unlink($path);
+		}
 	}
 }
