@@ -66,6 +66,9 @@ class ListeView extends View {
         }
         $this->content .= "</ul></article>";
 
+        $this->afficheMessage();
+
+
     }
 
     private function showPublic() {
@@ -87,15 +90,20 @@ class ListeView extends View {
             $this->content .= "<hr>";
         }
         $this->content .= "</ul>";
-
-
-
-        $this->content .= "<h3>Message :</h3>";
-        $this->content .= "<p>pas fonctionnel</p>";
-
-
+        $this->afficheMessage();
         $this->content .= '</article>';
 
+    }
+
+    private function afficheMessage(){
+        $this->content .= "<article><ul>";
+        $x = 1 ;
+        foreach($this->var->messagesliste as $m) {
+
+            $this->content .= "<li>$x : {$m->message}</li>";
+            $x++;
+        }
+        $this->content .= "</ul></article>";
     }
 
     private function edit() {
@@ -184,6 +192,7 @@ class ListeView extends View {
             case 'publique':
             $this->publique();
             break;
+
         }
 
         $this->html();

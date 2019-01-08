@@ -9,10 +9,14 @@
 	namespace wishlist\models;
     use Illuminate\Database\Eloquent\Model;
 
-    class Message extends Model{
+    class Messageliste extends Model{
         protected $table="messageliste";
-        protected $primaryKey="liste_id,message";
+        protected $primaryKey="idmess";
         public $timestamps=false;
         protected $guarded = [];
+
+        public function liste(){
+            return $this->belongsTo('\wishlist\models\Liste','liste_id');
+        }
 
     }
