@@ -112,6 +112,7 @@ if(Auth::check()) {
     })->name('liste.index');
 }
 
+
 // Affiche les listes publiques
 $app->get('/liste/publique', function () {
     $controller = new ListeController();
@@ -119,16 +120,20 @@ $app->get('/liste/publique', function () {
 })->name('liste.publique');
 
 // Liste des routes
-$app->get('/liste/create', function () {
-    $controller = new ListeController();
-    $controller->create();
-})->name('liste.create');
+
+//if(Auth::check()){
+  $app->get('/liste/create', function () {
+      $controller = new ListeController();
+      $controller->create();
+  })->name('liste.create');
+//}
 
 $app->post('/listecreer', function () {
 
     $controller = new ListeController();
     $controller->store();
 })->name('liste.store');
+
 
 $app->get('/liste/:id', function ($id) {
     $controller = new ListeController();
@@ -140,10 +145,13 @@ $app->get('/liste/publique/:token', function ($token) {
     $controller->showPublic($token);
 })->name('liste.showPublic');
 
+if(Auth::check()) {
 $app->get('/liste/:id/edit', function ($id) {
     $controller = new ListeController();
     $controller->edit($id);
 })->name('liste.edit')->conditions(['id' => '[0-9]+']);
+}
+
 
 $app->put('/liste/:id', function ($id) {
     $controller = new ListeController();

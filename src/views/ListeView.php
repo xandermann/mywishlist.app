@@ -3,6 +3,7 @@
 namespace wishlist\views;
 
 use wishlist\views\View;
+use wishlist\classes\Authentification as Auth;
 
 class ListeView extends View {
 
@@ -20,7 +21,7 @@ class ListeView extends View {
 
     private function publique() {
 
-        $this->content .= '<article><h2>Vos listes sont ici</h2>';
+        $this->content .= '<article><h2>Listes public</h2>';
 
         $this->content .= '<ul>';
         foreach ($this->var as $v)
@@ -29,6 +30,7 @@ class ListeView extends View {
     }
 
     private function create() {
+
         $this->content = "
         <article><h2>Creer une liste</h2>
 
@@ -46,13 +48,14 @@ class ListeView extends View {
         <p>A faire correctement pour le bouton + peut etre mettre a droite la liste des items et on a juste a les cochez pour les ajouter a la liste comme a l'acceuil avec connection pour le visuel</p></article>
         ";
 
-
     }
 
     private function show() {
         $this->content .= "<article><h2>{$this->var->titre}</h2>";
-        $this->content .= "<a href='{$this->app->urlFor('liste.edit', ['id' => $this->var->no])}'>Editer la liste</a>";
 
+        if(Auth::check()) {
+        $this->content .= "<a href='{$this->app->urlFor('liste.edit', ['id' => $this->var->no])}'>Editer la liste</a>";
+        }
 
         $this->content .= "<ul>";
         foreach($this->var->items as $item) {
@@ -74,8 +77,10 @@ class ListeView extends View {
         $this->content .= "<p>Vous voyez une liste partagée: {$this->app->urlFor('liste.showPublic', ['token' => $this->var->token])}</p>";
 
         $this->content .= "<h2>{$this->var->titre}</h2>";
-        $this->content .= "<a href='{$this->app->urlFor('liste.edit', ['id' => $this->var->no])}'>Editer la liste</a>";
 
+        if(Auth::check()){
+          $this->content .= "<a href='{$this->app->urlFor('liste.edit', ['id' => $this->var->no])}'>Editer la liste</a>";
+        }
 
         $this->content .= "<ul>";
         foreach($this->var->items as $item) {

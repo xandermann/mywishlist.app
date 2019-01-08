@@ -35,8 +35,12 @@ class ListeController extends Controller {
     }
 
     public function create() {
-        $view = new ListeView;
-        $view->render('create');
+        if(Auth::check()) {
+          $view = new ListeView;
+          $view->render('create');
+        } else {
+          $this->app->redirect($this->app->urlFor("index"));
+        }
     }
 
     public function store() {
@@ -62,8 +66,12 @@ class ListeController extends Controller {
         try {
             $liste = Liste::findOrFail($id);
 
-            $view = new ListeView($liste);
-            $view->render('show');
+            if(Auth::check()){
+              $view = new ListeView($liste);
+              $view->render('show');
+            } else {
+              $this->notFound();
+            }
         } catch(ModelNotFoundException $e) {
             $this->notFound();
         }
@@ -173,6 +181,7 @@ class ListeController extends Controller {
         Liste::destroy($id);
         $this->app->redirect($this->app->urlFor('liste.index'));
     }
+
 
 
     public function showmessage($id){
