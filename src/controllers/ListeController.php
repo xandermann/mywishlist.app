@@ -3,6 +3,7 @@
 namespace wishlist\controllers;
 
 use wishlist\models\Liste;
+use wishlist\models\Messageliste;
 use wishlist\controllers\Controller;
 use wishlist\views\ListeView;
 use wishlist\classes\Validator;
@@ -175,5 +176,18 @@ class ListeController extends Controller {
     public function destroy($id) {
         Liste::destroy($id);
         $this->app->redirect($this->app->urlFor('liste.index'));
+    }
+
+
+    public function showmessage($id){
+        try {
+
+            $mess = Messageliste::where('liste_id', $id)->get();
+            $view = new ListeView($mess);
+            $view->render('showPublic');
+        } catch(ModelNotFoundException $e) {
+            $view = new PageView;
+            $view->render('notFound');
+        }
     }
 }

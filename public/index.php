@@ -124,7 +124,8 @@ $app->get('/liste/create', function () {
     $controller->create();
 })->name('liste.create');
 
-$app->post('/liste', function () {
+$app->post('/listecreer', function () {
+
     $controller = new ListeController();
     $controller->store();
 })->name('liste.store');
@@ -163,6 +164,11 @@ $app->delete('/liste/:id', function ($id) {
     $controller = new ListeController();
     $controller->destroy($id);
 })->name('liste.destroy')->conditions(['id' => '[0-9]+']);
+
+$app->get('/liste/messageliste/:id', function ($id) {
+    $controller = new ListeController();
+    $controller->showmessage($id);
+})->name('liste.showmessage')->conditions(['id' => '[0-9]+']);
 
 
 
