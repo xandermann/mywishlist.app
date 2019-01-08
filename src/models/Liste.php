@@ -20,4 +20,8 @@ class Liste extends Model {
 		return $this->belongsTo('\wishlist\models\User', 'user_id');
 	}
 
+	public function messagesliste(){
+	    return $this->hasMany('\wishlist\models\Messageliste','liste_id');
+    }
+
 }

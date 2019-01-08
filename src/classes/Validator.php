@@ -69,7 +69,7 @@ class Validator {
 
 				// Si doit etre un string
 				case self::STRING:
-				if(!empty($paramToTest) && strlen($paramToTest) > 100000)
+				if(!empty($paramToTest) && strlen($paramToTest) < 100000)
 					$ret[$variableToFilter] = filter_var($paramToTest, FILTER_SANITIZE_STRING);
 				else
 					throw new ValidatorException($variableToFilter);
