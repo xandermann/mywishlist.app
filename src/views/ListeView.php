@@ -59,6 +59,7 @@ class ListeView extends View {
 
         $this->content .= "<ul>";
         foreach($this->var->items as $item) {
+            //here
             $this->content .= "<p>{$item->nom}</p>";
             $this->content .= "<p>{$item->descr}</p>";
             $this->content .= "<img src='../../img_item/{$item->img}'>";
@@ -111,9 +112,15 @@ class ListeView extends View {
         $this->content = "
         <article><h2>Editer la liste \"{$this->var->titre}\":</h2>
 
-        <a href='{$this->app->urlFor('item.create', ['id' => $this->var->no])}'>Ajouter un item</a>
+        <a href='{$this->app->urlFor('item.create', ['id' => $this->var->no])}'>Ajouter un item</a>";
 
-        <hr>
+        $this->content .= "<ul>";
+        foreach($this->var->items as $item) {
+            $this->content .= "<p><a href='{$this->app->urlFor('item.edit',['id' => $item->id])}'>{$item->nom}</a></p>";
+        }
+        $this->content .= "</ul>";
+
+        $this->content.="<hr>
 
         <h2>Rendre la liste publique</h2>
 
