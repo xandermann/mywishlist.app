@@ -7,7 +7,7 @@
 		/**
 		 * chemin d'accès au fichier ini
 		 */
-		private static $PATH="../config/imgType.ini";
+		private static $PATH="../src/config/imgType.ini";
 		/**
 		 * change le chemin d'accès au fichier ini
 		 */
