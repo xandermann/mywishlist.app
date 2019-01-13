@@ -45,7 +45,7 @@ class ListeView extends View {
 
         </form>
 
-        <p>A faire correctement pour le bouton + peut etre mettre a droite la liste des items et on a juste a les cochez pour les ajouter a la liste comme a l'acceuil avec connection pour le visuel</p></article>
+        </article>
         ";
 
     }
@@ -99,11 +99,31 @@ class ListeView extends View {
         $this->content .= "<article><ul>";
         $x = 1 ;
         foreach($this->var->messagesliste as $m) {
-
-            $this->content .= "<li>$x : {$m->message}</li>";
-            $x++;
+                $this->content .= "<li>$x {$this->var->user->email} : {$m->message}</li>";
+                $x++;
         }
-        $this->content .= "</ul></article>";
+        $this->content .= "</ul>";
+        if(Auth::check()){
+          $this->content .= "<a href='{$this->app->urlFor('liste.createmessage', ['id' => $this->var->no])}'>Ajouter un message</a>";
+        }else{
+            $this->content .= 'vous devez vous connecter';
+        }
+        $this->content .= '</article>';
+    }
+
+    private function createmessage(){/////////////////////////////////////////////c'est ici
+        $this->content = "
+
+        <h2>Ajouter un message</h2>
+
+        <form action='{$this->app->urlFor('liste.messagestore')}' method='POST'>
+        Message : <input type='text' name='message'>
+
+        <input type='hidden' name='_METHOD' value='POST' />
+
+        <input type='submit' value='Valide'>
+
+        </form></article>";
     }
 
     private function edit() {
@@ -191,6 +211,10 @@ class ListeView extends View {
 
             case 'publique':
             $this->publique();
+            break;
+
+            case 'createmessage':
+            $this->createmessage();/////////////////////////////////////////////c'est ici
             break;
 
         }

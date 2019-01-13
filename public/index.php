@@ -178,6 +178,17 @@ $app->get('/liste/messageliste/:id', function ($id) {
     $controller->showmessage($id);
 })->name('liste.showmessage')->conditions(['id' => '[0-9]+']);
 
+$app->get('/liste/createmessage', function () {/////////////////////////////////////////////c'est ici pour les routes
+
+    $controller = new ListeController();
+    $controller->createmessage();
+})->name('liste.createmessage');
+
+$app->post('/liste/messagestore', function ($id) {/////////////////////////////////////////////c'est ici pour les routes
+
+    $controller = new ListeController();
+    $controller->messagestore($id);
+})->name('liste.messagestore')->conditions(['id' => '[0-9]+']);
 
 
 
