@@ -64,7 +64,7 @@ class Authentification {
 	}
 
 
-	public function get($param = null) {
+	public static function get($param = null) {
 		if($param !== null) {
 			return $_SESSION[self::SESSION_VAR][$param];
 		} else {

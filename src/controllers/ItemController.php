@@ -127,13 +127,13 @@ class ItemController extends Controller {
 
 	public function addImage($id){
 		$request=App::getInstance()->request();
-		$files=$request->getUploadedFiles();
+		//$files=$request->getUploadedFiles();
 
-		$uploaded=$files['img'];
+		//$uploaded=$files['img'];
 
-		if($uploaded->getError()===UPLOAD_ERR_OK){
+		if(isset($_FILES['img'])){
 			$basename=$_FILES['img']['name'];
-			$imgPath='../../public/img_item/';
+			$imgPath='img_item/';
 			$image=new Image();
 			$image->path=$basename;
 			$image->save();
@@ -145,6 +145,18 @@ class ItemController extends Controller {
 	}
 
 	public function deleteImage($id,$idImage){
+		DB::table('decris')->where(
+			['idImage','=',$idImage],
+			['nomItem','=',$id]
+		)->delete();
 
+		$count=DB::table('decris')->where('idImage','=',$idImage)->count();
+
+		if($count==0){
+			$img=Image::find('idImage');
+			$path='../../public/img_item/'.$img->path;
+			$img->delete();
+			unlink($path);
+		}
 	}
 }

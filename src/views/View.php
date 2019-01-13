@@ -2,6 +2,8 @@
 
 namespace wishlist\views;
 
+use wishlist\classes\Authentification as Auth;
+
 abstract class View {
 
 	/**
@@ -22,10 +24,18 @@ abstract class View {
 	 */
 	protected $app;
 
+	private $nav;
+
 	public function __construct($var = null) {
 		$this->var = $var;
 		$this->content = "";
 		$this->app = \Slim\Slim::getInstance();
+
+		if(Auth::check()) {
+			$this->nav = "<li><a href='{$this->app->urlFor('index')}''>Accueil</a></li><li><a href='{$this->app->urlFor('liste.publique')}'>Voir les listes publiques</a></li><li><a href='{$this->app->urlFor('liste.create')}'>Créer une liste</a></li><li><a href='{$this->app->urlFor('liste.index')}'>Voir vos listes</a></li>";
+		} else {
+			$this->nav = "<li><a href='{$this->app->urlFor('index')}'>Accueil</a></li><li><a href='{$this->app->urlFor('liste.publique')}'>Voir les listes publiques</a></li>";
+		}
 	}
 
 	public abstract function render($view);
@@ -51,7 +61,7 @@ abstract class View {
 
 			<nav>
 				<ul>
-					<li><a href="{$this->app->urlFor('index')}">Accueil</a></li><li><a href='{$this->app->urlFor('liste.publique')}'>Voir les listes publiques</a></li><li><a href='{$this->app->urlFor('liste.create')}'>Créer une liste</a></li>
+					$this->nav
 				</ul>
 			</nav>
 		</header>
