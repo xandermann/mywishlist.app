@@ -1,6 +1,6 @@
 {
 	"require":{
-		"illuminate/database": "5.5.*",
+		"illuminate/database": "*",
 		"php": ">=7.0",
 		"slim/slim": "~2.0"
 	},
