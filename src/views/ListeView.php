@@ -107,12 +107,12 @@ class ListeView extends View {
         if(Auth::check()){
           $this->content .= "<a href='{$this->app->urlFor('liste.createmessage', ['id' => $this->var->no])}'>Ajouter un message</a>";
         }else{
-            $this->content .= 'vous devez vous connecter';
+            $this->content .= '<p>vous devez vous connecter</p>';
         }
         $this->content .= '</article>';
     }
 
-    private function createmessage(){/////////////////////////////////////////////c'est ici
+    private function createmessage(){
         $this->content = "
 
         <h2>Ajouter un message</h2>
@@ -221,7 +221,7 @@ class ListeView extends View {
             break;
 
             case 'createmessage':
-            $this->createmessage();/////////////////////////////////////////////c'est ici
+            $this->createmessage();
             break;
 
         }

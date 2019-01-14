@@ -203,7 +203,7 @@ class ListeController extends Controller {
         }
     }
 
-    public function createmessage() {/////////////////////////////////////////////c'est ici
+    public function createmessage() {
         if(Auth::check()) {
             $view = new ListeView();
             $view->render('createmessage');
@@ -215,7 +215,7 @@ class ListeController extends Controller {
 
     }
 
-    public function messagestore($id){/////////////////////////////////////////////c'est ici
+    public function messagestore(){
         $validator = new Validator;
 
         $datas = $validator([
@@ -229,6 +229,6 @@ class ListeController extends Controller {
         // Donnees inserees
         $liste = Messageliste::create($datas);
 
-        $this->app->redirect($this->app->urlFor('liste.showPublic', ['id' => $liste->no]));
+        $this->app->redirect($this->app->urlFor('liste.publique'));
     }
 }
