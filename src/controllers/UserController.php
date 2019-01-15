@@ -27,7 +27,6 @@ class UserController extends Controller
 
 		// Recupere les donnees
 		$datas = $validator([
-			'email' => $validator::EMAIL,
 			'password' => $validator::PASSWORD,
 			'password_confirm' => $validator::STRING, // => String, nous verifions deja 'password'
 		], 'auth.account');
@@ -47,7 +46,7 @@ class UserController extends Controller
 		]);
 
 		// On recharge le profil
-		Auth::loadProfile($datas['email']);
+		Auth::logOut();
 
 		// On redirige
 		$this->app->redirect($this->app->urlFor('auth.account') . '?success');
