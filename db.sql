@@ -61,6 +61,7 @@ CREATE TABLE `messageliste` (
   `idmess` int(11) not null AUTO_INCREMENT,
   `liste_id` int(11) NOT NULL,
   `message` varchar(200),
+  `pseudo` varchar(200),
 
   PRIMARY KEY (`idmess`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
