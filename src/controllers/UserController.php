@@ -28,8 +28,8 @@ class UserController extends Controller
 		// Recupere les donnees
 		$datas = $validator([
 			'email' => $validator::EMAIL,
-			'password' => $validator::STRING,
-			'password_confirm' => $validator::STRING,
+			'password' => $validator::PASSWORD,
+			'password_confirm' => $validator::STRING, // => String, nous verifions deja 'password'
 		], 'auth.account');
 
 		// Si les mots de passes sont differents

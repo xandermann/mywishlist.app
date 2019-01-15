@@ -15,6 +15,7 @@ class Validator {
 	const EMAIL = 3;
 	const INT = 4;
 	const DATE = 5;
+	const PASSWORD = 6;
 
 
 
@@ -120,6 +121,25 @@ class Validator {
 				} else {
 					throw new ValidatorException($variableToFilter);
 				}
+				break;
+
+				case self::PASSWORD:
+
+				if (strlen($paramToTest) < 4) {
+					throw new ValidatorException($variableToFilter . "_lenght_min_4");
+				}
+
+				if (!preg_match("#[0-9]+#", $paramToTest)) {
+					throw new ValidatorException($variableToFilter . "_must_include_number");
+				}
+
+				if (!preg_match("#[a-zA-Z]+#", $paramToTest)) {
+					throw new ValidatorException($variableToFilter . "_must_include_letter");
+				}
+
+				$ret[$variableToFilter] = $paramToTest;
+
+
 				break;
 
 				default:

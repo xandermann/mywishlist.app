@@ -28,8 +28,8 @@ class AuthController extends Controller {
 
 		$datas = $validator([
 			'email' => $validator::EMAIL,
-			'password' => $validator::STRING,
-			'password_confirm' => $validator::STRING,
+			'password' => $validator::PASSWORD,
+			'password_confirm' => $validator::STRING, // => STRING car on verifie deja 'password'
 		], 'auth.signup');
 
 		// Si 'mot de passe' et 'confirmation du mot de passe' different, alors erreur
