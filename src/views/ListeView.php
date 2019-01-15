@@ -24,9 +24,13 @@ class ListeView extends View {
         $this->content .= '<article><h2>Listes publiques</h2>';
 
         $this->content .= '<ul>';
-        foreach ($this->var as $v)
-            $this->content .= "<li><a href='{$this->app->urlFor('liste.showPublic', ['token' => $v->token])}'>{$v->titre}</a></li>";
+        $x = 1;
+        foreach ($this->var as $v){
+            $this->content .= "<li><a href='{$this->app->urlFor('liste.showPublic', ['token' => $v->token])}'>$x : {$v->titre}</a></li>";
+            $x++;
+          }
         $this->content .= '</ul></article>';
+
     }
 
     private function create() {
@@ -98,31 +102,36 @@ class ListeView extends View {
         $this->content .= "<article><ul>";
         $x = 1 ;
         foreach($this->var->messagesliste as $m) {
-                $this->content .= "<li>$x {$this->var->user->email} : {$m->message}</li>";
+                $this->content .= "<li>$x) {$m->pseudo}: {$m->message}</li>";
                 $x++;
         }
         $this->content .= "</ul>";
         if(Auth::check()){
           $this->content .= "<a href='{$this->app->urlFor('liste.createmessage', ['id' => $this->var->no])}'>Ajouter un message</a>";
+
         }else{
-            $this->content .= '<p>vous devez vous connecter</p>';
+            $this->content .= '<p>Vous devez vous connecter pour mettre un message</p>';
         }
         $this->content .= '</article>';
     }
 
     private function createmessage(){
-        $this->content = "
 
-        <h2>Ajouter un message</h2>
+      $this->content = "
 
-        <form action='{$this->app->urlFor('liste.messagestore')}' method='POST'>
-        Message : <input type='text' name='message'>
+      <h2>Ajouter un message</h2>
 
-        <input type='hidden' name='_METHOD' value='POST' />
 
-        <input type='submit' value='Valide'>
+      <form action='{$this->app->urlFor('liste.messagestore')}' method='POST'>
+      Liste_id : <input type='text' name='liste_id'>
+      Message : <input type='text' name='message'>
 
-        </form></article>";
+      <input type='hidden' name='_METHOD' value='POST' />
+
+      <input type='submit' value='Valide'>
+
+      </form></article>";
+
     }
 
     private function edit() {

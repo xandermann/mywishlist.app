@@ -190,12 +190,8 @@ class ListeController extends Controller {
 
             $mess = Messageliste::where('liste_id', $id)->get();
 
-            $no = Liste::select('user_id')->where('no',$id)->first();
 
-            $nom = User::where('id',$no);
-
-            $array = [$mess,$nom];
-            $view = new ListeView($array);
+            $view = new ListeView($mess);
             $view->render('showPublic');
         } catch(ModelNotFoundException $e) {
             $view = new PageView;
@@ -208,8 +204,8 @@ class ListeController extends Controller {
             $view = new ListeView();
             $view->render('createmessage');
         } else {
-            echo "casse";
-            //$this->app->redirect($this->app->urlFor("index"));
+
+            $this->app->redirect($this->app->urlFor("index"));
         }
 
 
@@ -218,13 +214,14 @@ class ListeController extends Controller {
     public function messagestore(){
         $validator = new Validator;
 
+
         $datas = $validator([
+            'liste_id' => $validator::STRING,
             'message' => $validator::STRING,
 
         ], 'liste.createmessage');
 
-        //$datas['user_id'] = 1; // TODO
-
+        $datas['pseudo'] = Auth::get('email');
 
         // Donnees inserees
         $liste = Messageliste::create($datas);
