@@ -36,8 +36,6 @@ abstract class View {
 		} else {
 			$this->nav = "<li><a href='{$this->app->urlFor('index')}'>Accueil</a></li><li><a href='{$this->app->urlFor('liste.publique')}'>Voir les listes publiques</a></li>";
 		}
-
-		var_dump(Auth::get('email'));
 	}
 
 	public abstract function render($view);
