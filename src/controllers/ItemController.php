@@ -40,11 +40,9 @@ class ItemController extends Controller {
 
 	public function store() {
 
-		// Recupere
-
 		$validator = new Validator;
 		$datasID = $validator([
-			'id' => $validator::INT
+			'liste_id' => $validator::INT
 		], 'index');
 
 
@@ -53,13 +51,13 @@ class ItemController extends Controller {
 			// On valide les donnees de base
 			$validator = new Validator;
 			$datas = $validator([
-				'liste_id' => $validator::INT
 				'nom' => $validator::STRING,
 				'descr' => $validator::STRING,
 				'tarif' => $validator::FLOAT,
-			], 'item.create', ['id' => $datasID['id']]);
+			], 'item.create', ['id' => $datasID['liste_id']]);
 
-
+			// On ajoute le numero de la liste
+			$datas['liste_id'] = $datasID['liste_id'];
 
 			$validatorURL = new Validator;
 
@@ -67,7 +65,7 @@ class ItemController extends Controller {
 			if($this->app->request->params('url') != null || $this->app->request->params('url') != '') {
 				$urlValidator = $validatorURL([
 					'url' => $validator::URL
-				], 'item.create', ['id' => $datasID['id']]);
+				], 'item.create', ['id' => $datasID['liste_id']]);
 			} else {
 				// Sinon l'URL prend une valeur par defaut
 				$urlValidator['url'] = null;
@@ -78,7 +76,7 @@ class ItemController extends Controller {
 
 			// Donnees inserees
 			Item::create($datas);
-			$this->app->redirect($this->app->urlFor('liste.show', ['id' => $datasID['id']]));
+			$this->app->redirect($this->app->urlFor('liste.show', ['id' => $datasID['liste_id']]));
 
 
 		} catch(ModelNotFoundException $e) {
@@ -114,27 +112,27 @@ class ItemController extends Controller {
 	}
 
 	public function update($id) {
-		// Recupere
-
-		$validator = new Validator;
-		$datasID = $validator([
-			'id' => $validator::INT
-		], 'index');
-
 
 		try {
+
+			$v = new Validator;
+			$datasID = $v([
+				'id' => $v::INT,
+			], 'index');
 
 			// On valide les donnees de base
 			$validator = new Validator;
 			$datas = $validator([
-				'liste_id' => $validator::INT
+				'id' => $validator::INT,
+				'liste_id' => $validator::INT,
 				'nom' => $validator::STRING,
 				'descr' => $validator::STRING,
 				'tarif' => $validator::FLOAT,
-			], 'item.create', ['id' => $datasID['id']]);
+			], 'item.edit', ['id' => $datasID['id']]);
 
 
 
+			// On ajoute le numero de la liste
 			$validatorURL = new Validator;
 
 			// Si existe, on verifie l'URL
@@ -151,15 +149,13 @@ class ItemController extends Controller {
 			$datas['url'] = $urlValidator['url'];
 
 			// Donnees inserees
-			Item::create($datas);
-			$this->app->redirect($this->app->urlFor('liste.show', ['id' => $datasID['id']]));
+			Item::findOrFail($datasID['id'])->update($datas);
+			$this->app->redirect($this->app->urlFor('item.show', ['id' => $datasID['id']]));
 
 
 		} catch(ModelNotFoundException $e) {
 			$this->notFound();
 		}
-
-
 	}
 
 	public function destroy($id) {

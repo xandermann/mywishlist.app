@@ -26,7 +26,7 @@ class ItemView extends View {
 		Tarif (en €): <input type='number' name='tarif'>
 		URL (optionnel): <input type='link' name='url'>
 
-		<input type='hidden' name='id' value='{$this->var->no}'>
+		<input type='hidden' name='liste_id' value='{$this->var->no}'>
 
 		<input type='hidden' name='_METHOD' value='POST' />
 
@@ -54,6 +54,7 @@ class ItemView extends View {
 		Tarif: <input type='text' name='tarif' value='{$this->var->tarif}'>
 		URL (optionnel): <input type='link' name='url' value='{$this->var->url}'>
 
+		<input type='hidden' name='id' value='{$this->var->id}' />
 		<input type='hidden' name='_METHOD' value='PUT' />
 
 		<input type='submit' value='Valide'>
