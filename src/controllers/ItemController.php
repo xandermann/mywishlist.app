@@ -73,6 +73,8 @@ class ItemController extends Controller {
 
 			// On ajoute au donnees que l'on va inserer
 			$datas['url'] = $urlValidator['url'];
+			$datas['url'] = null;
+
 
 			// Donnees inserees
 			Item::create($datas);
@@ -148,6 +150,9 @@ class ItemController extends Controller {
 			// On ajoute au donnees que l'on va inserer
 			$datas['url'] = $urlValidator['url'];
 
+
+			$datas['url'] = null;
+
 			// Donnees inserees
 			Item::findOrFail($datasID['id'])->update($datas);
 			$this->app->redirect($this->app->urlFor('item.show', ['id' => $datasID['id']]));
@@ -160,7 +165,7 @@ class ItemController extends Controller {
 
 	public function destroy($id) {
 		Item::destroy($id);
-		$this->app->redirect($this->app->urlFor('item.index'));
+		$this->app->redirect($this->app->urlFor('liste.index'));
 	}
 
 	public function addImage($id){

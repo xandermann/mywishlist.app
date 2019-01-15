@@ -50,9 +50,8 @@ class ItemView extends View {
 		Liste ID: <input type='text' name='liste_id' value='{$this->var->liste_id}'>
 		Nom: <input type='text' name='nom' value='{$this->var->nom}'>
 		Descr: <input type='text' name='descr' value='{$this->var->descr}'>
-		URL: <input type='text' name='url' value='{$this->var->url}'>
-		Tarif: <input type='text' name='tarif' value='{$this->var->tarif}'>
 		URL (optionnel): <input type='link' name='url' value='{$this->var->url}'>
+		Tarif: <input type='text' name='tarif' value='{$this->var->tarif}'>
 
 		<input type='hidden' name='id' value='{$this->var->id}' />
 		<input type='hidden' name='_METHOD' value='PUT' />
