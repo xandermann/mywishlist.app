@@ -36,8 +36,11 @@ abstract class View {
 		} else {
 			$this->nav = "<li><a href='{$this->app->urlFor('index')}'>Accueil</a></li><li><a href='{$this->app->urlFor('liste.publique')}'>Voir les listes publiques</a></li>";
 		}
+<<<<<<< HEAD
 
 		
+=======
+>>>>>>> 205f4b304186d2a484803ad2fb762b0e3b0c0cb0
 	}
 
 	public abstract function render($view);

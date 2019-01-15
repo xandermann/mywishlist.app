@@ -78,7 +78,7 @@ class ListeView extends View {
     private function showPublic() {
         $this->content .= '<article>';
 
-        $this->content .= "<p>Vous voyez une liste partagée: {$this->app->urlFor('liste.showPublic', ['token' => $this->var->token])}</p>";
+        $this->content .= "<p>Vous voyez une liste partagée: {$this->app->urlFor('liste.showPublic', ['token' => $this->var->token])}. Attention, elle n'est pas <strong>publique</strong> ! Seul les personnes possedant le token peuvent y acceder.</p>";
 
         $this->content .= "<h2>{$this->var->titre}</h2>";
 
