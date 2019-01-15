@@ -67,9 +67,6 @@ CREATE TABLE `messageliste` (
 
 
 
-/*=============================*/
-/*============ALEX=============*/
-/*========TABLE=USER===========*/
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (

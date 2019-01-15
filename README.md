@@ -26,7 +26,9 @@ Le dossier d'accès à l'application est **public/**.
 
 	$ cp ./src/config/db.exemple.ini ./src/config/db.ini
 
-	$ nano ./src/config/db.ini
+Puis modifier le fichier `db` se trouvant dans le dossier `./src/config/db.ini`
+
+Exécuter le code SQL du fichier `db.sql`
 
 
 ### Slim 2:
