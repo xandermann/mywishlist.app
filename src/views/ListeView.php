@@ -14,14 +14,14 @@ class ListeView extends View {
 
         $this->content .= '<ul>';
         foreach ($this->var as $v)
-            $this->content .= "<li><a href='{$this->app->urlFor('liste.showPublic', ['token' => $v->token])}'>{$v->titre}</a></li>";
+            $this->content .= "<li><a href='{$this->app->urlFor('liste.show', ['id' => $v->no])}'>{$v->titre}</a></li>";
         $this->content .= '</ul>';
         $this->content .= '</article>';
     }
 
     private function publique() {
 
-        $this->content .= '<article><h2>Listes public</h2>';
+        $this->content .= '<article><h2>Listes publiques</h2>';
 
         $this->content .= '<ul>';
         foreach ($this->var as $v)
