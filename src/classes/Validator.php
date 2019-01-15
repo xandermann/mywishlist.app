@@ -116,11 +116,20 @@ class Validator {
 
 				list($y, $m, $d) = explode('-', $date);
 
-				if(checkdate($m, $d, $y)){
+				if(!checkdate($m, $d, $y)){
+					throw new ValidatorException($variableToFilter . "_n_est_pas_une_date");
+				}
+
+				$date = new \DateTime("$y-$m-$d");
+				$now = new \DateTime;
+
+
+				if( ($date->getTimestamp() - $now->getTimestamp() ) > 0) {
 					$ret[$variableToFilter] = $paramToTest;
 				} else {
-					throw new ValidatorException($variableToFilter);
+					throw new ValidatorException($variableToFilter . "_est_passe");
 				}
+
 				break;
 
 				case self::PASSWORD:
