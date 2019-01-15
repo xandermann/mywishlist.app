@@ -45,7 +45,7 @@ class ListeView extends View {
 
         </form>
 
-        <p>A faire correctement pour le bouton + peut etre mettre a droite la liste des items et on a juste a les cochez pour les ajouter a la liste comme a l'acceuil avec connection pour le visuel</p></article>
+        </article>
         ";
 
     }
@@ -59,6 +59,7 @@ class ListeView extends View {
 
         $this->content .= "<ul>";
         foreach($this->var->items as $item) {
+            //here
             $this->content .= "<p>{$item->nom}</p>";
             $this->content .= "<p>{$item->descr}</p>";
             $this->content .= "<img src='../../img_item/{$item->img}'>";
@@ -99,11 +100,31 @@ class ListeView extends View {
         $this->content .= "<article><ul>";
         $x = 1 ;
         foreach($this->var->messagesliste as $m) {
-
-            $this->content .= "<li>$x : {$m->message}</li>";
-            $x++;
+                $this->content .= "<li>$x {$this->var->user->email} : {$m->message}</li>";
+                $x++;
         }
-        $this->content .= "</ul></article>";
+        $this->content .= "</ul>";
+        if(Auth::check()){
+          $this->content .= "<a href='{$this->app->urlFor('liste.createmessage', ['id' => $this->var->no])}'>Ajouter un message</a>";
+        }else{
+            $this->content .= '<p>vous devez vous connecter</p>';
+        }
+        $this->content .= '</article>';
+    }
+
+    private function createmessage(){
+        $this->content = "
+
+        <h2>Ajouter un message</h2>
+
+        <form action='{$this->app->urlFor('liste.messagestore')}' method='POST'>
+        Message : <input type='text' name='message'>
+
+        <input type='hidden' name='_METHOD' value='POST' />
+
+        <input type='submit' value='Valide'>
+
+        </form></article>";
     }
 
     private function edit() {
@@ -111,9 +132,15 @@ class ListeView extends View {
         $this->content = "
         <article><h2>Editer la liste \"{$this->var->titre}\":</h2>
 
-        <a href='{$this->app->urlFor('item.create', ['id' => $this->var->no])}'>Ajouter un item</a>
+        <a href='{$this->app->urlFor('item.create', ['id' => $this->var->no])}'>Ajouter un item</a>";
 
-        <hr>
+        $this->content .= "<ul>";
+        foreach($this->var->items as $item) {
+            $this->content .= "<p><a href='{$this->app->urlFor('item.edit',['id' => $item->id])}'>{$item->nom}</a></p>";
+        }
+        $this->content .= "</ul>";
+
+        $this->content.="<hr>
 
         <h2>Rendre la liste publique</h2>
 
@@ -191,6 +218,10 @@ class ListeView extends View {
 
             case 'publique':
             $this->publique();
+            break;
+
+            case 'createmessage':
+            $this->createmessage();
             break;
 
         }

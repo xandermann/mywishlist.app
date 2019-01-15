@@ -5,6 +5,7 @@ namespace wishlist\controllers;
 use wishlist\models\Liste;
 use wishlist\models\Messageliste;
 use wishlist\controllers\Controller;
+use wishlist\models\User;
 use wishlist\views\ListeView;
 use wishlist\classes\Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -188,11 +189,46 @@ class ListeController extends Controller {
         try {
 
             $mess = Messageliste::where('liste_id', $id)->get();
-            $view = new ListeView($mess);
+
+            $no = Liste::select('user_id')->where('no',$id)->first();
+
+            $nom = User::where('id',$no);
+
+            $array = [$mess,$nom];
+            $view = new ListeView($array);
             $view->render('showPublic');
         } catch(ModelNotFoundException $e) {
             $view = new PageView;
             $view->render('notFound');
         }
+    }
+
+    public function createmessage() {
+        if(Auth::check()) {
+            $view = new ListeView();
+            $view->render('createmessage');
+        } else {
+            echo "casse";
+            //$this->app->redirect($this->app->urlFor("index"));
+        }
+
+
+    }
+
+    public function messagestore(){
+        $validator = new Validator;
+
+        $datas = $validator([
+            'message' => $validator::STRING,
+
+        ], 'liste.createmessage');
+
+        //$datas['user_id'] = 1; // TODO
+
+
+        // Donnees inserees
+        $liste = Messageliste::create($datas);
+
+        $this->app->redirect($this->app->urlFor('liste.publique'));
     }
 }

@@ -61,6 +61,7 @@ class ItemView extends View {
 
 		<form action='{$this->app->urlFor('item.images.create',['id' => $this->var->id])}' enctype='multipart/form-data' method='POST'>
 		Img: <input type='file' name='img' value='{$this->var->img} accept='{$accepted_types}'>
+		<input type='submit' value='Valide'>
 		</form>
 
 		<hr>
