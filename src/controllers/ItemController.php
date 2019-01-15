@@ -11,6 +11,7 @@ use wishlist\models\Liste;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
 use Slim\Slim as App;
+use wishlist\classes\ValidatorException;
 
 
 class ItemController extends Controller {
@@ -39,24 +40,45 @@ class ItemController extends Controller {
 
 	public function store() {
 
+		// Recupere
 
-		$token = $this->app->request->params('listToken');
+		$validator = new Validator;
+		$datasID = $validator([
+			'id' => $validator::INT
+		], 'index');
+
 
 		try {
-			$liste = Liste::where('token', $token)->firstOrFail(); // Si token pas OK, erreur 404
 
+			// On valide les donnees de base
 			$validator = new Validator;
 			$datas = $validator([
+				'liste_id' => $validator::INT
 				'nom' => $validator::STRING,
 				'descr' => $validator::STRING,
 				'tarif' => $validator::FLOAT,
-			], 'item.create', ['listToken' => $token]);
+			], 'item.create', ['id' => $datasID['id']]);
 
-			$datas['liste_id'] = $liste->no;
+
+
+			$validatorURL = new Validator;
+
+			// Si existe, on verifie l'URL
+			if($this->app->request->params('url') != null || $this->app->request->params('url') != '') {
+				$urlValidator = $validatorURL([
+					'url' => $validator::URL
+				], 'item.create', ['id' => $datasID['id']]);
+			} else {
+				// Sinon l'URL prend une valeur par defaut
+				$urlValidator['url'] = null;
+			}
+
+			// On ajoute au donnees que l'on va inserer
+			$datas['url'] = $urlValidator['url'];
 
 			// Donnees inserees
 			Item::create($datas);
-			$this->app->redirect($this->app->urlFor('liste.show', ['id' => $liste->no]));
+			$this->app->redirect($this->app->urlFor('liste.show', ['id' => $datasID['id']]));
 
 
 		} catch(ModelNotFoundException $e) {
@@ -92,27 +114,47 @@ class ItemController extends Controller {
 	}
 
 	public function update($id) {
-		$liste_id = $this->app->request->put('liste_id');
-		$nom = $this->app->request->put('nom');
-		$descr = $this->app->request->put('descr');
-		$url = $this->app->request->put('url');
-		$tarif = $this->app->request->put('tarif');
+		// Recupere
 
 		$validator = new Validator;
-		$safeDatas = $validator([
-			'liste_id' => $validator::STRING,
-			'nom' => $validator::STRING,
-			'descr' => $validator::STRING,
-			//'img' => $this->validator::STRING, 	//<== Voir groupe
-			'url' => $validator::URL,
-			'tarif' => $validator::FLOAT,
-		], 'item.create');
+		$datasID = $validator([
+			'id' => $validator::INT
+		], 'index');
 
 
-		// Donnees inserees
 		try {
-			Item::findOrFail($id)->update($safeDatas);
-			$this->app->redirect($this->app->urlFor('item.index'));
+
+			// On valide les donnees de base
+			$validator = new Validator;
+			$datas = $validator([
+				'liste_id' => $validator::INT
+				'nom' => $validator::STRING,
+				'descr' => $validator::STRING,
+				'tarif' => $validator::FLOAT,
+			], 'item.create', ['id' => $datasID['id']]);
+
+
+
+			$validatorURL = new Validator;
+
+			// Si existe, on verifie l'URL
+			if($this->app->request->params('url') != null || $this->app->request->params('url') != '') {
+				$urlValidator = $validatorURL([
+					'url' => $validator::URL
+				], 'item.create', ['id' => $datasID['id']]);
+			} else {
+				// Sinon l'URL prend une valeur par defaut
+				$urlValidator['url'] = null;
+			}
+
+			// On ajoute au donnees que l'on va inserer
+			$datas['url'] = $urlValidator['url'];
+
+			// Donnees inserees
+			Item::create($datas);
+			$this->app->redirect($this->app->urlFor('liste.show', ['id' => $datasID['id']]));
+
+
 		} catch(ModelNotFoundException $e) {
 			$this->notFound();
 		}

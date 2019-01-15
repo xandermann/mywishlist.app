@@ -24,8 +24,9 @@ class ItemView extends View {
 		Nom: <input type='text' name='nom'>
 		Descr: <input type='text' name='descr'>
 		Tarif (en €): <input type='number' name='tarif'>
+		URL (optionnel): <input type='link' name='url'>
 
-		<input type='hidden' name='listToken' value='{$this->var->token}'>
+		<input type='hidden' name='id' value='{$this->var->no}'>
 
 		<input type='hidden' name='_METHOD' value='POST' />
 
@@ -51,6 +52,7 @@ class ItemView extends View {
 		Descr: <input type='text' name='descr' value='{$this->var->descr}'>
 		URL: <input type='text' name='url' value='{$this->var->url}'>
 		Tarif: <input type='text' name='tarif' value='{$this->var->tarif}'>
+		URL (optionnel): <input type='link' name='url' value='{$this->var->url}'>
 
 		<input type='hidden' name='_METHOD' value='PUT' />
 
