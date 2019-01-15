@@ -32,7 +32,7 @@ abstract class View {
 		$this->app = \Slim\Slim::getInstance();
 
 		if(Auth::check()) {
-			$this->nav = "<li><a href='{$this->app->urlFor('index')}''>Accueil</a></li><li><a href='{$this->app->urlFor('liste.publique')}'>Voir les listes publiques</a></li><li><a href='{$this->app->urlFor('liste.create')}'>Créer une liste</a></li><li><a href='{$this->app->urlFor('liste.index')}'>Voir vos listes</a></li>";
+			$this->nav = "<li><a href='{$this->app->urlFor('index')}'>Accueil</a></li><li><a href='{$this->app->urlFor('liste.publique')}'>Voir les listes publiques</a></li><li><a href='{$this->app->urlFor('liste.create')}'>Créer une liste</a></li><li><a href='{$this->app->urlFor('liste.index')}'>Voir vos listes</a></li>";
 		} else {
 			$this->nav = "<li><a href='{$this->app->urlFor('index')}'>Accueil</a></li><li><a href='{$this->app->urlFor('liste.publique')}'>Voir les listes publiques</a></li>";
 		}
@@ -73,8 +73,7 @@ abstract class View {
 
 
 		<footer>
-			<p>Site réalisé par [...]</p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore natus accusamus consectetur dolores eum repudiandae laborum iste voluptas earum, expedita officia voluptatum velit amet ducimus deserunt sequi quaerat ullam necessitatibus reprehenderit doloremque, dignissimos hic et aut optio ipsam. Inventore saepe rerum fugit quos. Explicabo aperiam ullam eum cupiditate cum alias.</p>
+			<p>Site réalisé par <strong>Da Silva Carmo Alexandre</strong>, <strong>Battani Lilian</strong>, <strong>Vernevaut Corentin</strong>, <strong>Hublau Alexandre</strong>.</p>
 		</footer>
 	</div>
 

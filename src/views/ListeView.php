@@ -60,10 +60,9 @@ class ListeView extends View {
         $this->content .= "<ul>";
         foreach($this->var->items as $item) {
             //here
-            $this->content .= "<p>{$item->nom}</p>";
+            $this->content .= "<li><p>{$item->nom}</p>";
             $this->content .= "<p>{$item->descr}</p>";
-            $this->content .= "<img src='../../img_item/{$item->img}'>";
-            $this->content .= "<hr>";
+            $this->content .= "<img src='../../img_item/{$item->img}' alt='{$item->img}'><hr></li>";
         }
         $this->content .= "</ul></article>";
 
@@ -85,10 +84,9 @@ class ListeView extends View {
 
         $this->content .= "<ul>";
         foreach($this->var->items as $item) {
-            $this->content .= "<p>{$item->nom}</p>";
+            $this->content .= "<li><p>{$item->nom}</p>";
             $this->content .= "<p>{$item->descr}</p>";
-            $this->content .= "<img src='../../img_item/{$item->img}'>";
-            $this->content .= "<hr>";
+            $this->content .= "<img src='../../img_item/{$item->img}' alt='{$item->desc}'><hr></li>";
         }
         $this->content .= "</ul>";
         $this->afficheMessage();

@@ -27,7 +27,7 @@ class AuthView extends View {
 		$this->content .= "<h3>Voulez-vous modifier des paramètres de votre compte ?</h3>";
 
 		$this->content .= "<form action='{$this->app->urlFor('user.update')}' method='POST'>";
-		$this->content .= "<input type='mail' name='email' placeholder='email' value='". Auth::get('email') ."'>";
+		$this->content .= "<input type='email' name='email' placeholder='email' value='". Auth::get('email') ."'>";
 		$this->content .= "<input type='password' name='password' placeholder='Mot de passe'>";
 		$this->content .= "<input type='password' name='password_confirm' placeholder='Condirmation du mot de passe'>";
 		$this->content .= "<input type='submit' value='Valider'>";
