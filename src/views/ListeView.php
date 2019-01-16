@@ -23,11 +23,11 @@ class ListeView extends View {
 
         $this->content .= '<article><h2>Listes publiques</h2>';
 
+        $this->content .= "<p><a href='{$this->app->urlFor('user.creator')}'>Voir la liste des créateurs</a></p>";
+
         $this->content .= '<ul>';
-        $x = 1;
         foreach ($this->var as $v){
-            $this->content .= "<li><a href='{$this->app->urlFor('liste.showPublic', ['token' => $v->token])}'>$x : {$v->titre}</a></li>";
-            $x++;
+            $this->content .= "<li><a href='{$this->app->urlFor('liste.showPublic', ['token' => $v->token])}'>{$v->no}: {$v->titre}</a></li>";
           }
         $this->content .= '</ul></article>';
 
@@ -96,7 +96,7 @@ class ListeView extends View {
         foreach($this->var->items as $item) {
             $this->content .= "<li><p>{$item->nom}</p>";
             $this->content .= "<p>{$item->descr}</p>";
-            
+
             $images=$item->images()->get();
 
             foreach($images as $image)

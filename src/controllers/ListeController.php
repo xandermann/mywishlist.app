@@ -19,7 +19,6 @@ class ListeController extends Controller {
 
     public function index() {
         $userId = Auth::get('id');
-
         $liste = Liste::where('user_id', $userId)->get();
 
         $view = new ListeView($liste);
@@ -28,7 +27,7 @@ class ListeController extends Controller {
     }
 
     public function publique() {
-        $liste = Liste::whereNotNull('token')->where('estPublique', 1)->get();
+        $liste = Liste::whereNotNull('token')->where('estPublique', 1)->orderBy('expiration')->get();
 
         $view = new ListeView($liste);
         $view->render('publique');

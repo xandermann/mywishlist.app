@@ -24,6 +24,10 @@ class AuthView extends View {
 
 		$this->content .= "<hr>";
 
+		$this->content .= "<p><a href='{$this->app->urlFor('auth.signout')}'>Se déconnecter</a></p>";
+
+		$this->content .= "<hr>";
+
 		$this->content .= "<h3>Voulez-vous modifier des paramètres de votre compte ?</h3>";
 
 		$this->content .= "<form action='{$this->app->urlFor('user.update')}' method='POST'>";

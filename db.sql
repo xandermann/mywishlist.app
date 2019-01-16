@@ -78,12 +78,10 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-/*============Datas============*/
-
 INSERT INTO `users` (`id`, `email`, `password`) VALUES
 (1, 'a@a.a',  '$2a$10$wbEcZj9/19Mo0PpNBPujBeKMcYNqhEDd/f7Mc0ATsuAGvnpUlYrTS'), /* a */
 (2, 'tstanton@hotmail.com', 'L0\'Wtse?3'),
-(3, 'tstanton@hotmail.com', 'L0\'Wtse?3'),
+(3, 'COUCOUEmailTest@hotmail.com', 'L0\'Wtse?3'),
 (4, 'king.marquise@funk.com', 'xXq*F!YOxCWh3'),
 (5, 'tstanton@hotmail.com', 'L0\'Wtse?3'),
 (6, 'king.marquise@funk.com', 'xXq*F!YOxCWh3'),
