@@ -21,6 +21,6 @@ class Item extends Model {
      * @return images associées à l'item
      */
     public function images(){
-    	return $this->belongsToMany('\wishlist\models\Image','decris');
+    	return $this->belongsToMany('wishlist\models\Image','decris');
     }
 }

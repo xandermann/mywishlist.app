@@ -9,7 +9,8 @@ use wishlist\views\PageView;
 use wishlist\classes\Validator;
 use wishlist\models\Liste;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Capsule\Manager as DB;
+use Illuminate\Support\Facades\Facade;
 use Slim\Slim as App;
 use wishlist\classes\ValidatorException;
 
@@ -180,11 +181,13 @@ class ItemController extends Controller {
 			$image=new Image();
 			$image->path=$basename;
 			$image->save();
-
-			DB::table('decris')->insert(['idImage' => $image->idImage , 'nomItem' => $id]);
+			//here error
+			DB::table('decris')->insert(['idImage' => $image->idImage , 'id' => $id]);
 
 			move_uploaded_file($_FILES['img']['tmp_name'],$imgPath.$basename);
 		}
+
+		$this->app->redirect($this->app->urlFor('liste.show', ['id' => $id]));
 	}
 
 	public function deleteImage($id,$idImage){
@@ -201,5 +204,7 @@ class ItemController extends Controller {
 			$img->delete();
 			unlink($path);
 		}
+
+		$this->app->redirect($this->app->urlFor('liste.show', ['id' => $id]));
 	}
 }

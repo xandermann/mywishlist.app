@@ -66,7 +66,13 @@ class ListeView extends View {
             //here
             $this->content .= "<li><p>{$item->nom}</p>";
             $this->content .= "<p>{$item->descr}</p>";
-            $this->content .= "<img src='../../img_item/{$item->img}' alt='{$item->img}'><hr></li>";
+            //problem
+            $images=$item->images()->get();
+
+            foreach($images as $image)
+                $this->content .= "<img src='img_item/{$image->path}' alt='{$image->path}'><hr>";
+
+            $this->content .= "</li>";
         }
         $this->content .= "</ul></article>";
 

@@ -39,13 +39,13 @@ ALTER TABLE items
 
 CREATE TABLE decris(
   idImage INTEGER NOT NULL,
-  nomItem VARCHAR(80) NOT NULL
+  id INTEGER NOT NULL
 );
 
 ALTER TABLE decris
-    ADD PRIMARY KEY (idImage,nomItem),
+    ADD PRIMARY KEY (idImage,id),
     ADD FOREIGN KEY (idImage) REFERENCES image(idImage),
-    ADD FOREIGN KEY (nomItem) REFERENCES items(nomItem);
+    ADD FOREIGN KEY (id) REFERENCES items(id);
 
 CREATE TABLE estDans(
   titreListe VARCHAR(80) NOT NULL,
