@@ -27,8 +27,11 @@ $app->get('/css', function () use ($app) {
 })->name('css');
 
 $app->get('/img/:image', function ($image) use ($app) {
-    $app->response->headers->set('Content-Type', 'text/jpg');
-    require "img_item/$image";
+    $app->response->headers->set('Content-Type', 'image/jpg');
+    try {
+      readfile("img_item/$image");
+    } catch(Exception $e) {
+    }
 })->name('img');
 
 
