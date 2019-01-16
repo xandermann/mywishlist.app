@@ -70,7 +70,7 @@ class ListeView extends View {
             $images=$item->images()->get();
 
             foreach($images as $image)
-                $this->content .= "<img src='/proj_prog_web/mywishlist.app/public/img_item/{$image->path}' alt='{$image->path}'><hr>";
+                $this->content .= "<img src='{$this->app->urlFor('img', ['image' => $image->path])}' alt='{$image->path}'><hr>";
 
             $this->content .= "</li>";
         }
@@ -100,7 +100,7 @@ class ListeView extends View {
             $images=$item->images()->get();
 
             foreach($images as $image)
-                $this->content .= "<img src='/proj_prog_web/mywishlist.app/public/img_item/{$image->path}' alt='{$image->path}'><hr>";
+                $this->content .= "<img src='{$this->app->urlFor('img', ['image' => $image->path])}' alt='{$image->path}'><hr>";
 
             $this->content .= "</li>";
         }

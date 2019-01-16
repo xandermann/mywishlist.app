@@ -26,6 +26,11 @@ $app->get('/css', function () use ($app) {
     require 'style.css';
 })->name('css');
 
+$app->get('/img/:image', function ($image) use ($app) {
+    $app->response->headers->set('Content-Type', 'text/jpg');
+    require "img_item/$image";
+})->name('img');
+
 
 /*========================================*/
 /* PAGES */
