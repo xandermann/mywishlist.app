@@ -182,7 +182,7 @@ class ItemController extends Controller {
 			$image->path=$basename;
 			$image->save();
 			//here error
-			DB::table('decris')->insert(['idImage' => $image->idImage , 'id' => $id]);
+			DB::table('decris')->insert(['image_idImage' => $image->idImage , 'item_id' => $id]);
 
 			move_uploaded_file($_FILES['img']['tmp_name'],$imgPath.$basename);
 		}
@@ -196,7 +196,7 @@ class ItemController extends Controller {
 			['nomItem','=',$id]
 		)->delete();
 
-		$count=DB::table('decris')->where('idImage','=',$idImage)->count();
+		$count=DB::table('decris')->where('image_idImage','=',$idImage)->count();
 
 		if($count==0){
 			$img=Image::find('idImage');

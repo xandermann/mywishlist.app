@@ -38,14 +38,14 @@ ALTER TABLE items
     ADD FOREIGN KEY (codeCateg) REFERENCES categorie(codeCateg);
 
 CREATE TABLE decris(
-  idImage INTEGER NOT NULL,
-  id INTEGER NOT NULL
+  image_idImage INTEGER NOT NULL,
+  item_id INTEGER NOT NULL
 );
 
 ALTER TABLE decris
-    ADD PRIMARY KEY (idImage,id),
-    ADD FOREIGN KEY (idImage) REFERENCES image(idImage),
-    ADD FOREIGN KEY (id) REFERENCES items(id);
+    ADD PRIMARY KEY (image_idImage,item_id),
+    ADD FOREIGN KEY (image_idImage) REFERENCES image(idImage),
+    ADD FOREIGN KEY (item_id) REFERENCES items(id);
 
 CREATE TABLE estDans(
   titreListe VARCHAR(80) NOT NULL,
