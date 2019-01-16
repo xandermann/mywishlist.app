@@ -1,0 +1,8 @@
+
+
+Lien projet GIT (bitbucket):
+https://bitbucket.org/AlexandrEmma/mywishlist.app/src
+
+
+Lien pour tester le projet:
+https://webetu.iutnc.univ-lorraine.fr/www/hublau2u/mywishlist.app/public/index.php/
