@@ -130,7 +130,7 @@ class ListeView extends View {
     private function createmessage(){
 
       $this->content = "
-
+    <article>
       <h2>Ajouter un message</h2>
 
 

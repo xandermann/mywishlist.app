@@ -17,33 +17,36 @@ class ItemView extends View {
 	*/
 
 	private function create() {
-		$this->content = "
+		$this->content = "<article>
 		<h2>Creer un item</h2>
 
 		<form action='{$this->app->urlFor('item.store')}' method='POST'>
 		Nom: <input type='text' name='nom'>
 		Descr: <input type='text' name='descr'>
 		Tarif (en €): <input type='number' name='tarif'>
-		URL (optionnel): <input type='link' name='url'>
+		URL (optionnel): <input type='url' name='url'>
 
 		<input type='hidden' name='liste_id' value='{$this->var->no}'>
 
 		<input type='hidden' name='_METHOD' value='POST' />
 
 		<input type='submit' value='Valide'>
-		</form>
+		</form></article>
 		";
 	}
 
 	private function show() {
+		$this->content .= "<article>";
 		$this->content .= "<h2>{$this->var->nom}</h2>";
 		$this->content .= "<p>{$this->var->descr}</p>";
 		$this->content .= "<img src='../img_item/{$this->var->img}'>";
+		$this->content .= "<article>";
 	}
 
 	private function edit() {
 		$accepted_types=ImageTypeLoader::types();
 		$this->content = "
+		<article>
 		<h2>Editer l'item {$this->var->id}:</h2>
 
 		<form action='{$this->app->urlFor('item.update', ['id' => $this->var->id])}' method='POST'>
@@ -59,7 +62,7 @@ class ItemView extends View {
 		<input type='submit' value='Valide'>
 		</form>
 
-		<h2>ajouter des images à l'item {$this->var->id}:</h2>
+		<h2>Ajouter des images à l'item {$this->var->id}:</h2>
 
 		<form action='{$this->app->urlFor('item.images.create',['id' => $this->var->id])}' enctype='multipart/form-data' method='POST'>
 		Img: <input type='file' name='img' value='{$this->var->img} accept='{$accepted_types}'>
@@ -77,7 +80,7 @@ class ItemView extends View {
 		<input type='hidden' name='_METHOD' value='DELETE' />
 
 		<input type='submit' value='Valide'>
-		</form>
+		</form></article>
 		";
 	}
 
