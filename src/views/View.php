@@ -32,7 +32,7 @@ abstract class View {
 		$this->app = \Slim\Slim::getInstance();
 
 		if(Auth::check()) {
-			$this->nav = "<li><a href='{$this->app->urlFor('index')}'>Accueil</a></li><li><a href='{$this->app->urlFor('liste.publique')}'>Voir les listes publiques</a></li><li><a href='{$this->app->urlFor('liste.create')}'>Créer une liste</a></li><li><a href='{$this->app->urlFor('liste.index')}'>Voir vos listes</a></li>";
+			$this->nav = "<li><a href='{$this->app->urlFor('index')}'>Accueil</a></li><li><a href='{$this->app->urlFor('auth.account')}'>Espace connexion</a></li><li><a href='{$this->app->urlFor('liste.publique')}'>Voir les listes publiques</a></li><li><a href='{$this->app->urlFor('liste.create')}'>Créer une liste</a></li><li><a href='{$this->app->urlFor('liste.index')}'>Voir vos listes</a></li>";
 		} else {
 			$this->nav = "<li><a href='{$this->app->urlFor('index')}'>Accueil</a></li><li><a href='{$this->app->urlFor('liste.publique')}'>Voir les listes publiques</a></li>";
 		}
