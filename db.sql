@@ -135,3 +135,23 @@ INSERT INTO `users` (`id`, `email`, `password`) VALUES
 (54,  'carissa.turner@crist.biz', '@\'<^.(+S)$'),
 (55,  'justina65@blanda.com', 'AG2mJy>k9>IOOE-'),
 (56,  'kelvin.kerluke@yahoo.com', '`F{3Aq');
+
+CREATE TABLE image(
+  idImage INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  path VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE message(
+  idMessage INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  contenu VARCHAR(200) NOT NULL
+);
+
+CREATE TABLE decris(
+  image_idImage INTEGER NOT NULL,
+  item_id INTEGER NOT NULL
+);
+
+ALTER TABLE decris
+    ADD PRIMARY KEY (image_idImage,item_id),
+    ADD FOREIGN KEY (image_idImage) REFERENCES image(idImage),
+    ADD FOREIGN KEY (item_id) REFERENCES items(id);
