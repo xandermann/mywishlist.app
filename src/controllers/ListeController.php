@@ -27,7 +27,16 @@ class ListeController extends Controller {
     }
 
     public function publique() {
-        $liste = Liste::whereNotNull('token')->where('estPublique', 1)->orderBy('expiration')->get();
+
+        //S'il existe toujours des listes exprirées non publique
+        $listes = Liste::where('expiration', '<', date('Y-m-d'))
+        ->where('estPublique', 0)
+        ->update(['estPublique' => 1]);
+
+        $liste = Liste::whereNotNull('token')
+        ->where('estPublique', 1)
+        ->orderBy('expiration')
+        ->get();
 
         $view = new ListeView($liste);
         $view->render('publique');
@@ -38,20 +47,20 @@ class ListeController extends Controller {
         if(Auth::check()) {
           $view = new ListeView;
           $view->render('create');
-        } else {
+      } else {
           $this->app->redirect($this->app->urlFor("index"));
-        }
-    }
+      }
+  }
 
-    public function store() {
+  public function store() {
 
-        $validator = new Validator;
+    $validator = new Validator;
 
-        $datas = $validator([
-            'titre' => $validator::STRING,
-            'description' => $validator::STRING,
-            'expiration' => $validator::DATE,
-        ], 'liste.create');
+    $datas = $validator([
+        'titre' => $validator::STRING,
+        'description' => $validator::STRING,
+        'expiration' => $validator::DATE,
+    ], 'liste.create');
 
         $datas['user_id'] = 1; // TODO
 
@@ -69,162 +78,162 @@ class ListeController extends Controller {
             if(Auth::check()){
               $view = new ListeView($liste);
               $view->render('show');
-            } else {
+          } else {
               $this->notFound();
-            }
-        } catch(ModelNotFoundException $e) {
-            $this->notFound();
-        }
-
-
+          }
+      } catch(ModelNotFoundException $e) {
+        $this->notFound();
     }
 
-    public function showPublic($token) {
-        try {
-            $liste = Liste::where('token', $token)->firstOrFail();
 
-            $view = new ListeView($liste);
-            $view->render('showPublic');
-        } catch(ModelNotFoundException $e) {
-            $this->notFound();
-        }
+}
+
+public function showPublic($token) {
+    try {
+        $liste = Liste::where('token', $token)->firstOrFail();
+
+        $view = new ListeView($liste);
+        $view->render('showPublic');
+    } catch(ModelNotFoundException $e) {
+        $this->notFound();
+    }
+}
+
+public function edit($id) {
+    try {
+        $liste = Liste::findOrFail($id);
+        $view = new ListeView($liste);
+        $view->render('edit');
+    } catch(ModelNotFoundException $e) {
+        $this->notFound();
     }
 
-    public function edit($id) {
-        try {
-            $liste = Liste::findOrFail($id);
-            $view = new ListeView($liste);
-            $view->render('edit');
-        } catch(ModelNotFoundException $e) {
-            $this->notFound();
-        }
+}
 
-    }
+public function update($id) {
 
-    public function update($id) {
-
-        $validator = new Validator;
-        $datas = $validator([
-            'titre' => $validator::STRING,
-            'description' => $validator::STRING,
-            'expiration' => $validator::DATE,
-        ], 'liste.edit');
+    $validator = new Validator;
+    $datas = $validator([
+        'titre' => $validator::STRING,
+        'description' => $validator::STRING,
+        'expiration' => $validator::DATE,
+    ], 'liste.edit');
 
 
         // Donnees inserees
-        Liste::where('token', $id)->update($datas);
-        $this->app->redirect($this->app->urlFor('liste.index'));
-    }
+    Liste::where('token', $id)->update($datas);
+    $this->app->redirect($this->app->urlFor('liste.index'));
+}
 
-    public function setPublic() {
+public function setPublic() {
 
 
-        $validator = new Validator;
+    $validator = new Validator;
 
-        $datas = $validator([
-            'no' => $validator::INT,
-        ], 'liste.index');
+    $datas = $validator([
+        'no' => $validator::INT,
+    ], 'liste.index');
 
         // Passe a 1 la liste
         //
-        try {
-            $liste = Liste::findOrFail($datas['no']);
+    try {
+        $liste = Liste::findOrFail($datas['no']);
 
             // On genere un token si ce n'est pas encore fait
-            $this->createToken($liste);
+        $this->createToken($liste);
 
-            $liste->update(['estPublique' => 1]);
+        $liste->update(['estPublique' => 1]);
 
-            $this->app->redirect($this->app->urlFor('liste.edit', ['id' => $liste->no]));
+        $this->app->redirect($this->app->urlFor('liste.edit', ['id' => $liste->no]));
 
-        } catch(ModelNotFoundException $e) {
-            $this->notFound();
-        }
+    } catch(ModelNotFoundException $e) {
+        $this->notFound();
     }
+}
 
-    private function createToken($liste) {
+private function createToken($liste) {
         // Si le token existe deja, ne le genere pas
-        if(!$liste->token) {
+    if(!$liste->token) {
             // Generation du token
             // On genere un token, tant qu'il y a un token qui existe deja, alors on regenere
-            $token;
-            do {
-                $token = bin2hex(random_bytes(11));
-            } while(Liste::where('token', $token)->first());
+        $token;
+        do {
+            $token = bin2hex(random_bytes(11));
+        } while(Liste::where('token', $token)->first());
 
             //$token est maintenant unique
-            $liste->update(['token' => $token]);
-
-        }
-    }
-
-    public function generateToken() {
-
-        $validator = new Validator;
-
-        $datas = $validator([
-            'no' => $validator::INT
-        ], 'liste.index');
-
-        try {
-            $liste = Liste::findOrFail($datas['no']);
-
-            $this->createToken($liste);
-
-            $this->app->redirect($this->app->urlFor('liste.showPublic', ['token' => $liste->token]));
-        } catch(ModelNotFoundException $e) {
-            $this->notFound();
-        }
-    }
-
-    public function destroy($id) {
-        Liste::destroy($id);
-        $this->app->redirect($this->app->urlFor('liste.index'));
-    }
-
-
-
-    public function showmessage($id){
-        try {
-
-            $mess = Messageliste::where('liste_id', $id)->get();
-
-
-            $view = new ListeView($mess);
-            $view->render('showPublic');
-        } catch(ModelNotFoundException $e) {
-            $view = new PageView;
-            $view->render('notFound');
-        }
-    }
-
-    public function createmessage() {
-        if(Auth::check()) {
-            $view = new ListeView();
-            $view->render('createmessage');
-        } else {
-
-            $this->app->redirect($this->app->urlFor("index"));
-        }
-
+        $liste->update(['token' => $token]);
 
     }
+}
 
-    public function messagestore(){
-        $validator = new Validator;
+public function generateToken() {
+
+    $validator = new Validator;
+
+    $datas = $validator([
+        'no' => $validator::INT
+    ], 'liste.index');
+
+    try {
+        $liste = Liste::findOrFail($datas['no']);
+
+        $this->createToken($liste);
+
+        $this->app->redirect($this->app->urlFor('liste.showPublic', ['token' => $liste->token]));
+    } catch(ModelNotFoundException $e) {
+        $this->notFound();
+    }
+}
+
+public function destroy($id) {
+    Liste::destroy($id);
+    $this->app->redirect($this->app->urlFor('liste.index'));
+}
 
 
-        $datas = $validator([
-            'liste_id' => $validator::STRING,
-            'message' => $validator::STRING,
 
-        ], 'liste.createmessage');
+public function showmessage($id){
+    try {
 
-        $datas['pseudo'] = Auth::get('email');
+        $mess = Messageliste::where('liste_id', $id)->get();
+
+
+        $view = new ListeView($mess);
+        $view->render('showPublic');
+    } catch(ModelNotFoundException $e) {
+        $view = new PageView;
+        $view->render('notFound');
+    }
+}
+
+public function createmessage() {
+    if(Auth::check()) {
+        $view = new ListeView();
+        $view->render('createmessage');
+    } else {
+
+        $this->app->redirect($this->app->urlFor("index"));
+    }
+
+
+}
+
+public function messagestore(){
+    $validator = new Validator;
+
+
+    $datas = $validator([
+        'liste_id' => $validator::STRING,
+        'message' => $validator::STRING,
+
+    ], 'liste.createmessage');
+
+    $datas['pseudo'] = Auth::get('email');
 
         // Donnees inserees
-        $liste = Messageliste::create($datas);
+    $liste = Messageliste::create($datas);
 
-        $this->app->redirect($this->app->urlFor('liste.publique'));
-    }
+    $this->app->redirect($this->app->urlFor('liste.publique'));
+}
 }
