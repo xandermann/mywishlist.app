@@ -60,7 +60,7 @@ class UserController extends Controller
 		User::find($id)->delete();
 
 		// Supprime les listes
-		List::where('user_id', $id)->delete();
+		Liste::where('user_id', $id)->delete();
 
 
 		// Deconnecte l'utilisateur
