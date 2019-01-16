@@ -79,7 +79,7 @@ class ItemController extends Controller {
 
 			// Donnees inserees
 			Item::create($datas);
-			$this->app->redirect($this->app->urlFor('liste.show', ['id' => $datasID['liste_id']]));
+			$this->app->redirect($this->app->urlFor('liste.publique'));
 
 
 		} catch(ModelNotFoundException $e) {
@@ -115,7 +115,6 @@ class ItemController extends Controller {
 	}
 
 	public function update($id) {
-
 		try {
 
 			$v = new Validator;

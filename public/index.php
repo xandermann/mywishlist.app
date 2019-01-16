@@ -113,12 +113,12 @@ $app->delete('/item/:id/:idImage',function($id,$idImage){
 use wishlist\controllers\ListeController;
 
 // Affiche les listes DE L'UTILISATEUR
-if(Auth::check()) {
+
     $app->get('/liste', function () {
         $controller = new ListeController();
         $controller->index();
     })->name('liste.index');
-}
+
 
 
 // Affiche les listes publiques
@@ -153,12 +153,12 @@ $app->get('/liste/publique/:token', function ($token) {
     $controller->showPublic($token);
 })->name('liste.showPublic');
 
-if(Auth::check()) {
+
 $app->get('/liste/:id/edit', function ($id) {
     $controller = new ListeController();
     $controller->edit($id);
 })->name('liste.edit')->conditions(['id' => '[0-9]+']);
-}
+
 
 
 $app->put('/liste/:id', function ($id) {
@@ -188,13 +188,13 @@ $app->get('/liste/messageliste/:id', function ($id) {
 
 
 
-$app->get('/liste/createmessage', function () {/////////////////////////////////////////////c'est ici pour les routes
+$app->get('/liste/createmessage', function () {
 
     $controller = new ListeController();
     $controller->createmessage();
 })->name('liste.createmessage');
 
-$app->post('/liste/messagestore', function () {/////////////////////////////////////////////c'est ici pour les routes
+$app->post('/liste/messagestore', function () {
 
     $controller = new ListeController();
     $controller->messagestore();

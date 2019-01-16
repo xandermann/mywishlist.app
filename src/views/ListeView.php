@@ -185,7 +185,7 @@ class ListeView extends View {
 
         <hr>
 
-        <form action='{$this->app->urlFor('liste.update', ['id' => $this->var->token])}' method='POST'>
+        <form action='{$this->app->urlFor('liste.update', ['id' => $this->var->no])}' method='POST'>
 
         Titre: <input type='text' name='titre' value='{$this->var->titre}'>
         Descr: <input type='text' name='description' value='{$this->var->description}'>

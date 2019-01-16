@@ -33,6 +33,6 @@ Puis modifier le fichier `db` se trouvant dans le dossier `./src/config/db.ini`
 Exécuter le code SQL du fichier `db.sql`
 
 
+
 ### Slim 2:
 Slim: [https://www.slimframework.com/](https://www.slimframework.com/)
-

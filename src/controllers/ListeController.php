@@ -111,7 +111,6 @@ public function edit($id) {
 }
 
 public function update($id) {
-
     $validator = new Validator;
     $datas = $validator([
         'titre' => $validator::STRING,
@@ -121,7 +120,7 @@ public function update($id) {
 
 
         // Donnees inserees
-    Liste::where('token', $id)->update($datas);
+    Liste::where('no', $id)->update($datas);
     $this->app->redirect($this->app->urlFor('liste.index'));
 }
 

@@ -11,6 +11,10 @@ html, body {
 	font-family: roboto;
 }
 
+img {
+	max-width: 100%;
+}
+
 a, a:visited {
 	color: green;
 }
