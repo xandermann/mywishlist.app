@@ -23,6 +23,8 @@ class ListeView extends View {
 
         $this->content .= '<article><h2>Listes publiques</h2>';
 
+        $this->content .= "<p><a href='{$this->app->urlFor('user.creator')}'>Voir la liste des créateurs</a></p>";
+
         $this->content .= '<ul>';
         foreach ($this->var as $v){
             $this->content .= "<li><a href='{$this->app->urlFor('liste.showPublic', ['token' => $v->token])}'>{$v->no}: {$v->titre}</a></li>";
