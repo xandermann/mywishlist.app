@@ -47,7 +47,7 @@ abstract class View {
 <html lang="fr">
 <head>
 	<meta charset="UTF-8">
-	<title>INDEX</title>
+	<title>My Wishapp</title>
 	<link rel="stylesheet" href="{$this->app->urlFor('css')}">
 </head>
 <body>

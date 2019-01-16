@@ -3,6 +3,8 @@
 Repository pour le **projet PHP** 2018-2019.
 Groupe S3B.
 
+## [Lien du PDF](https://docs.google.com/document/d/1EntX1yRaeEx2Waq8aQ_R07uvUOd-watGwBSD5Ax1LH4/edit?usp=sharing)
+
 ------------------------------------------------------------
 ## Groupe:
 
