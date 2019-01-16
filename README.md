@@ -13,7 +13,7 @@ Groupe S3B.
 | CorentinVernevaut            | Vernevaut Corentin        |
 | dasilvac9u                   | Da silva Carmo Alexandre  |
 | AlexandrEmma                 | Hublau Alexandre          |
-| BATTANI_lilian               | Battani Lilan             |
+| BATTANI_lilian               | Battani Lilian             |
 
 ------------------------------------------------------------
 
