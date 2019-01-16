@@ -1,4 +1,4 @@
--- Adminer 4.6.3 MySQL dump
+﻿-- Adminer 4.6.3 MySQL dump
 
 SET NAMES utf8;
 SET time_zone = '+00:00';
@@ -13,17 +13,6 @@ CREATE TABLE `categorie` (
   `nomCateg` varchar(80) NOT NULL,
   `description` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`codeCateg`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-DROP TABLE IF EXISTS `concerne`;
-CREATE TABLE `concerne` (
-  `idPoste` int(11) NOT NULL,
-  `nomItem` varchar(80) NOT NULL,
-  PRIMARY KEY (`idPoste`,`nomItem`),
-  KEY `nomItem` (`nomItem`),
-  CONSTRAINT `concerne_ibfk_1` FOREIGN KEY (`idPoste`) REFERENCES `poste` (`idPoste`),
-  CONSTRAINT `concerne_ibfk_2` FOREIGN KEY (`nomItem`) REFERENCES `items` (`nomItem`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -174,6 +163,16 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `concerne`;
+CREATE TABLE `concerne` (
+  `idPoste` int(11) NOT NULL,
+  `nomItem` varchar(80) NOT NULL,
+  PRIMARY KEY (`idPoste`,`nomItem`),
+  KEY `nomItem` (`nomItem`),
+  CONSTRAINT `concerne_ibfk_1` FOREIGN KEY (`idPoste`) REFERENCES `poste` (`idPoste`),
+  CONSTRAINT `concerne_ibfk_2` FOREIGN KEY (`nomItem`) REFERENCES `items` (`nomItem`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `users` (`id`, `email`, `password`) VALUES
 (1,	'a@a.a',	'$2a$10$wbEcZj9/19Mo0PpNBPujBeKMcYNqhEDd/f7Mc0ATsuAGvnpUlYrTS'),
